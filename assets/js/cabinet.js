@@ -193,7 +193,7 @@
     note("");
     loginBtn.disabled = true;
     apiReady.then(function () {
-      if (!API) { loginBtn.disabled = false; note("Личный кабинет временно недоступен."); return null; }
+      if (!API) { loginBtn.disabled = false; note("Вход через сайт ещё подключается. Пока открой кабинет прямо в боте — кнопка «Профиль» в главном меню."); return null; }
       return api("/login/start", { method: "POST" });
     }).then(function (res) {
       if (!res) return;

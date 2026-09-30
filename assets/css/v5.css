@@ -1,0 +1,96 @@
+/* YarVpn v5 — компактная версия: тёмная тема, глобус в первом экране, без лишних блоков.
+   Подключается ПОСЛЕ main.css и переопределяет размеры (заголовки и отступы стали в разы меньше). */
+
+body{background:#050b22}
+.veil{background:linear-gradient(180deg,rgba(4,10,34,.10),rgba(4,10,34,.30))}
+.sky-fallback{background:radial-gradient(120% 90% at 70% 30%,#12306b 0%,#08163a 45%,#050b22 100%)}
+
+/* ---- размеры: ничего не растянуто ---- */
+.sec{padding:clamp(56px,7vw,104px) 0}
+.sec-head{margin-bottom:clamp(24px,3vw,40px);gap:14px}
+.h2{font-size:clamp(38px,4.6vw,66px);line-height:1}
+.h1{font-size:clamp(54px,7.6vw,118px);line-height:.92;text-shadow:none}
+.lede{font-size:clamp(16px,1.25vw,18px)}
+
+/* ---- первый экран ---- */
+.hero{min-height:min(100svh,880px);padding:calc(var(--nav) + 12px) 0 40px;align-items:center}
+.hero-in{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:clamp(8px,3vw,40px);align-items:center}
+.hero-copy{gap:22px;padding-bottom:0}
+.hero-cta{margin-top:4px}
+.earth-wrap{position:relative;width:100%;max-width:820px;justify-self:end;aspect-ratio:1/1}
+.earth{width:100%;height:100%;opacity:0;transition:opacity 1.8s var(--ease);touch-action:pan-y;cursor:grab;-webkit-tap-highlight-color:transparent}
+.earth.on{opacity:1}
+.earth.grab{cursor:grabbing}
+.earth-hint{position:absolute;left:50%;bottom:2%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:9px;font:600 12px/1 var(--f-ui);letter-spacing:.06em;color:var(--t2);padding:9px 14px;border-radius:99px;background:rgba(6,14,44,.5);border:1px solid rgba(255,255,255,.18);pointer-events:none;white-space:nowrap}
+.earth-hint i{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:hint 2.4s ease-in-out infinite}
+@keyframes hint{50%{transform:scale(.55);opacity:.5}}
+
+/* ---- как начать ---- */
+.steps3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.steps3 li{padding:26px 26px 28px}
+.steps3 .num{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#3a2200;font:700 15px var(--f-ui);margin-bottom:16px}
+.steps3 h3{font:600 clamp(26px,2.3vw,32px)/1.1 var(--f-display);color:var(--t1);margin-bottom:8px}
+.steps3 p{font-size:15.5px;line-height:1.55;font-weight:500}
+.apps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
+.app{display:grid;gap:2px;padding:16px 20px;border-radius:20px;color:var(--t1)}
+.app small{font:700 11px/1 var(--f-ui);letter-spacing:.14em;text-transform:uppercase;color:var(--t3)}
+.app b{font:600 24px/1.2 var(--f-display)}
+.app span{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;color:var(--t2)}
+.app span svg{width:13px;height:13px}
+
+/* ---- тарифы ---- */
+.trial{padding:22px 28px;border-radius:26px}
+.trial h3{font-size:clamp(24px,2.4vw,32px)}
+.plans{margin-top:16px;gap:16px;perspective:none}
+.plan{padding:28px 28px 26px;transform-style:flat}
+.plan-name{font-size:30px}
+.plan-price{margin-top:14px;font-size:clamp(64px,6vw,88px);transform:none}
+.plan-spec{margin:18px 0 22px;padding-top:18px;gap:10px}
+.plan .btn{transform:none}
+.addons{margin-top:16px;gap:16px}
+.addon{padding:22px 26px}
+.addon h3{font-size:26px;margin-bottom:6px}
+.addon li{padding:11px 0}
+.pay{margin-top:20px}
+
+/* ---- бонусы ---- */
+.duo{perspective:none;gap:16px}
+.card-lg{padding:clamp(24px,2.6vw,36px)}
+.card-lg h3{font-size:clamp(28px,2.6vw,38px)}
+.card-lg .k{margin-bottom:14px}
+.duo .card-lg:nth-child(2) h3,.duo .card-lg:nth-child(2) .k{max-width:none}
+
+/* ---- FAQ ---- */
+.qa-q{padding:20px 12px;font-size:clamp(22px,2vw,28px)}
+.qa-a p{padding:0 12px 22px;font-size:16px}
+.faq-side{top:96px;gap:18px}
+
+/* ---- подвал ---- */
+.foot{padding-top:clamp(40px,5vw,72px);margin-top:20px}
+.foot-grid{grid-template-columns:1.6fr 1fr 1fr}
+
+/* ---- стекло без размытия (плавнее на телефонах) ---- */
+.glass{background:linear-gradient(135deg,rgba(18,30,72,.72),rgba(12,22,58,.58))}
+
+/* ---- планшет / телефон ---- */
+@media (max-width:1020px){
+  .hero{min-height:0;padding-top:calc(var(--nav) + 20px);align-items:flex-start}
+  .hero-in{grid-template-columns:1fr;gap:0}
+  .h1{font-size:clamp(50px,13vw,96px)}
+  .earth-wrap{max-width:min(430px,88vw);justify-self:center;margin-top:-2%}
+  .steps3,.apps{grid-template-columns:1fr}
+  .apps{grid-template-columns:repeat(3,1fr)}
+  .plans,.addons,.duo{grid-template-columns:1fr}
+  .faq{grid-template-columns:1fr}
+  .faq-side{position:static}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-brand{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .apps{grid-template-columns:1fr}
+  .app{grid-template-columns:auto 1fr auto;align-items:center;gap:12px}
+  .earth-hint{font-size:11px}
+  .earth-wrap{margin-bottom:16px}
+  .trial{flex-direction:column;align-items:flex-start}
+  .trial .btn{width:100%}
+}

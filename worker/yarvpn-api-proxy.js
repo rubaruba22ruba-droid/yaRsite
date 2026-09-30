@@ -25,6 +25,16 @@ export default {
     if (url.pathname === "/" || url.pathname === "/health") {
       return reply(200, { ok: true, service: "yarvpn-api-proxy" }, { "access-control-allow-origin": "*" });
     }
+    /* /check — проверка «воркер → бот»: откройте эту ссылку в браузере, должно быть {"worker":true,"bot":true} */
+    if (url.pathname === "/check") {
+      const ctl = new AbortController(); const tm = setTimeout(function () { ctl.abort(); }, 8000);
+      try {
+        const r = await fetch(upstream + "/health", { signal: ctl.signal });
+        return reply(200, { worker: true, bot: r.ok, bot_status: r.status }, { "access-control-allow-origin": "*" });
+      } catch (e) {
+        return reply(200, { worker: true, bot: false, hint: "воркер не достучался до бота: проверьте порт и что бот запущен" }, { "access-control-allow-origin": "*" });
+      } finally { clearTimeout(tm); }
+    }
     if (!ALLOWED.some(function (p) { return url.pathname.indexOf(p) === 0; })) {
       return reply(404, { ok: false, error: "not_found" }, { "access-control-allow-origin": "*" });
     }
