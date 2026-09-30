@@ -49,9 +49,10 @@
   var legGeo = null;
 
   function view() {
-    if (W < 700) return { lon0: -96, lon1: 52, latT: 74, latB: -8 };
-    if (W < 960) return { lon0: -132, lon1: 78, latT: 76, latB: -40 };
-    return { lon0: -180, lon1: 180, latT: D.meta.latTop, latB: D.meta.latBot };
+    /* чем уже экран, тем ближе камера: на телефоне — Атлантика и Европа, на компьютере — от Америки до Ближнего Востока */
+    if (W < 700) return { lon0: -92, lon1: 50, latT: 70, latB: 14 };
+    if (W < 960) return { lon0: -110, lon1: 56, latT: 72, latB: 8 };
+    return { lon0: -118, lon1: 62, latT: 72, latB: 4 };
   }
   function proj(lon, lat) { return [ox + (lon - v.lon0) * S, oy + (v.latT - lat) * S]; }
   var v = view(), ox = 0, oy = 0;
@@ -152,8 +153,8 @@
   function label(i, t) {
     var s = SERVERS[i], side = (narrow && s.sideN) || s.side, p = pts[i], on = i === leg.b && leg.wait > 0 || i === hot;
     var txt = narrow ? s.c : s.c + " · " + s.city;
-    cx.font = (narrow ? "800 9px" : "700 11px") + ' "Unbounded","Manrope",sans-serif';
-    var w = cx.measureText(txt).width, pad = 6, gap = on ? 14 : 11, x = p[0], y = p[1], bw = w + pad * 2, bh = narrow ? 16 : 20;
+    cx.font = (narrow ? "800 10px" : "700 12px") + ' "Unbounded","Manrope",sans-serif';
+    var w = cx.measureText(txt).width, pad = 6, gap = on ? 14 : 11, x = p[0], y = p[1], bw = w + pad * 2, bh = narrow ? 18 : 22;
     var bxp = x - bw / 2, byp = y - gap - bh;
     if (side === "l") { bxp = x - gap - bw; byp = y - bh / 2; }
     else if (side === "r") { bxp = x + gap; byp = y - bh / 2; }
@@ -233,7 +234,7 @@
     }
     for (j = 0; j < pts.length; j++) label(j, t);
 
-    drawPlane(px, py, ang, narrow ? .85 : 1.1);
+    drawPlane(px, py, ang, narrow ? 1.25 : 1.7);
   }
 
   function step(dt) {

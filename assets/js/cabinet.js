@@ -37,7 +37,7 @@
     });
   }
 
-  var cabOut = $("cabOut"), cabIn = $("cabIn"), idle = $("loginIdle"), wait = $("loginWait"), noteEl = $("cabNote");
+  var cabOut = $("cabOut"), cabIn = $("cabIn"), idle = $("loginIdle"), wait = $("loginWait"), noteEl = $("cabNote"), modal = $("loginModal"), modalNote = $("modalNote");
   var loginBtn = $("loginBtn"), meChip = $("meChip");
   if (!cabOut || !cabIn) return;
 
@@ -49,10 +49,17 @@
       b.addEventListener("click", retry); noteEl.appendChild(b);
     }
     noteEl.hidden = !text;
+    if (modalNote) { modalNote.className = noteEl.className; modalNote.textContent = noteEl.textContent; modalNote.hidden = !text || !modal || modal.hidden; }
   }
-  function showOut() { cabOut.hidden = false; cabIn.hidden = true; idle.hidden = false; wait.hidden = true; loginBtn.disabled = false; setChip(null); heroData(null); }
-  function showWait() { idle.hidden = true; wait.hidden = false; }
-  function showIn() { cabOut.hidden = true; cabIn.hidden = false; }
+  function setModal(open) {
+    if (!modal) return;
+    modal.hidden = !open; modal.setAttribute("aria-hidden", open ? "false" : "true");
+    doc.body.classList.toggle("lock", open);
+    if (!open && modalNote) modalNote.hidden = true;
+  }
+  function showOut() { cabOut.hidden = false; cabIn.hidden = true; idle.hidden = false; wait.hidden = false; setModal(false); loginBtn.disabled = false; setChip(null); heroData(null); }
+  function showWait() { wait.hidden = false; setModal(true); }
+  function showIn() { cabOut.hidden = true; cabIn.hidden = false; setModal(false); }
   function setChip(d) {
     if (!meChip) return;
     if (!d) { meChip.classList.remove("on"); return; }
@@ -178,7 +185,6 @@
   }
   function makeQr(link) {
     var box = $("qrBox"), wrap = $("loginQr");
-    if (window.innerWidth < 720) { wrap.hidden = true; return; }   // на телефоне QR не нужен — кнопка откроет бота
     function draw() {
       try {
         var q = window.qrcode(0, "M"); q.addData(link); q.make();
@@ -193,7 +199,7 @@
     note("");
     loginBtn.disabled = true;
     apiReady.then(function () {
-      if (!API) { loginBtn.disabled = false; note("Вход через сайт ещё подключается. Пока открой кабинет прямо в боте — кнопка «Профиль» в главном меню."); return null; }
+      if (!API) { loginBtn.disabled = false; setModal(true); wait.hidden = true; note("Вход через сайт ещё подключается. Пока открой кабинет прямо в боте — кнопка «Профиль» в главном меню."); return null; }
       return api("/login/start", { method: "POST" });
     }).then(function (res) {
       if (!res) return;
@@ -203,7 +209,7 @@
       $("loginLink").href = res.data.link;
       showWait(); makeQr(res.data.link); tickTimer();
       st.tick = setInterval(tickTimer, 1000); st.timer = setTimeout(poll, 1200);
-    }).catch(function () { loginBtn.disabled = false; note("Не удалось связаться с сервером. Попробуй позже."); });
+    }).catch(function () { loginBtn.disabled = false; setModal(true); wait.hidden = true; note("Не удалось связаться с сервером. Попробуй позже."); });
   }
   function logout() {
     var s = getSession(); clearSession(); showOut();
@@ -221,6 +227,15 @@
   }
 
   on(loginBtn, "click", startLogin);
+  Array.prototype.forEach.call(doc.querySelectorAll("[data-login]"), function (b) {
+    on(b, "click", function () {
+      var sheet = $("sheet"); if (sheet && sheet.classList.contains("open")) { var bg = $("burger"); if (bg) bg.click(); }
+      if (getSession() && !cabIn.hidden) { var c = $("cabinet"); if (c) c.scrollIntoView({ behavior: "smooth" }); return; }
+      startLogin();
+    });
+  });
+  on(modal, "click", function (e) { if (e.target === modal) stopLogin(); });
+  on(doc, "keydown", function (e) { if (e.key === "Escape" && modal && !modal.hidden) stopLogin(); });
   on($("loginCancel"), "click", function () { stopLogin(); });
   on($("logoutBtn"), "click", logout);
   on($("cabRefresh"), "click", loadAccount);
