@@ -22,9 +22,8 @@
   if (saved === "yes") metrika();
   if (saved) return;
 
-  var inSub = /\/(privacy|terms)\/?$/.test(location.pathname);
+  var inSub = /\/(privacy|terms|cabinet)\/?$/.test(location.pathname);
   var policy = (inSub ? "../" : "") + "privacy/";
-  if (inSub) policy = "./";
 
   var box = doc.createElement("div");
   box.className = "consent"; box.setAttribute("role", "dialog"); box.setAttribute("aria-label", "Cookie и хранение данных");
@@ -37,7 +36,7 @@
     no.addEventListener("click", function () { put("no"); close(); });
     yes.addEventListener("click", function () { put("yes"); metrika(); close(); });
   } else {
-    p.innerHTML = "Сайт не использует cookie для слежки и ничего не хранит о вас, кроме этого ответа. Подробнее — в <a href=\"" + policy + "\">политике конфиденциальности</a>.";
+    p.innerHTML = "Сайт не использует cookie для слежки и ничего не хранит о вас, кроме этого ответа (и сессии входа, если вы заходите в кабинет). Подробнее — в <a href=\"" + policy + "\">политике конфиденциальности</a>.";
     var ok = doc.createElement("button"); ok.type = "button"; ok.className = "btn btn-solid"; ok.textContent = "Понятно";
     btns.appendChild(ok);
     ok.addEventListener("click", function () { put("ok"); close(); });

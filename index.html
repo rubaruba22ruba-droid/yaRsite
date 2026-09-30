@@ -13,8 +13,6 @@
 <link rel="canonical" href="https://yarvpn.best/">
 <link rel="alternate" hreflang="ru" href="https://yarvpn.best/">
 <link rel="alternate" hreflang="x-default" href="https://yarvpn.best/">
-<!-- Адрес API бота для входа в кабинет: если сайт открыт с сервера бота — работает сам (адрес /api/web); иначе берётся из файла api.json. -->
-<meta name="yarvpn-api" content="/api/web">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="YarVpn">
@@ -43,7 +41,7 @@
 <link rel="preload" href="assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=8">
+<link rel="stylesheet" href="assets/css/site.css?v=9">
 <script>if(location.protocol==="http:"&&/(^|\.)yarvpn\.best$/.test(location.hostname))location.replace("https://"+location.host+location.pathname+location.search+location.hash);document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},5000)</script>
 
 <script type="application/ld+json">
@@ -205,11 +203,11 @@
       <a href="#servers">Серверы</a>
       <a href="#how">Как начать</a>
       <a href="#pricing">Тарифы</a>
-      <a href="#cabinet">Кабинет</a>
+      <a href="cabinet/">Кабинет</a>
       <a href="#faq">Вопросы</a>
     </nav>
     <div class="nav-act">
-      <a class="btn btn-white btn-sm btn-enter" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Войти</a>
+      <a class="btn btn-white btn-sm btn-enter" href="cabinet/">Войти</a>
       <a class="sq sq-or sq-tg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener" aria-label="Открыть бота в Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a>
       <a class="btn btn-solid btn-sm nav-tg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
       <button class="sq burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="sheet"><i></i><i></i><i></i></button>
@@ -223,11 +221,11 @@
     <a href="#servers" style="--i:1"><small>02</small><span>Серверы</span><svg aria-hidden="true"><use href="#i-arr"/></svg></a>
     <a href="#how" style="--i:2"><small>03</small><span>Как начать</span><svg aria-hidden="true"><use href="#i-arr"/></svg></a>
     <a href="#pricing" style="--i:3"><small>04</small><span>Тарифы</span><svg aria-hidden="true"><use href="#i-arr"/></svg></a>
-    <a href="#cabinet" style="--i:4"><small>05</small><span>Кабинет</span><svg aria-hidden="true"><use href="#i-arr"/></svg></a>
+    <a href="cabinet/" style="--i:4"><small>05</small><span>Кабинет</span><svg aria-hidden="true"><use href="#i-arr"/></svg></a>
     <a href="#faq" style="--i:5"><small>06</small><span>Вопросы</span><svg aria-hidden="true"><use href="#i-arr"/></svg></a>
   </nav>
   <div class="sheet-foot">
-    <a class="btn btn-white" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Войти</a>
+    <a class="btn btn-white" href="cabinet/">Войти</a>
     <a class="btn btn-solid" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Telegram</a>
   </div>
   <p class="sheet-note">Поддержка — <a class="link" href="https://t.me/entoni" target="_blank" rel="noopener">@entoni</a></p>
@@ -359,9 +357,9 @@
         </div>
         <div class="gate-box">
           <div>
-            <h3>Кабинет — в Telegram-боте: баланс, подписка, устройства и друзья в разделе «Профиль».</h3>
-            <div class="gate-cta"><a class="btn btn-solid btn-lg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</a></div>
-            <p class="cab-hint">Откроется бот — нажми Start, и ты в кабинете. Пароль не нужен.</p>
+            <h3>Баланс, подписка, устройства и пополнение — в личном кабинете. Логин и пароль берутся в боте.</h3>
+            <div class="gate-cta"><a class="btn btn-solid btn-lg" href="cabinet/">Войти в кабинет</a> <a class="btn btn-glass btn-lg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Взять пароль в боте</a></div>
+            <p class="cab-hint">Логин — твой Telegram ID, пароль — 8 цифр. Оба в боте: Профиль → «Вход на сайт».</p>
           </div>
         </div>
       </div>
@@ -435,10 +433,10 @@
   </div>
 </footer>
 
-<script src="assets/js/bg.js?v=8" defer></script>
-<script src="assets/js/map-data.js?v=8" defer></script>
-<script src="assets/js/map.js?v=8" defer></script>
-<script src="assets/js/main.js?v=8" defer></script>
-<script src="assets/js/consent.js?v=8" defer></script>
+<script src="assets/js/bg.js?v=9" defer></script>
+<script src="assets/js/map-data.js?v=9" defer></script>
+<script src="assets/js/map.js?v=9" defer></script>
+<script src="assets/js/main.js?v=9" defer></script>
+<script src="assets/js/consent.js?v=9" defer></script>
 </body>
 </html>

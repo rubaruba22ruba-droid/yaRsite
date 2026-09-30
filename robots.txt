@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cabinet/
 
 Host: https://yarvpn.best
 Sitemap: https://yarvpn.best/sitemap.xml

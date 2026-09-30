@@ -8,17 +8,6 @@
   var hasIO = "IntersectionObserver" in window;
   var YV = window.YV = {};
 
-  /* QR для кабинета (грузится только когда нужен) */
-  var qrWaiters = null;
-  YV.loadQr = function (cb) {
-    if (window.qrcode) { cb(); return; }
-    if (qrWaiters) { qrWaiters.push(cb); return; }
-    qrWaiters = [cb];
-    var s = doc.createElement("script"); s.src = "assets/js/qr.js?v=7";
-    s.onload = function () { var w = qrWaiters; qrWaiters = null; w.forEach(function (f) { f(); }); };
-    doc.head.appendChild(s);
-  };
-
   function ready() { root.className += " js-ready"; }
   requestAnimationFrame(function () { requestAnimationFrame(ready); });
 
