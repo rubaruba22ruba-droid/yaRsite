@@ -31,16 +31,16 @@
     ctx.globalCompositeOperation = "source-over"; ctx.globalAlpha = 1;
 
     var g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, "#010208"); g.addColorStop(0.5, "#030716"); g.addColorStop(1, "#061029");
+    g.addColorStop(0, "#050506"); g.addColorStop(0.5, "#08080a"); g.addColorStop(1, "#0b0b0e");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
     // мягкие туманности: холодные, еле заметные
     ctx.globalCompositeOperation = "lighter";
     var s = Math.max(W, H);
-    glow(W * 0.78, H * 0.30, s * 0.55, "28,64,150", 0.14);
-    glow(W * 0.12, H * 0.72, s * 0.50, "22,58,110", 0.10);
-    glow(W * 0.50, H * 0.95, s * 0.60, "18,44,96", 0.10);
-    glow(W * 0.30, H * 0.10, s * 0.35, "40,44,110", 0.06);
+    glow(W * 0.78, H * 0.30, s * 0.55, "60,70,100", 0.10);
+    glow(W * 0.12, H * 0.72, s * 0.50, "70,50,40", 0.06);
+    glow(W * 0.50, H * 0.95, s * 0.60, "50,50,60", 0.07);
+    glow(W * 0.30, H * 0.10, s * 0.35, "60,60,80", 0.04);
 
     // Млечный Путь — диагональная полоса из мелких звёзд и пыли
     var ax = -W * 0.1, ay = H * 0.86, bx = W * 1.1, by = H * 0.14;

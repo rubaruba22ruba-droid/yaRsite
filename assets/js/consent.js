@@ -31,14 +31,14 @@
   var p = doc.createElement("p"), btns = doc.createElement("div"); btns.className = "btns";
   if (YM_ID) {
     p.innerHTML = "Мы используем cookie Яндекс Метрики, чтобы понимать, как пользуются сайтом. Для входа в кабинет сессия хранится в вашем браузере. Подробнее — в <a href=\"" + policy + "\">политике конфиденциальности</a>.";
-    var no = doc.createElement("button"); no.type = "button"; no.className = "btn btn-glass"; no.textContent = "Отклонить";
-    var yes = doc.createElement("button"); yes.type = "button"; yes.className = "btn btn-solid"; yes.textContent = "Принять";
+    var no = doc.createElement("button"); no.type = "button"; no.className = "btn btn-line"; no.textContent = "Отклонить";
+    var yes = doc.createElement("button"); yes.type = "button"; yes.className = "btn btn-or"; yes.textContent = "Принять";
     btns.appendChild(no); btns.appendChild(yes);
     no.addEventListener("click", function () { put("no"); close(); });
     yes.addEventListener("click", function () { put("yes"); metrika(); close(); });
   } else {
     p.innerHTML = "Сайт не использует cookie для слежки. Для входа в кабинет ваша сессия хранится только в вашем браузере. Подробнее — в <a href=\"" + policy + "\">политике конфиденциальности</a>.";
-    var ok = doc.createElement("button"); ok.type = "button"; ok.className = "btn btn-solid"; ok.textContent = "Понятно";
+    var ok = doc.createElement("button"); ok.type = "button"; ok.className = "btn btn-or"; ok.textContent = "Понятно";
     btns.appendChild(ok);
     ok.addEventListener("click", function () { put("ok"); close(); });
   }

@@ -1,7 +1,7 @@
 /* YarVpn — реальный 3D-глобус: снимки NASA (Blue Marble, ночные огни, облака), атмосфера, «линии связи».
    Собирается в assets/js/earth.js. Подписей и списка серверов нет — точки и дуги только оформление. */
 import {
-  WebGLRenderer, Scene, PerspectiveCamera, Group, Mesh, SphereGeometry, ShaderMaterial, TextureLoader, Vector3,
+  WebGLRenderer, Scene, PerspectiveCamera, Group, Mesh, SphereGeometry, ShaderMaterial, TextureLoader, Vector3, Matrix4, Shape, ShapeGeometry,
   AdditiveBlending, BackSide, TubeGeometry, CatmullRomCurve3, MeshBasicMaterial, RingGeometry, DoubleSide, Color, LinearFilter, LinearMipmapLinearFilter
 } from "three";
 
@@ -27,9 +27,9 @@ void main(){
   float lit=clamp(dot(N,uSun)*.9+.1,0.,1.);
   vec3 col=day*(.035+1.08*pow(lit,.9));
   float water=texture2D(uWater,vUv).r;
-  vec3 H=normalize(uSun+V);float sp=pow(max(dot(Ng,H),0.),70.)*water;
-  col+=vec3(1.,.9,.72)*sp*.85*dayF;
-  col+=vec3(.55,.75,1.)*pow(max(dot(Ng,H),0.),8.)*water*.05*dayF;
+  vec3 H=normalize(uSun+V);float sp=pow(max(dot(Ng,H),0.),220.)*water;
+  col+=vec3(1.,.92,.78)*sp*.22*dayF;
+  col+=vec3(.55,.75,1.)*pow(max(dot(Ng,H),0.),8.)*water*.03*dayF;
   float tw=exp(-pow(ng/.17,2.));col+=vec3(1.,.45,.16)*tw*.16*(.25+day.b*1.3);
   vec3 nl=texture2D(uNight,vUv).rgb;nl=pow(nl,vec3(1.1))*3.0*vec3(1.,.8,.5);
   col=mix(nl+day*.028,col,dayF);
@@ -58,40 +58,42 @@ void main(){
 }`;
 
 const ARC_VERT = `varying float vT;void main(){vT=uv.x;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
-const ARC_FRAG = `uniform float uTime;uniform float uOff;uniform vec3 uCol;varying float vT;
+const ARC_FRAG = `uniform float uP;uniform vec3 uCol;varying float vT;
 void main(){
-  float d=fract(vT*1.15-uTime*.16+uOff);
-  float pulse=smoothstep(0.,.05,d)*(1.-smoothstep(.05,.30,d));
-  float base=.22*sin(vT*3.14159);
-  float a=base+pulse*.95;
-  gl_FragColor=vec4(uCol*(.8+pulse*1.2)*a,0.);
+  float behind=uP-vT;                               // расстояние позади самолёта
+  float trail=(behind>0.)?exp(-behind*7.)*smoothstep(0.,.012,behind):0.;
+  float base=.20*sin(vT*3.14159);
+  float a=base+trail*.95;
+  gl_FragColor=vec4(uCol*(.75+trail*1.1)*a,0.);
 }`;
 
-// Москва — центр, остальное — узлы сети (без подписей).
+// Центр сети — Москва (откуда смотрит пользователь); серверы берутся из assets/js/servers.js
 const HUB = [55.75, 37.62];
-const NODES = [[60.17, 24.94], [59.33, 18.07], [40.42, -3.7], [39.93, 32.86], [41.33, 19.82]];
 
-export function initEarth(canvas, opts) {
+export function initEarth(canvas, labelsEl, opts) {
   opts = opts || {};
   const reduce = !!opts.reduce;
+  const SERVERS = (window.YV_SERVERS && window.YV_SERVERS.length ? window.YV_SERVERS : []);
   let renderer;
   try { renderer = new WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" }); }
   catch (e) { return null; }
   renderer.setClearColor(0x000000, 0);
   const scene = new Scene();
-  const camera = new PerspectiveCamera(28, 1, 0.1, 50);
-  camera.position.set(0, 0, 5.3);
+  const FOV = 28, CAMZ = 5.3;
+  const camera = new PerspectiveCamera(FOV, 1, 0.1, 50);
+  camera.position.set(0, 0, CAMZ);
   const sun = new Vector3(-0.85, 0.34, 0.78).normalize();
   const sunV = sun.clone();
 
   const loader = new TextureLoader();
   const maxAniso = renderer.capabilities.getMaxAnisotropy();
-  const load = (f, color) => new Promise((res) => loader.load(BASE + f, (t) => { t.anisotropy = Math.min(8, maxAniso); t.minFilter = LinearMipmapLinearFilter; t.magFilter = LinearFilter; res(t); }, undefined, () => res(null)));
+  const load = (f) => new Promise((res) => loader.load(BASE + f, (t) => { t.anisotropy = Math.min(8, maxAniso); t.minFilter = LinearMipmapLinearFilter; t.magFilter = LinearFilter; res(t); }, undefined, () => res(null)));
 
+  const place = new Group();          // положение на экране (масштаб и сдвиг)
   const world = new Group();          // наклон оси
   world.rotation.z = 0.26;
   const spin = new Group();           // вращение вокруг оси
-  world.add(spin); scene.add(world);
+  place.add(world); world.add(spin); scene.add(place);
   const R = 1;
 
   const earthMat = new ShaderMaterial({ vertexShader: VERT, fragmentShader: EARTH_FRAG, uniforms: { uDay: { value: null }, uNight: { value: null }, uBump: { value: null }, uWater: { value: null }, uSun: { value: sun } } });
@@ -101,73 +103,108 @@ export function initEarth(canvas, opts) {
   const clouds = new Mesh(new SphereGeometry(R * 1.007, 96, 72), cloudMat);
   world.add(clouds);
   const atmoMat = new ShaderMaterial({ vertexShader: ATMO_VERT, fragmentShader: ATMO_FRAG, side: BackSide, blending: AdditiveBlending, premultipliedAlpha: true, transparent: true, depthWrite: false, uniforms: { uSunV: { value: sunV } } });
-  scene.add(new Mesh(new SphereGeometry(R * 1.08, 96, 72), atmoMat));
+  place.add(new Mesh(new SphereGeometry(R * 1.08, 96, 72), atmoMat));
 
-  // линии связи
-  const arcs = [];
+  // маршруты и самолёты
+  const ORANGE = 0xff5a00, WHITE = 0xffffff;
   const hubP = ll(HUB[0], HUB[1], R);
-  function addArc(a, b, off, col) {
-    const hgt = Math.min(0.32, 0.05 + a.angleTo(b) * 0.2), mid = a.clone().add(b).normalize().multiplyScalar(R + hgt);
-    const c = new CatmullRomCurve3([a.clone().multiplyScalar(1.004), a.clone().lerp(mid, 0.5).normalize().multiplyScalar(R + hgt * 0.55), mid, b.clone().lerp(mid, 0.5).normalize().multiplyScalar(R + hgt * 0.55), b.clone().multiplyScalar(1.004)]);
-    const mat = new ShaderMaterial({ vertexShader: ARC_VERT, fragmentShader: ARC_FRAG, transparent: true, premultipliedAlpha: true, depthWrite: false, blending: AdditiveBlending, uniforms: { uTime: { value: 0 }, uOff: { value: off }, uCol: { value: new Color(col) } } });
-    const m = new Mesh(new TubeGeometry(c, 90, 0.0028, 5, false), mat);
-    spin.add(m); arcs.push(mat);
+  const routes = [];
+  const planeShape = new Shape();
+  [[1, 0], [-.55, .9], [-.3, .16], [-.95, .34], [-.95, -.34], [-.3, -.16], [-.55, -.9]].forEach((p, i) => i ? planeShape.lineTo(p[0], p[1]) : planeShape.moveTo(p[0], p[1]));
+  planeShape.closePath();
+  const planeGeo = new ShapeGeometry(planeShape); planeGeo.rotateX(-Math.PI / 2);
+  const planeMat = new MeshBasicMaterial({ color: WHITE, side: DoubleSide });
+  const tmpF = new Vector3(), tmpU = new Vector3(), tmpZ = new Vector3(), mtx = new Matrix4();
+
+  function addRoute(a, b, idx) {
+    const hgt = Math.min(0.30, 0.05 + a.angleTo(b) * 0.19), mid = a.clone().add(b).normalize().multiplyScalar(R + hgt);
+    const curve = new CatmullRomCurve3([a.clone().multiplyScalar(1.004), a.clone().lerp(mid, 0.5).normalize().multiplyScalar(R + hgt * 0.55), mid, b.clone().lerp(mid, 0.5).normalize().multiplyScalar(R + hgt * 0.55), b.clone().multiplyScalar(1.004)]);
+    const mat = new ShaderMaterial({ vertexShader: ARC_VERT, fragmentShader: ARC_FRAG, transparent: true, premultipliedAlpha: true, depthWrite: false, blending: AdditiveBlending, uniforms: { uP: { value: 0 }, uCol: { value: new Color(ORANGE) } } });
+    spin.add(new Mesh(new TubeGeometry(curve, 110, 0.0030, 5, false), mat));
+    const plane = new Mesh(planeGeo, planeMat); plane.scale.setScalar(0.024); spin.add(plane);
+    routes.push({ curve, mat, plane, dur: 7.5 + (idx % 3) * 1.6, off: (idx * 0.37) % 1 });
   }
-  const dots = [];
+  const dots = [], labels = [];
   function addDot(p, big) {
-    const m = new Mesh(new SphereGeometry(big ? 0.017 : 0.0115, 16, 12), new MeshBasicMaterial({ color: big ? 0xffd27a : 0xbfe3ff }));
+    const col = big ? WHITE : ORANGE;
+    const m = new Mesh(new SphereGeometry(big ? 0.016 : 0.013, 16, 12), new MeshBasicMaterial({ color: col }));
     m.position.copy(p).multiplyScalar(1.004); spin.add(m);
-    const ring = new Mesh(new RingGeometry(0.014, 0.019, 40), new MeshBasicMaterial({ color: big ? 0xffd27a : 0xbfe3ff, transparent: true, opacity: 0.6, blending: AdditiveBlending, side: DoubleSide, depthWrite: false }));
+    const ring = new Mesh(new RingGeometry(0.016, 0.022, 40), new MeshBasicMaterial({ color: col, transparent: true, opacity: 0.6, blending: AdditiveBlending, side: DoubleSide, depthWrite: false }));
     ring.position.copy(p).multiplyScalar(1.006); ring.lookAt(p.clone().multiplyScalar(2)); spin.add(ring);
     dots.push({ ring, ph: Math.random() * 6.28 });
   }
-  NODES.forEach((n, i) => { const p = ll(n[0], n[1], R); addArc(hubP, p, i * 0.17, i % 2 ? 0x9fd4ff : 0xffd98a); addDot(p, false); });
+  SERVERS.forEach((sv, i) => {
+    const p = ll(sv.lat, sv.lon, R);
+    addRoute(hubP, p, i); addDot(p, false);
+    if (labelsEl) { const el = document.createElement("span"); el.className = "gl-label d-" + (sv.dir || "r"); const tb = document.createElement("b"); tb.textContent = sv.city || sv.name; el.appendChild(tb); labelsEl.appendChild(el); labels.push({ el, p }); }
+  });
   addDot(hubP, true);
+  if (labelsEl) { const el = document.createElement("span"); el.className = "gl-label you d-r"; const tb = document.createElement("b"); tb.textContent = "Вы"; el.appendChild(tb); labelsEl.appendChild(el); labels.push({ el, p: hubP }); }
 
   Promise.all([load("day.jpg"), load("night.jpg"), load("bump.jpg"), load("water.jpg"), load("clouds.jpg")]).then((t) => {
     const u = earthMat.uniforms; u.uDay.value = t[0]; u.uNight.value = t[1]; u.uBump.value = t[2]; u.uWater.value = t[3]; cloudMat.uniforms.uCl.value = t[4];
-    ready = true; canvas.classList.add("on"); if (opts.onReady) opts.onReady();
+    ready = true; canvas.classList.add("on"); if (labelsEl) labelsEl.classList.add("on"); if (opts.onReady) opts.onReady();
   });
 
-  // управление
-  let ready = false, visible = true, raf = 0, last = 0, t = 0;
-  let rot = -Math.PI / 2 - (62 * Math.PI) / 180;       // лицом к камере — Европа/Россия
-  let vel = 0, dragging = false, lx = 0, mx = 0, my = 0, tx = 0, ty = 0, sc = 0;
-  const AUTO = 0.045;
+  let ready = false, visible = true, raf = 0, last = 0, t = 0, cw = 600, ch = 600;
+  const CENTER_LON = -17;                                      // Атлантика: видны и Москва, и Америка
+  const BASE_ROT = -Math.PI / 2 - (CENTER_LON * Math.PI) / 180;
+  let mx = 0, my = 0, tx = 0, ty = 0, sc = 0;
+  const wv = new Vector3();
+
   function size() {
-    const w = canvas.clientWidth || 600, h = canvas.clientHeight || 600, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    renderer.setPixelRatio(dpr); renderer.setSize(w, h, false);
-    camera.aspect = w / h; camera.updateProjectionMatrix();
-    camera.position.z = w / h < 0.9 ? 5.3 / Math.max(0.75, w / h) * 0.95 : 5.3;
+    cw = canvas.clientWidth || 600; ch = canvas.clientHeight || 600;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.setSize(cw, ch, false);
+    const aspect = cw / ch; camera.aspect = aspect; camera.updateProjectionMatrix();
+    const halfH = Math.tan((FOV * Math.PI) / 360) * CAMZ, halfW = halfH * aspect;
+    let s, x, y;
+    if (aspect >= 1.05) { s = Math.min(halfH * 0.9, halfW * 0.46); x = halfW * 0.50; y = -halfH * 0.02; }       // компьютер: справа, крупно
+    else { s = halfW * 0.88; x = 0; y = -halfH + s * 1.08; }                                   // телефон: ниже заголовка
+    place.scale.setScalar(s); place.position.set(x, y, 0);
   }
   size();
   window.addEventListener("resize", size);
-  canvas.addEventListener("pointerdown", (e) => { dragging = true; lx = e.clientX; vel = 0; try { canvas.setPointerCapture(e.pointerId); } catch (_) {} canvas.classList.add("grab"); });
-  canvas.addEventListener("pointermove", (e) => {
-    if (dragging) { const dx = e.clientX - lx; lx = e.clientX; rot += dx * 0.0062; vel = dx * 0.0062 * 60; }
-    const r = canvas.getBoundingClientRect(); mx = ((e.clientX - r.left) / r.width - 0.5); my = ((e.clientY - r.top) / r.height - 0.5);
-  });
-  const up = () => { dragging = false; canvas.classList.remove("grab"); };
-  canvas.addEventListener("pointerup", up); canvas.addEventListener("pointercancel", up);
-  canvas.addEventListener("pointerleave", () => { mx = 0; my = 0; });
+  window.addEventListener("pointermove", (e) => { mx = e.clientX / window.innerWidth - 0.5; my = e.clientY / window.innerHeight - 0.5; }, { passive: true });
+
+  function updateLabels() {
+    if (!labels.length) return;
+    for (let i = 0; i < labels.length; i++) {
+      const L = labels[i];
+      wv.copy(L.p).multiplyScalar(1.03); spin.localToWorld(wv);
+      const facing = wv.clone().sub(place.position).normalize().dot(camera.position.clone().sub(wv).normalize());   // >0 — точка на видимой стороне
+      wv.project(camera);
+      const vis = facing > 0.12 && wv.z < 1;
+      L.el.style.opacity = vis ? "" : "0";
+      L.el.style.transform = "translate3d(" + ((wv.x * 0.5 + 0.5) * cw).toFixed(1) + "px," + ((-wv.y * 0.5 + 0.5) * ch).toFixed(1) + "px,0)";
+    }
+  }
 
   function frame(now) {
     raf = requestAnimationFrame(frame);
-    const dt = Math.min(0.05, (now - last) / 1000 || 0.016); last = now; t += dt;
-    if (!dragging) { rot += (vel + (reduce ? 0 : AUTO)) * dt; vel *= Math.exp(-dt * 2.2); }
-    tx += (mx * 0.16 - tx) * (1 - Math.exp(-dt * 3)); ty += (my * 0.12 - ty) * (1 - Math.exp(-dt * 3));
-    spin.rotation.y = rot + sc;
-    clouds.rotation.y = rot * 0.9 + sc + t * 0.006;
-    world.rotation.x = 0.46 + ty; world.rotation.y = tx;
-    clouds.rotation.z = 0; 
-    arcs.forEach((m) => { m.uniforms.uTime.value = t; });
+    const dt = Math.max(0, Math.min(0.05, (now - last) / 1000 || 0.016)); last = now; t += dt;
+    tx += (mx * 0.12 - tx) * (1 - Math.exp(-dt * 3)); ty += (my * 0.08 - ty) * (1 - Math.exp(-dt * 3));
+    const sway = reduce ? 0 : Math.sin(t * 0.11) * 0.28;      // плавное покачивание вместо бесконечного вращения
+    spin.rotation.y = BASE_ROT + sway + sc;
+    clouds.rotation.y = BASE_ROT * 0.98 + sway + sc + t * 0.005;
+    world.rotation.x = 0.36 + ty; world.rotation.y = tx;
+    for (let i = 0; i < routes.length; i++) {
+      const r = routes[i];
+      const p = reduce ? 0.55 : (((t / r.dur + r.off) % 1) + 1) % 1;
+      r.mat.uniforms.uP.value = p;
+      const pos = r.curve.getPointAt(Math.min(0.999, p)), tan = r.curve.getTangentAt(Math.min(0.999, p));
+      tmpU.copy(pos).normalize(); tmpF.copy(tan).normalize(); tmpZ.crossVectors(tmpF, tmpU);
+      mtx.makeBasis(tmpF, tmpU, tmpZ); r.plane.quaternion.setFromRotationMatrix(mtx);
+      r.plane.position.copy(pos).multiplyScalar(1.012);
+      const fade = p < 0.04 ? p / 0.04 : p > 0.96 ? (1 - p) / 0.04 : 1; r.plane.scale.setScalar(0.024 * fade);
+    }
     dots.forEach((d) => { const k = (t * 0.7 + d.ph) % 1; d.ring.scale.setScalar(1 + k * 2.6); d.ring.material.opacity = 0.55 * (1 - k); });
     renderer.render(scene, camera);
+    updateLabels();
   }
-  function start() { if (!raf && ready !== null) { last = performance.now(); raf = requestAnimationFrame(frame); } }
+  function start() { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } }
   function stop() { cancelAnimationFrame(raf); raf = 0; }
   start();
   if ("IntersectionObserver" in window) new IntersectionObserver((es) => { es.forEach((e) => { visible = e.isIntersecting; visible ? start() : stop(); }); }, { threshold: 0.01 }).observe(canvas);
   document.addEventListener("visibilitychange", () => { document.hidden ? stop() : (visible && start()); });
-  return { setScroll(v) { sc = v; }, render() { frame(performance.now()); stop(); }, step(dt) { t += dt; rot += AUTO * dt; } };
+  return { setScroll(v) { sc = v * 0.5; }, step(dt) { t += dt; } };
 }
