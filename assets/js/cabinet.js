@@ -101,12 +101,12 @@
     var sub = d.subscription, act = $("tSubAct"), meter = $("tMeter"), fill = $("tMeterI"), linkBox = $("tLinkBox");
     act.innerHTML = ""; meter.hidden = true; fill.style.width = "0%";
     function addBtn(label, href, cls) {
-      var a = doc.createElement("a"); a.className = "btn btn-sm " + (cls || "btn-ghost"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = label; act.appendChild(a);
+      var a = doc.createElement("a"); a.className = "btn btn-sm " + (cls || "btn-glass"); a.href = href; a.target = "_blank"; a.rel = "noopener"; a.textContent = label; act.appendChild(a);
     }
     if (sub) {
       $("tSub").innerHTML = sub.left_days + "<small>дн.</small>";
       $("tSubS").textContent = "активна до " + fmtDate(sub.expires_at);
-      addBtn("Продлить в боте", BOT, "btn-primary");
+      addBtn("Продлить в боте", BOT, "btn-solid");
       $("tDev").textContent = sub.devices || "—";
       var total = Number(sub.total_gb) || 0, used = sub.used_gb == null ? null : Number(sub.used_gb);
       if (total > 0 && used != null) {
@@ -120,7 +120,7 @@
       if (sub.url) { $("tLink").textContent = sub.url; linkBox.hidden = false; } else { linkBox.hidden = true; }
     } else {
       $("tSub").textContent = "Нет"; $("tSubS").textContent = "оформи подписку в боте";
-      addBtn("Открыть бота", BOT, "btn-primary");
+      addBtn("Открыть бота", BOT, "btn-solid");
       $("tDev").textContent = "—"; $("tTr").textContent = "—"; $("tTrS").textContent = "";
       linkBox.hidden = true;
     }
