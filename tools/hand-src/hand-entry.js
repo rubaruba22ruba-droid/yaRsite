@@ -15,21 +15,15 @@ import { mountHand } from "./hand3d.js";
     });
   } catch (e) { cv.style.display = "none"; return; }
 
-  // палитры окружения по времени суток (те же, что у неба)
-  const K = [
-    { top: [0.16, 0.42, 0.85], hor: [0.85, 0.93, 1.0], gnd: [0.55, 0.62, 0.32], sun: [1.0, 0.96, 0.85] },
-    { top: [0.20, 0.42, 0.66], hor: [1.0, 0.72, 0.42], gnd: [0.82, 0.52, 0.22], sun: [1.0, 0.80, 0.50] },
-    { top: [0.16, 0.14, 0.42], hor: [1.0, 0.52, 0.42], gnd: [0.36, 0.20, 0.30], sun: [1.0, 0.62, 0.42] },
-    { top: [0.02, 0.04, 0.16], hor: [0.20, 0.24, 0.45], gnd: [0.06, 0.08, 0.16], sun: [0.70, 0.78, 1.0] }
-  ];
+  // свет руки берём у неба: время суток и положение солнца
+  const SUNC = [[1.0, 0.96, 0.85], [1.0, 0.80, 0.50], [1.0, 0.62, 0.42]];
   const mixv = (a, b, t) => a.map((x, i) => x + (b[i] - x) * t);
-  function colors(ph) {
-    ph = Math.max(0, Math.min(3, ph)); const i = Math.min(2, Math.floor(ph)), f = ph - i, a = K[i], b = K[i + 1];
-    return { top: mixv(a.top, b.top, f), hor: mixv(a.hor, b.hor, f), gnd: mixv(a.gnd, b.gnd, f), sun: mixv(a.sun, b.sun, f), sunDir: [-0.55, 0.55, 0.62] };
+  function lightNow() {
+    const sk = window.YVSky, ph = Math.max(0, Math.min(2, sk ? sk.phase : 0)), i = Math.min(1, Math.floor(ph));
+    const sx = sk ? sk.sun[0] : 0.27, sy = sk ? sk.sun[1] : 0.66;
+    return { ph, sun: mixv(SUNC[i], SUNC[i + 1], ph - i), sunDir: [(sx - 0.5) * 1.6, (sy - 0.5) * 1.4 + 0.15, 0.9] };
   }
-  let lastPh = -9;
-  function syncSky() { const ph = window.YVSky ? window.YVSky.phase : 0; if (Math.abs(ph - lastPh) > 0.04) { lastPh = ph; hand.setSky(colors(ph)); } }
-  syncSky(); setInterval(syncSky, 250);
+  hand.setSky(lightNow()); setInterval(() => hand.setSky(lightNow()), 250);
 
   let visible = true;
   window.addEventListener("pointermove", (e) => hand.pointer(e.clientX / innerWidth - 0.5, e.clientY / innerHeight - 0.5), { passive: true });
