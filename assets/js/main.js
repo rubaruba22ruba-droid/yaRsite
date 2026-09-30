@@ -1,4 +1,4 @@
-/* YarVpn — интерфейс: навигация, появление блоков, FAQ, фон-небо от прокрутки и глобус в первом экране. */
+/* YarVpn — интерфейс: навигация, появление блоков, FAQ и глобус в первом экране. */
 (function () {
   "use strict";
   var doc = document, root = doc.documentElement, body = doc.body;
@@ -14,7 +14,7 @@
     if (window.qrcode) { cb(); return; }
     if (qrWaiters) { qrWaiters.push(cb); return; }
     qrWaiters = [cb];
-    var s = doc.createElement("script"); s.src = "assets/js/qr.js?v=5";
+    var s = doc.createElement("script"); s.src = "assets/js/qr.js?v=6";
     s.onload = function () { var w = qrWaiters; qrWaiters = null; w.forEach(function (f) { f(); }); };
     doc.head.appendChild(s);
   };
@@ -98,45 +98,12 @@
   });
   var yr = $("#year"); if (yr) yr.textContent = new Date().getFullYear();
 
-  /* ---------- небо: спокойный сумрак со звёздами, плавно темнеет к концу страницы ---------- */
-  var sections = [
-    { id: "top",     phase: 2.55, land: 0.0,  sun: [0.30, 0.80] },
-    { id: "how",     phase: 2.70, land: 0.0, sun: [0.40, 0.60] },
-    { id: "pricing", phase: 2.80, land: 0.0, sun: [0.55, 0.50] },
-    { id: "cabinet", phase: 2.88, land: 0.0, sun: [0.50, 0.45] },
-    { id: "bonus",   phase: 2.92, land: 0.0, sun: [0.42, 0.40] },
-    { id: "faq",     phase: 2.96, land: 0.0, sun: [0.60, 0.36] }
-  ];
-  var secEls = sections.map(function (s) { return $("#" + s.id); });
-  var cur = { phase: sections[0].phase, land: 0, sx: 0.3, sy: 0.8, scroll: 0 }, cts = [], ctsAt = 0;
-  function centers() { var y0 = window.pageYOffset; return secEls.map(function (el) { if (!el) return 0; var r = el.getBoundingClientRect(); return y0 + r.top + r.height / 2; }); }
-  function targetAt(vy) {
-    var n = sections.length, i = 0;
-    while (i < n - 1 && vy > cts[i + 1]) i++;
-    var a = sections[i], b = sections[Math.min(n - 1, i + 1)], span = Math.max(1, cts[Math.min(n - 1, i + 1)] - cts[i]);
-    var f = Math.max(0, Math.min(1, (vy - cts[i]) / span)); f = f * f * (3 - 2 * f); if (vy < cts[0]) f = 0;
-    return { phase: a.phase + (b.phase - a.phase) * f, land: a.land + (b.land - a.land) * f, sx: a.sun[0] + (b.sun[0] - a.sun[0]) * f, sy: a.sun[1] + (b.sun[1] - a.sun[1]) * f };
-  }
-  var lastT = 0, earth = null;
-  function loop(ts) {
-    var dt = Math.min((ts - lastT) / 1000 || 0.016, 0.05); lastT = ts;
-    if (ts - ctsAt > 1500 || !cts.length) { cts = centers(); ctsAt = ts; }
-    var y = window.pageYOffset, tg = targetAt(y + window.innerHeight * 0.5), k = 1 - Math.exp(-dt * 3);
-    cur.phase += (tg.phase - cur.phase) * k; cur.land += (tg.land - cur.land) * k; cur.sx += (tg.sx - cur.sx) * k; cur.sy += (tg.sy - cur.sy) * k;
-    cur.scroll += (y / 1000 - cur.scroll) * (1 - Math.exp(-dt * 2));
-    var sk = window.YVSky;
-    if (sk) { sk.phase = cur.phase; sk.land = cur.land; sk.sun = [cur.sx, cur.sy]; sk.scroll = cur.scroll; sk.flare = 0; }
-    if (earth) earth.setScroll(y * 0.0011);
-    requestAnimationFrame(loop);
-  }
-  if (!reduce) requestAnimationFrame(loop);
-  else { cts = centers(); var t0 = targetAt(window.innerHeight * 0.5); if (window.YVSky) { window.YVSky.phase = t0.phase; window.YVSky.land = t0.land; } }
-  window.addEventListener("resize", function () { cts = centers(); ctsAt = performance.now(); });
-  window.addEventListener("load", function () { cts = centers(); ctsAt = performance.now(); });
+  var earth = null;
 
   window.addEventListener("scroll", function () {
     if (nav) nav.classList.toggle("stuck", window.pageYOffset > 20);
     if (prog) { var max = Math.max(1, root.scrollHeight - window.innerHeight); prog.style.setProperty("--p", Math.min(1, window.pageYOffset / max).toFixed(4)); }
+    if (earth && !reduce) earth.setScroll(window.pageYOffset * 0.0011);
   }, { passive: true });
   if (nav) nav.classList.toggle("stuck", window.pageYOffset > 20);
 

@@ -8,7 +8,7 @@
 <meta name="keywords" content="впн, vpn, яр впн, ярвпн, yarvpn, yar vpn, vpn в телеграм, vpn telegram бот, купить vpn, впн без блокировок">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="author" content="YarVpn">
-<meta name="theme-color" content="#060d24">
+<meta name="theme-color" content="#030716">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://yarvpn.best/">
 <link rel="alternate" hreflang="ru" href="https://yarvpn.best/">
@@ -22,14 +22,14 @@
 <meta property="og:url" content="https://yarvpn.best/">
 <meta property="og:title" content="YarVpn (Яр ВПН) — интернет без границ">
 <meta property="og:description" content="VPN, который живёт в Telegram. От 39 ₽, 3 дня бесплатно.">
-<meta property="og:image" content="https://yarvpn.best/assets/img/og.png">
+<meta property="og:image" content="https://yarvpn.best/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="YarVpn — интернет без границ">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="YarVpn (Яр ВПН) — интернет без границ">
 <meta name="twitter:description" content="VPN, который живёт в Telegram. От 39 ₽, 3 дня бесплатно.">
-<meta name="twitter:image" content="https://yarvpn.best/assets/img/og.png">
+<meta name="twitter:image" content="https://yarvpn.best/assets/img/og.jpg">
 
 <!-- Подтверждение прав на сайт (добавьте свои коды из Яндекс.Вебмастера и Google Search Console):
 <meta name="yandex-verification" content="КОД">
@@ -43,10 +43,10 @@
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/cormorant-garamond-cyrillic-500-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/main.css?v=5">
-<link rel="stylesheet" href="assets/css/v5.css?v=5">
-<noscript><style>.nav{transform:translate(-50%,0)}.sky,.earth-wrap{display:none}</style></noscript>
-<script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},5000)</script>
+<link rel="stylesheet" href="assets/css/main.css?v=6">
+<link rel="stylesheet" href="assets/css/v5.css?v=6">
+<noscript><style>.nav{transform:translate(-50%,0)}.earth-wrap{display:none}</style></noscript>
+<script>if(location.protocol==="http:"&&/(^|\.)yarvpn\.best$/.test(location.hostname))location.replace("https://"+location.host+location.pathname+location.search+location.hash);document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},5000)</script>
 
 <script type="application/ld+json">
 {
@@ -185,10 +185,11 @@
   </defs>
 </svg>
 
-<!-- ============ ФОН: живое небо (WebGL) ============ -->
-<div class="sky-fallback" aria-hidden="true"></div>
-<canvas class="sky" id="sky" aria-hidden="true"></canvas>
-<div class="veil" aria-hidden="true"></div>
+<!-- ============ ФОН: звёздное небо ============ -->
+<div class="space-base" aria-hidden="true"></div>
+<canvas class="space" id="space" aria-hidden="true"></canvas>
+<div class="twinkle" id="twinkle" aria-hidden="true"></div>
+<div class="grain" id="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"><i></i></div>
 <a class="skip" href="#main">К содержимому</a>
 
@@ -237,7 +238,6 @@
       <p class="lede rv" style="--d:3">VPN, который живёт в Telegram. Открой бота, выбери тариф и подключись за секунды.</p>
       <div class="hero-cta rv" style="--d:4">
         <a class="btn btn-solid btn-lg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
-        <a class="btn btn-glass btn-lg" href="#pricing">Тарифы</a>
       </div>
     </div>
     <div class="earth-wrap" id="earthWrap">
@@ -416,8 +416,8 @@
       </div>
       <nav class="foot-col" aria-label="Документы">
         <h4>Документы</h4>
-        <a href="https://telegra.ph/polzovatelskoe-soglashenie-09-17-24" target="_blank" rel="noopener">Пользовательское соглашение</a>
-        <a href="https://telegra.ph/Politika-konfidencialnosti-09-17-68" target="_blank" rel="noopener">Политика конфиденциальности</a>
+        <a href="privacy/">Политика конфиденциальности</a>
+        <a href="terms/">Условия использования</a>
       </nav>
       <nav class="foot-col" aria-label="Связь">
         <h4>Связь</h4>
@@ -431,9 +431,10 @@
   </div>
 </footer>
 
-<script src="assets/js/sky.js?v=5" defer></script>
-<script src="assets/js/earth.js?v=5" defer></script>
-<script src="assets/js/main.js?v=5" defer></script>
-<script src="assets/js/cabinet.js?v=5" defer></script>
+<script src="assets/js/space.js?v=6" defer></script>
+<script src="assets/js/earth.js?v=6" defer></script>
+<script src="assets/js/main.js?v=6" defer></script>
+<script src="assets/js/cabinet.js?v=6" defer></script>
+<script src="assets/js/consent.js?v=6" defer></script>
 </body>
 </html>
