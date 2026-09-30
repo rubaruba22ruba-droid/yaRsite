@@ -94,3 +94,44 @@ body{background:#050b22}
   .trial{flex-direction:column;align-items:flex-start}
   .trial .btn{width:100%}
 }
+
+/* ---- телефон: компактнее и легче для видеокарты ---- */
+@media (max-width:640px){
+  .sec{padding:46px 0}
+  .sec-head{margin-bottom:20px}
+  .h2{font-size:clamp(34px,10vw,44px)}
+  .glass{box-shadow:0 10px 26px -16px rgba(0,0,0,.55);background:linear-gradient(135deg,rgba(20,32,76,.86),rgba(13,23,60,.78))}
+  .glass::after{display:none}
+  .btn-solid{box-shadow:0 0 0 2px rgba(255,255,255,.5),0 8px 20px -10px rgba(0,0,0,.5)}
+  .js .rv{transform:translate3d(0,26px,0);transition-duration:.8s,.9s}
+
+  .steps3{gap:10px}
+  .steps3 li{display:grid;grid-template-columns:38px 1fr;column-gap:14px;align-items:start;padding:16px 18px}
+  .steps3 .num{grid-row:1 / span 2;margin:0}
+  .steps3 h3{font-size:24px;margin:0 0 2px}
+  .steps3 p{font-size:14.5px}
+  .apps{gap:10px;margin-top:10px}
+  .app{padding:12px 16px}
+  .app b{font-size:21px}
+
+  .trial{padding:18px 20px}
+  .plans,.addons{gap:10px}
+  .plan{padding:20px 20px 18px;display:grid;grid-template-columns:1fr auto;grid-template-areas:"top price" "spec spec" "btn btn";align-items:center;column-gap:12px}
+  .plan-top{grid-area:top;flex-wrap:wrap;gap:8px;min-height:0}
+  .plan-price{grid-area:price;margin:0;font-size:56px;justify-self:end}
+  .plan-spec{grid-area:spec;margin:12px 0 14px;padding-top:12px;gap:7px}
+  .plan .btn{grid-area:btn;height:46px}
+  .plan-name{font-size:28px}
+  .addon{padding:16px 18px}
+  .addon h3{font-size:23px}
+  .addon li{padding:9px 0;font-size:15px}
+  .pay{margin-top:14px}
+
+  .gate{grid-template-columns:1fr}
+  .cab .preview{display:none}
+  .card-lg{padding:20px 20px 22px}
+  .card-lg h3{font-size:27px}
+  .qa-q{padding:16px 6px;font-size:21px}
+  .qa-a p{padding:0 6px 18px;font-size:15px}
+  .foot{padding-top:34px}
+}

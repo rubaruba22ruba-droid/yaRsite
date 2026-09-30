@@ -101,7 +101,7 @@
     "  }else if(rd.y<.03){col=mix(col,mix(tf,hor,.5),smoothstep(.03,-.01,rd.y));}",
     " }",
     " float ns=smoothstep(2.2,3.,uPhase);",
-    " if(ns>0.){vec2 g=floor(fc/2.4);float r=hash(g);float st=step(.9975,r)*ns*smoothstep(.22,.7,y);col+=vec3(.8,.85,1.)*st*(.55+.45*sin(uT*2.+r*40.));}",
+    " if(ns>0.){vec2 sp=vec2(uv.x*asp,uv.y)*64.;vec2 g=floor(sp);float r=hash(g);vec2 o=vec2(hash(g+3.1),hash(g+7.7))*.56+.22;float d=length(fract(sp)-o);float st=step(.984,r)*smoothstep(.13,.0,d)*ns*smoothstep(.2,.7,y);col+=vec3(.82,.88,1.)*st*(.5+.5*sin(uT*1.6+r*40.))*1.4;}",
     " col+=vec3(1.,.96,.88)*exp(-sr*2.0)*uFlare*.9;",
     " vec2 vq=uv-.5;col*=1.-dot(vq,vq)*.5;",
     " col=pow(col,vec3(.96));",

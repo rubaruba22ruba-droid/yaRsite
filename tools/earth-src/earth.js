@@ -34,7 +34,7 @@ void main(){
   vec3 nl=texture2D(uNight,vUv).rgb;nl=pow(nl,vec3(1.1))*3.0*vec3(1.,.8,.5);
   col=mix(nl+day*.028,col,dayF);
   float fr=pow(1.-max(dot(Ng,V),0.),3.);
-  col+=vec3(.22,.5,1.)*fr*(.12+.85*dayF)*.9;
+  col+=vec3(.2,.45,.9)*fr*(.06+.42*dayF)*.6;
   gl_FragColor=vec4(col,1.);
 }`;
 
@@ -51,9 +51,9 @@ const ATMO_VERT = `varying vec3 vNormal;varying vec3 vView;
 void main(){vNormal=normalize(normalMatrix*normal);vec4 mv=modelViewMatrix*vec4(position,1.);vView=-mv.xyz;gl_Position=projectionMatrix*mv;}`;
 const ATMO_FRAG = `uniform vec3 uSunV;varying vec3 vNormal;varying vec3 vView;
 void main(){
-  float i=pow(max(0.,.69-dot(vNormal,vec3(0.,0.,1.))),5.2)*2.3;
+  float i=pow(max(0.,.66-dot(vNormal,vec3(0.,0.,1.))),6.0)*0.85;
   float sunSide=.30+.95*clamp(dot(normalize(vNormal),uSunV)*.6+.5,0.,1.);
-  vec3 c=mix(vec3(.10,.34,.95),vec3(.38,.68,1.),clamp(i*.5,0.,1.));
+  vec3 c=mix(vec3(.12,.36,.9),vec3(.36,.62,.95),clamp(i*.5,0.,1.));
   gl_FragColor=vec4(c*i*sunSide,0.);
 }`;
 
@@ -101,7 +101,7 @@ export function initEarth(canvas, opts) {
   const clouds = new Mesh(new SphereGeometry(R * 1.007, 96, 72), cloudMat);
   world.add(clouds);
   const atmoMat = new ShaderMaterial({ vertexShader: ATMO_VERT, fragmentShader: ATMO_FRAG, side: BackSide, blending: AdditiveBlending, premultipliedAlpha: true, transparent: true, depthWrite: false, uniforms: { uSunV: { value: sunV } } });
-  scene.add(new Mesh(new SphereGeometry(R * 1.13, 96, 72), atmoMat));
+  scene.add(new Mesh(new SphereGeometry(R * 1.08, 96, 72), atmoMat));
 
   // линии связи
   const arcs = [];
