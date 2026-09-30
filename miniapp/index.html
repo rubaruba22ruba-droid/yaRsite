@@ -52,7 +52,7 @@
   .wheel-box{position:relative;margin:14px auto 0;width:100%;max-width:400px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
   #wheel{display:block;pointer-events:none}
   .info{margin-top:26px;text-align:center}
-  h1{margin:0;display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:800 clamp(22px,7.2vw,32px)/1.15 var(--serif);letter-spacing:-.02em;text-transform:uppercase;font-variant-numeric:lining-nums}
+  h1{margin:0;display:block;font:800 clamp(20px,6.2vw,28px)/1.18 var(--serif);letter-spacing:-.02em;text-transform:uppercase;font-variant-numeric:lining-nums}
   .chip{display:inline-flex;margin-top:14px;padding:9px 16px;border-radius:4px;background:rgba(255,255,255,.04);border:1px solid var(--line2);font-size:14px;font-weight:700}
   .note{margin:14px auto 0;max-width:420px;min-height:1.45em;font-size:15px;font-weight:500;color:var(--muted)}
   .note.ok{color:var(--ok);font-weight:700}
@@ -87,6 +87,8 @@
   body.outside main>:not(.out):not(.top){display:none}
   body.outside .out{display:flex}
   body.outside .bar{display:none}
+  body.soon .wheel-box,body.soon section.block,body.soon .fair{display:none}
+  body.soon .info{margin-top:22vh}
   @media (prefers-reduced-motion:reduce){.sky canvas{animation:none}}
 </style>
 </head>
@@ -363,12 +365,7 @@ function spinTo(winnerIdx, ms) {
 }
 
 /* ===== ТЕКСТЫ ===== */
-function setTitle(t) {
-  const el = $("title");
-  el.style.fontSize = ""; el.textContent = t;
-  let fs = parseFloat(getComputedStyle(el).fontSize);
-  while (el.scrollWidth > el.clientWidth && fs > 20) { fs -= 1; el.style.fontSize = fs + "px"; }
-}
+function setTitle(t) { $("title").textContent = t; }
 const setChip = (t) => { $("chip").textContent = t; };
 function setNote(text, kind) { S.noteOverride = text ? { text, kind } : null; renderNote(); }
 function renderNote() {
@@ -400,6 +397,7 @@ function fmtDate(ts) {
 
 /* ===== ОТРИСОВКА ===== */
 function renderInfo() {
+  if (document.body.classList.contains("soon")) { setTitle("Рулетка скоро откроется"); setChip("Скоро"); return; }
   if (S.result) { setTitle(S.result.prize.label); setChip("Шанс " + chance(S.result.prize)); return; }
   const top = S.prizes.filter((p) => p.type === "balance").sort((a, b) => b.amount - a.amount)[0];
   setTitle(top ? "Главный приз — " + money(top.amount) : "Ежедневная рулетка");
@@ -454,6 +452,14 @@ async function api(path) {
 }
 function fail(code, retry) {
   S.loaded = true;
+  if (code === "not_configured") {          // адрес API не указан — показываем «скоро», а не пустое колесо
+    document.body.classList.add("soon");
+    S.fatal = { msg: "Мы подключаем рулетку — загляните позже.", cta: "Вернуться в бота", retry: false };
+    setTitle("Рулетка скоро откроется"); setChip("Скоро");
+    const n = $("note"); n.textContent = S.fatal.msg; n.className = "note";
+    const b = $("cta"); b.disabled = false; b.textContent = S.fatal.cta;
+    return;
+  }
   S.fatal = { msg: ERR[code] || ERR.server_error, cta: retry ? "Повторить" : "Вернуться в бота", retry: !!retry };
   renderAll();
 }

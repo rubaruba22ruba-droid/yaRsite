@@ -43,7 +43,7 @@
 <link rel="preload" href="assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/site.css?v=7">
+<link rel="stylesheet" href="assets/css/site.css?v=8">
 <script>if(location.protocol==="http:"&&/(^|\.)yarvpn\.best$/.test(location.hostname))location.replace("https://"+location.host+location.pathname+location.search+location.hash);document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},5000)</script>
 
 <script type="application/ld+json">
@@ -209,8 +209,7 @@
       <a href="#faq">Вопросы</a>
     </nav>
     <div class="nav-act">
-      <a class="me-chip" id="meChip" href="#cabinet" aria-label="Личный кабинет"><b id="meAva">Y</b><span id="meName"></span></a>
-      <button class="btn btn-white btn-sm btn-enter" type="button" data-login>Войти</button>
+      <a class="btn btn-white btn-sm btn-enter" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Войти</a>
       <a class="sq sq-or sq-tg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener" aria-label="Открыть бота в Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a>
       <a class="btn btn-solid btn-sm nav-tg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
       <button class="sq burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="sheet"><i></i><i></i><i></i></button>
@@ -228,7 +227,7 @@
     <a href="#faq" style="--i:5"><small>06</small><span>Вопросы</span><svg aria-hidden="true"><use href="#i-arr"/></svg></a>
   </nav>
   <div class="sheet-foot">
-    <button class="btn btn-white" type="button" data-login>Войти</button>
+    <a class="btn btn-white" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Войти</a>
     <a class="btn btn-solid" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Telegram</a>
   </div>
   <p class="sheet-note">Поддержка — <a class="link" href="https://t.me/entoni" target="_blank" rel="noopener">@entoni</a></p>
@@ -350,8 +349,7 @@
     <header class="sec-head"><p class="idx rv">04</p><h2 class="h2 rv" id="cab-h">Личный <em>кабинет</em></h2></header>
 
     <div class="cab glass rv" id="cab">
-      <!-- не вошли -->
-      <div class="gate" id="cabOut">
+      <div class="gate">
         <div class="preview" aria-hidden="true">
           <div class="tile"><p class="lbl">Баланс</p><div class="val">—</div></div>
           <div class="tile"><p class="lbl">Подписка</p><div class="val">—</div></div>
@@ -360,35 +358,11 @@
           <div class="tile w2"><p class="lbl">Пробный период</p><div class="val">—</div></div>
         </div>
         <div class="gate-box">
-          <div id="loginIdle">
-            <h3>Войди через Telegram — увидишь баланс, подписку, устройства и статистику приглашений.</h3>
-            <div class="gate-cta"><button class="btn btn-solid btn-lg" id="loginBtn" type="button"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</button></div>
-            <p class="cab-hint">Бот покажет, откуда идёт вход, и попросит подтвердить. Пароль не нужен.</p>
+          <div>
+            <h3>Кабинет — в Telegram-боте: баланс, подписка, устройства и друзья в разделе «Профиль».</h3>
+            <div class="gate-cta"><a class="btn btn-solid btn-lg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</a></div>
+            <p class="cab-hint">Откроется бот — нажми Start, и ты в кабинете. Пароль не нужен.</p>
           </div>
-          <div class="note" id="cabNote" role="status" hidden></div>
-        </div>
-      </div>
-
-      <!-- вошли -->
-      <div class="dash" id="cabIn" hidden>
-        <div class="dash-top">
-          <div class="ava" id="cabAva">Y</div>
-          <div class="who"><b id="cabName"></b><span id="cabUser"></span></div>
-          <div class="dash-tools">
-            <button class="btn btn-glass btn-sm" id="cabRefresh" type="button">Обновить</button>
-            <button class="btn btn-glass btn-sm" id="logoutBtn" type="button">Выйти</button>
-          </div>
-        </div>
-        <div class="grid" id="cabGrid">
-          <div class="tile c4"><p class="lbl">Баланс</p><div class="val tnum" id="tBal">0<small>₽</small></div><p class="sub">можно тратить на подписку</p></div>
-          <div class="tile c8"><p class="lbl">Подписка</p><div class="val tnum" id="tSub">—</div><p class="sub" id="tSubS"></p><div class="act" id="tSubAct"></div></div>
-          <div class="tile c4"><p class="lbl">Трафик</p><div class="val tnum" id="tTr">—</div><p class="sub" id="tTrS"></p><div class="meter" id="tMeter" hidden><i id="tMeterI"></i></div></div>
-          <div class="tile c4"><p class="lbl">Устройства</p><div class="val tnum" id="tDev">—</div></div>
-          <div class="tile c4"><p class="lbl">Пробный период</p><div class="val val-s" id="tTrial">—</div></div>
-          <div class="tile c12" id="tLinkBox"><p class="lbl">Ссылка подписки</p><p class="sub">Вставь в приложение через «Добавить подписку по URL». Никому не передавай — по ней работает твой VPN.</p>
-            <div class="copy"><code id="tLink">—</code><button class="btn btn-solid btn-sm" id="copyLink" type="button"><svg aria-hidden="true" style="width:16px;height:16px"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
-          <div class="tile c12"><p class="lbl">Друзья</p><div class="val tnum" id="tRef">0</div><p class="sub" id="tRefS"></p>
-            <div class="copy"><code id="tRefLink">—</code><button class="btn btn-glass btn-sm" id="copyRef" type="button"><svg aria-hidden="true" style="width:16px;height:16px"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
         </div>
       </div>
     </div>
@@ -461,26 +435,10 @@
   </div>
 </footer>
 
-<!-- ============ ОКНО ВХОДА ЧЕРЕЗ TELEGRAM ============ -->
-<div class="modal" id="loginModal" role="dialog" aria-modal="true" aria-labelledby="loginTitle" aria-hidden="true" hidden>
-  <div class="modal-box">
-    <div class="modal-head"><h3 id="loginTitle">Вход через Telegram</h3><button class="btn btn-glass btn-sm" id="loginCancel" type="button">Закрыть</button></div>
-    <div class="wait" id="loginWait">
-      <p>Откройте бота, нажмите <b>Start</b> и подтвердите вход кнопкой «Да, это я». Если аккаунта ещё нет, он создастся автоматически.</p>
-      <a class="btn btn-solid btn-block btn-lg" id="loginLink" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener"><svg aria-hidden="true" style="width:20px;height:20px"><use href="#i-tg"/></svg>Открыть @yarVpnRubot</a>
-      <div class="qr" id="loginQr" hidden><div class="qr-box" id="qrBox"></div><small>или отсканируйте камерой телефона</small></div>
-      <div class="waiting"><i></i><span>Ждём подтверждение в Telegram…</span><b id="timerText">5:00</b></div>
-      <div class="timer-bar"><i id="timerBar"></i></div>
-    </div>
-    <div class="note" id="modalNote" role="status" hidden></div>
-  </div>
-</div>
-
-<script src="assets/js/bg.js?v=7" defer></script>
-<script src="assets/js/map-data.js?v=7" defer></script>
-<script src="assets/js/map.js?v=7" defer></script>
-<script src="assets/js/main.js?v=7" defer></script>
-<script src="assets/js/cabinet.js?v=7" defer></script>
-<script src="assets/js/consent.js?v=7" defer></script>
+<script src="assets/js/bg.js?v=8" defer></script>
+<script src="assets/js/map-data.js?v=8" defer></script>
+<script src="assets/js/map.js?v=8" defer></script>
+<script src="assets/js/main.js?v=8" defer></script>
+<script src="assets/js/consent.js?v=8" defer></script>
 </body>
 </html>
