@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>YarVpn (Яр ВПН) — быстрый VPN в Telegram от 39 ₽</title>
-<meta name="description" content="YarVpn (Яр ВПН) — быстрый VPN-сервис с подключением через Telegram-бота. Серверы в Финляндии и Европе, до 3 устройств, тарифы от 39 ₽ за неделю. 3 дня бесплатно.">
-<meta name="keywords" content="впн, vpn, яр впн, ярвпн, yarvpn, yar vpn, vpn в телеграм, vpn telegram бот, купить vpn, быстрый vpn">
+<title>YarVpn (Яр ВПН) — VPN в Telegram от 39 ₽</title>
+<meta name="description" content="YarVpn (Яр ВПН) — VPN, который живёт в Telegram. Открой бота, выбери тариф и подключись за секунды. Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.">
+<meta name="keywords" content="впн, vpn, яр впн, ярвпн, yarvpn, yar vpn, vpn в телеграм, vpn telegram бот, купить vpn">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="author" content="YarVpn">
-<meta name="theme-color" content="#0a0705">
+<meta name="theme-color" content="#050506">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://yarvpn.best/">
 <!-- Адрес API бота для входа в кабинет (обязательно HTTPS, без слэша в конце). Пусто = кабинет отключён. -->
@@ -18,15 +18,15 @@
 <meta property="og:site_name" content="YarVpn">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://yarvpn.best/">
-<meta property="og:title" content="YarVpn (Яр ВПН) — быстрый VPN в Telegram">
-<meta property="og:description" content="Быстрый VPN, который живёт в Telegram. Серверы в столицах Европы, до 3 устройств, от 39 ₽ за неделю. 3 дня бесплатно.">
+<meta property="og:title" content="YarVpn (Яр ВПН) — VPN, который живёт в Telegram">
+<meta property="og:description" content="Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.">
 <meta property="og:image" content="https://yarvpn.best/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="YarVpn — скорость без ограничений">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="YarVpn (Яр ВПН) — быстрый VPN в Telegram">
-<meta name="twitter:description" content="Серверы в столицах Европы, до 3 устройств, от 39 ₽ за неделю. 3 дня бесплатно.">
+<meta name="twitter:title" content="YarVpn (Яр ВПН) — VPN, который живёт в Telegram">
+<meta name="twitter:description" content="Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.">
 <meta name="twitter:image" content="https://yarvpn.best/assets/img/og.png">
 
 <!-- Подтверждение прав на сайт (добавьте свои коды из Яндекс.Вебмастера и Google Search Console):
@@ -38,12 +38,11 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 
-<link rel="preload" href="assets/fonts/geologica-cyr.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/geologica-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-cyr.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/main.css?v=1">
-<noscript><style>.map{display:none}.net-list{position:static;display:block;pointer-events:auto}.srv-list{width:100%}.hdr{background:rgba(10,7,5,.95)}</style></noscript>
+<link rel="preload" href="assets/fonts/geologica-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/main.css?v=2">
+<noscript><style>.map-face,.pins,.map-ui{display:none}.map-plane{height:auto}.net-list{position:static;width:100%;margin-top:0}.nav{transform:translate(-50%,0)}</style></noscript>
 <script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},5000)</script>
 
 <script type="application/ld+json">
@@ -58,13 +57,7 @@
       "url": "https://yarvpn.best/",
       "logo": "https://yarvpn.best/assets/img/apple-touch-icon.png",
       "sameAs": ["https://t.me/yarVpnRubot", "https://t.me/YarVpnews"],
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "customer support",
-        "email": "yarsup@proton.me",
-        "url": "https://t.me/entoni",
-        "availableLanguage": ["ru"]
-      }
+      "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "email": "yarsup@proton.me", "url": "https://t.me/entoni", "availableLanguage": ["ru"] }
     },
     {
       "@type": "WebSite",
@@ -81,7 +74,7 @@
       "name": "YarVpn — VPN в Telegram",
       "alternateName": "Яр ВПН",
       "serviceType": "VPN-сервис",
-      "description": "Быстрый VPN с подключением через Telegram-бота: серверы в столицах Европы, до 3 устройств, 3 дня бесплатно.",
+      "description": "VPN, который живёт в Telegram. Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.",
       "provider": { "@id": "https://yarvpn.best/#org" },
       "url": "https://yarvpn.best/",
       "hasOfferCatalog": {
@@ -97,14 +90,14 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Что такое YarVpn (Яр ВПН)?", "acceptedAnswer": { "@type": "Answer", "text": "YarVpn — это VPN-сервис, который целиком живёт в Telegram. Открываешь бота @yarVpnRubot, выбираешь тариф или берёшь пробный период, а бот присылает ссылку-подписку и QR-код. Добавляешь её в приложение — и VPN готов. Отдельный аккаунт и пароль не нужны." } },
-        { "@type": "Question", "name": "Как подключить VPN на телефоне и компьютере?", "acceptedAnswer": { "@type": "Answer", "text": "Установи приложение: на Android — v2rayNG, на iPhone, iPad и Mac — Happ, на Windows — v2rayN. В боте нажми «Подключиться», в приложении выбери «Добавить подписку по URL» и вставь ссылку (или отсканируй QR-код), затем включи VPN." } },
-        { "@type": "Question", "name": "Сколько стоит VPN YarVpn?", "acceptedAnswer": { "@type": "Answer", "text": "7 дней — 39 ₽, 1 месяц — 79 ₽, 3 месяца — 199 ₽. Во всех тарифах есть трафик (120, 500 и 1500 ГБ) и до 3 устройств. На длинном тарифе выходит около 2,2 ₽ в день." } },
-        { "@type": "Question", "name": "Есть ли бесплатный пробный период?", "acceptedAnswer": { "@type": "Answer", "text": "Да: 3 дня, 10 ГБ трафика и 1 устройство, со всеми серверами. Активируется один раз из главного меню бота, банковская карта не нужна." } },
-        { "@type": "Question", "name": "Сколько устройств можно подключить?", "acceptedAnswer": { "@type": "Answer", "text": "В каждом тарифе — до 3 устройств одновременно. Нужно больше — докупи пакет в боте: +1 устройство за 49 ₽, +3 за 99 ₽, +10 за 209 ₽." } },
-        { "@type": "Question", "name": "Какие способы оплаты доступны?", "acceptedAnswer": { "@type": "Answer", "text": "TON, Telegram Stars, криптовалюта и внутренний баланс. Баланс можно пополнить или заработать на приглашениях друзей." } },
-        { "@type": "Question", "name": "Что делать, если трафик закончился раньше срока?", "acceptedAnswer": { "@type": "Answer", "text": "Докупи гигабайты, не дожидаясь продления: +50 ГБ за 49 ₽, +250 ГБ за 199 ₽, +500 ГБ за 399 ₽." } },
-        { "@type": "Question", "name": "Как войти в личный кабинет на сайте?", "acceptedAnswer": { "@type": "Answer", "text": "Через Telegram: нажми «Войти через Telegram», открой бота по ссылке и подтверди вход кнопкой «Да, это я». Пароль не нужен." } }
+        { "@type": "Question", "name": "Что такое YarVpn (Яр ВПН)?", "acceptedAnswer": { "@type": "Answer", "text": "VPN, который живёт в Telegram: открой бота, выбери тариф и подключись за секунды. Без нового аккаунта и отдельного приложения — подписка и поддержка в одном чате." } },
+        { "@type": "Question", "name": "Сколько устройств можно подключить?", "acceptedAnswer": { "@type": "Answer", "text": "В тарифах — до 3 одновременно. Нужно больше? Докупи пакет прямо в боте: +1 устройство за 49 ₽, +3 за 99 ₽, +10 за 209 ₽." } },
+        { "@type": "Question", "name": "Что даёт бесплатный пробный период?", "acceptedAnswer": { "@type": "Answer", "text": "3 дня, 10 ГБ трафика и 1 устройство — доступ ко всем серверам, как в платной подписке. Активируется один раз из главного меню бота." } },
+        { "@type": "Question", "name": "Какие есть способы оплаты?", "acceptedAnswer": { "@type": "Answer", "text": "TON, Telegram Stars, криптовалюта, а ещё баланс — деньги, заработанные на рефералах, можно сразу потратить на подписку." } },
+        { "@type": "Question", "name": "Закончился трафик раньше срока — что делать?", "acceptedAnswer": { "@type": "Answer", "text": "Докупи гигабайты, не дожидаясь продления: +50 ГБ за 49 ₽, +250 ГБ за 199 ₽, +500 ГБ за 399 ₽." } },
+        { "@type": "Question", "name": "Как быстро включается доступ после оплаты?", "acceptedAnswer": { "@type": "Answer", "text": "Сразу. Бот подтверждает платёж и присылает ссылку с QR-кодом за несколько секунд." } },
+        { "@type": "Question", "name": "Как подключить VPN на телефоне и компьютере?", "acceptedAnswer": { "@type": "Answer", "text": "Установи приложение: на Android — v2rayNG, на iPhone, iPad и Mac — Happ, на Windows — v2rayN. В боте нажми «Подключиться», в приложении добавь подписку по URL (или отсканируй QR-код) и включи VPN." } },
+        { "@type": "Question", "name": "Что-то не работает — куда писать?", "acceptedAnswer": { "@type": "Answer", "text": "В поддержку прямо в боте, в Telegram — @entoni, или на почту yarsup@proton.me." } }
       ]
     }
   ]
@@ -113,470 +106,394 @@
 </head>
 <body>
 
-<!-- SVG-спрайт: логотип-«Я», иконки и общий рисунок дуг (используется в hero и в финальном блоке) -->
+<!-- SVG-спрайт иконок -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
-    <linearGradient id="gRim" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ff7a2e" stop-opacity="0"/>
-      <stop offset=".45" stop-color="#ff7a2e" stop-opacity=".35"/>
-      <stop offset="1" stop-color="#ffb066" stop-opacity="1"/>
-    </linearGradient>
-    <linearGradient id="gBand" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ff6a1f" stop-opacity="0"/>
-      <stop offset=".6" stop-color="#ff6a1f" stop-opacity=".10"/>
-      <stop offset="1" stop-color="#ff6a1f" stop-opacity=".30"/>
-    </linearGradient>
-    <radialGradient id="gSpark" cx=".5" cy=".5" r=".5">
-      <stop offset="0" stop-color="#fff1d6" stop-opacity="1"/>
-      <stop offset=".25" stop-color="#ffb066" stop-opacity=".9"/>
-      <stop offset=".6" stop-color="#ff6a1f" stop-opacity=".35"/>
-      <stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="gFloor" cx=".5" cy="1" r=".75">
-      <stop offset="0" stop-color="#ff6a1f" stop-opacity=".26"/>
-      <stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="fBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
-    <filter id="fBlurS" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
-
-    <symbol id="i-mark" viewBox="0 0 24 24"><path d="M16.6 4.4v15.2M16.6 4.4h-5.5a3.95 3.95 0 0 0 0 7.9h5.5" fill="none" stroke="#1c0a02" stroke-width="3" stroke-linecap="square" stroke-linejoin="round"/><path d="M12.2 12.7 6.9 20.4" fill="none" stroke="#1c0a02" stroke-width="3"/></symbol>
-    <symbol id="i-go" viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-go" viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="m3.5 8.6 3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21.4 3.6 2.9 10.8c-.9.4-.9 1.1-.2 1.3l4.7 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.2-.5-1.8-1.3-1.7ZM9.3 13.5l9-5.7c.4-.3.8-.1.5.2l-7.4 6.7-.3 3.1-1.8-4.3Z" fill="currentColor"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H10.5L6 19.5V16H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.5 6.5h17v11h-17zM3.8 7l8.2 6.2L20.2 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 3.5v-.2A1.3 1.3 0 0 0 9.2 2H3.8A1.8 1.8 0 0 0 2 3.8v5.4a1.3 1.3 0 0 0 1.3 1.3h.2" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
-
-    <!-- общий рисунок дуг: два «занавеса» и искры у основания, как свет из-под арки -->
-    <symbol id="arcs-art" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
-      <ellipse cx="720" cy="900" rx="640" ry="240" fill="url(#gFloor)" class="arc-breath"/>
-      <g class="arc-flick">
-        <path d="M60 0A640 930 0 0 0 420 812L468 770A560 830 0 0 1 176 0Z" fill="url(#gBand)"/>
-        <path d="M1380 0A640 930 0 0 1 1020 812L972 770A560 830 0 0 0 1264 0Z" fill="url(#gBand)"/>
-      </g>
-      <g fill="none" stroke="url(#gRim)" stroke-width="2.2" stroke-linecap="round">
-        <path d="M60 0A640 930 0 0 0 420 812"/>
-        <path d="M1380 0A640 930 0 0 1 1020 812"/>
-      </g>
-      <g fill="none" stroke="url(#gRim)" stroke-width="10" stroke-linecap="round" filter="url(#fBlur)" opacity=".7" class="arc-flick b">
-        <path d="M60 0A640 930 0 0 0 420 812"/>
-        <path d="M1380 0A640 930 0 0 1 1020 812"/>
-      </g>
-      <g class="arc-flick b">
-        <ellipse cx="428" cy="806" rx="70" ry="34" fill="url(#gSpark)"/>
-        <ellipse cx="1012" cy="806" rx="70" ry="34" fill="url(#gSpark)"/>
-        <circle cx="452" cy="784" r="3" fill="#ffd9a8"/><circle cx="486" cy="770" r="2" fill="#ffb066"/><circle cx="410" cy="760" r="2" fill="#ff9048"/>
-        <circle cx="988" cy="784" r="3" fill="#ffd9a8"/><circle cx="954" cy="770" r="2" fill="#ffb066"/><circle cx="1030" cy="760" r="2" fill="#ff9048"/>
-      </g>
-    </symbol>
+    <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 3.5v8M6.6 7a7.5 7.5 0 1 0 10.8 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
   </defs>
 </svg>
 
-<canvas id="embers" aria-hidden="true"></canvas>
-<div class="bg-heat" aria-hidden="true"></div>
-<div class="bg-grain" aria-hidden="true"></div>
+<div class="page-bg" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 <a class="skip" href="#main">К содержимому</a>
 
-<header class="hdr" id="hdr">
-  <div class="wrap hdr-in">
-    <a class="brand" href="#top" aria-label="YarVpn — на главную">
-      <span class="brand-mark"><svg aria-hidden="true"><use href="#i-mark"/></svg></span>YarVpn
-    </a>
-    <nav class="nav" aria-label="Основная навигация" id="nav">
+<!-- ============ НАВИГАЦИЯ ============ -->
+<header class="nav" id="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="YarVpn — на главную">YarVpn<i aria-hidden="true"></i></a>
+    <nav class="nav-links" id="navLinks" aria-label="Основная навигация">
+      <span class="nav-ind" id="navInd" aria-hidden="true"></span>
       <a href="#servers">Серверы</a>
-      <a href="#how">Подключение</a>
+      <a href="#how">Как это работает</a>
       <a href="#pricing">Тарифы</a>
-      <a href="#cabinet">Кабинет</a>
-      <a href="#faq">Вопросы</a>
+      <a href="#cabinet">Личный кабинет</a>
+      <a href="#faq">Частые вопросы</a>
     </nav>
-    <div class="hdr-act">
-      <a class="me-chip" id="meChip" href="#cabinet" aria-label="Личный кабинет"><b id="meAva">Я</b><span id="meName"></span></a>
-      <a class="btn btn-ghost btn-sm" id="hdrCab" href="#cabinet">Войти</a>
-      <a class="btn btn-primary btn-sm" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть бота<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
-      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    <div class="nav-act">
+      <a class="me-chip" id="meChip" href="#cabinet" aria-label="Личный кабинет"><b id="meAva">Y</b><span id="meName"></span></a>
+      <a class="btn btn-primary btn-sm" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="sheet"><i></i><i></i><i></i></button>
     </div>
   </div>
 </header>
 
-<div class="menu" id="menu" aria-hidden="true">
+<div class="sheet" id="sheet" aria-hidden="true">
   <nav aria-label="Мобильное меню">
-    <a href="#servers" style="--i:0"><small>01</small>Серверы</a>
-    <a href="#how" style="--i:1"><small>02</small>Подключение</a>
-    <a href="#pricing" style="--i:2"><small>03</small>Тарифы</a>
-    <a href="#cabinet" style="--i:3"><small>04</small>Кабинет</a>
-    <a href="#faq" style="--i:4"><small>05</small>Вопросы</a>
+    <a href="#servers" style="--i:0">Серверы</a>
+    <a href="#how" style="--i:1">Как это работает</a>
+    <a href="#pricing" style="--i:2">Тарифы</a>
+    <a href="#cabinet" style="--i:3">Личный кабинет</a>
+    <a href="#faq" style="--i:4">Частые вопросы</a>
   </nav>
-  <div class="menu-foot">
-    <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть бота в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+  <div class="sheet-foot">
+    <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
     <a class="btn btn-ghost" href="https://t.me/entoni" target="_blank" rel="noopener">Поддержка @entoni</a>
   </div>
 </div>
 
 <main id="main">
 
-<!-- ===================== HERO ===================== -->
+<!-- ============ HERO ============ -->
 <section class="hero" id="top" aria-labelledby="h1">
-  <div class="hero-glow" aria-hidden="true"></div>
-  <div class="hero-slit" aria-hidden="true"></div>
-  <svg class="hero-arcs" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#arcs-art"/></svg>
-  <div class="wrap hero-in">
-    <p class="kicker rv"><span class="live-dot"></span><b>YarVpn</b><span class="sep">/</span>Яр ВПН<span class="k-node"><span class="sep">/</span>основной узел — Хельсинки</span></p>
-    <h1 class="h1" id="h1">
-      <span class="ln" style="--d:0"><span>Быстрый VPN</span></span>
-      <span class="ln" style="--d:1"><span class="ember">в&nbsp;Telegram</span></span>
-    </h1>
-    <p class="lede rv" style="--d:3"><b>YarVpn (Яр ВПН)</b> — VPN без ограничений скорости. Открой бота, возьми 3&nbsp;дня бесплатно и подключись за минуту: серверы в столицах Европы, до&nbsp;3&nbsp;устройств, от&nbsp;39&nbsp;₽ за неделю.</p>
-    <div class="hero-cta rv" style="--d:4">
-      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
-      <a class="btn btn-ghost" href="#pricing">Смотреть тарифы</a>
-    </div>
-    <ul class="facts mono rv" style="--d:5">
-      <li><b>3 дня</b> бесплатно</li>
-      <li>от <b>39 ₽</b> / 7 дней</li>
-      <li>до <b>3</b> устройств</li>
-      <li>TON · Stars · крипто</li>
-    </ul>
-  </div>
-  <div class="hero-scroll" aria-hidden="true"></div>
-</section>
-
-<!-- ===================== СЕРВЕРА / КАРТА ===================== -->
-<section class="sec" id="servers" aria-labelledby="servers-h">
-  <div class="wrap">
-    <header class="sec-head">
-      <p class="sec-idx mono rv">01<i></i><span>Сеть</span></p>
-      <h2 class="h2 rv" id="servers-h">Узлы в столицах <span class="ember">Европы</span></h2>
-      <p class="sec-lede rv">Основной узел — Финляндия, Хельсинки. Подписка сама подтягивает актуальный сервер: ничего добавлять вручную не нужно. Нажми на точку или строку — покажем узел на карте.</p>
-    </header>
-  </div>
-
-  <div class="net">
-    <div class="map rv" id="map" role="group" aria-label="Карта серверов YarVpn">
-      <canvas id="mapCanvas" aria-hidden="true"></canvas>
-      <div class="pins" id="pins"></div>
-      <div class="map-ui" role="group" aria-label="Масштаб карты">
-        <button type="button" data-view="eu" aria-pressed="true">Европа</button>
-        <button type="button" data-view="world" aria-pressed="false">Весь мир</button>
+  <canvas class="lattice" id="lattice" aria-hidden="true"></canvas>
+  <div class="container hero-grid">
+    <div class="hero-text">
+      <p class="pill rv"><span class="dot"></span>Работает прямо в Telegram</p>
+      <h1 class="h1" id="h1">
+        <span class="wd" style="--w:0"><span>VPN,</span></span>
+        <span class="wd" style="--w:1"><span>который</span></span><br>
+        <span class="wd" style="--w:2"><span>живёт</span></span>
+        <span class="wd dim" style="--w:3"><span>в&nbsp;Telegram</span></span>
+      </h1>
+      <p class="lede rv" style="--d:4">Открой бота, выбери тариф и подключись за секунды. Быстрые сервера в нескольких странах, честная цена от&nbsp;39&nbsp;₽.</p>
+      <div class="hero-cta rv" style="--d:5">
+        <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+        <a class="btn btn-ghost" href="#pricing">Тарифы</a>
       </div>
-      <div class="hud" id="hud" aria-live="polite">
-        <div class="hud-top mono"><span id="hudCode">HEL</span><span class="state"><i class="live-dot"></i>Доступен</span></div>
-        <div class="hud-city" id="hudCity">Хельсинки</div>
-        <div class="hud-sub" id="hudSub">Финляндия · столица</div>
-        <div class="hud-row mono"><span>Координаты</span><b id="hudCoord">60.17° N · 24.94° E</b></div>
-      </div>
-    </div>
-
-    <div class="net-list"><div class="wrap">
-    <!-- Список узлов — единственный источник данных для карты. Добавить/убрать сервер = добавить/убрать <li>.
-           data-dir — куда ставить подпись у точки: r/l/t/b. data-main — основной узел. -->
-      <ul class="srv-list rv" id="srvList">
-        <li class="srv on" data-id="hel" data-code="HEL" data-city="Хельсинки" data-country="Финляндия" data-lat="60.1699" data-lon="24.9384" data-dir="r" data-main="1">
-          <button class="srv-btn" type="button" aria-pressed="true">
-            <span class="srv-code mono">HEL</span>
-            <span class="srv-name"><b>Хельсинки<span class="badge">основной</span></b><small>Финляндия · столица</small></span>
-            <span class="state mono"><i class="live-dot"></i>Доступен</span>
-          </button>
-        </li>
-        <li class="srv" data-id="sto" data-code="STO" data-city="Стокгольм" data-country="Швеция" data-lat="59.3293" data-lon="18.0686" data-dir="l">
-          <button class="srv-btn" type="button" aria-pressed="false">
-            <span class="srv-code mono">STO</span>
-            <span class="srv-name"><b>Стокгольм</b><small>Швеция · столица</small></span>
-            <span class="state mono"><i class="live-dot"></i>Доступен</span>
-          </button>
-        </li>
-        <li class="srv" data-id="ber" data-code="BER" data-city="Берлин" data-country="Германия" data-lat="52.52" data-lon="13.405" data-dir="b">
-          <button class="srv-btn" type="button" aria-pressed="false">
-            <span class="srv-code mono">BER</span>
-            <span class="srv-name"><b>Берлин</b><small>Германия · столица</small></span>
-            <span class="state mono"><i class="live-dot"></i>Доступен</span>
-          </button>
-        </li>
-        <li class="srv" data-id="ams" data-code="AMS" data-city="Амстердам" data-country="Нидерланды" data-lat="52.3676" data-lon="4.9041" data-dir="l">
-          <button class="srv-btn" type="button" aria-pressed="false">
-            <span class="srv-code mono">AMS</span>
-            <span class="srv-name"><b>Амстердам</b><small>Нидерланды · столица</small></span>
-            <span class="state mono"><i class="live-dot"></i>Доступен</span>
-          </button>
-        </li>
-        <li class="srv" data-id="war" data-code="WAW" data-city="Варшава" data-country="Польша" data-lat="52.2297" data-lon="21.0122" data-dir="r">
-          <button class="srv-btn" type="button" aria-pressed="false">
-            <span class="srv-code mono">WAW</span>
-            <span class="srv-name"><b>Варшава</b><small>Польша · столица</small></span>
-            <span class="state mono"><i class="live-dot"></i>Доступен</span>
-          </button>
-        </li>
+      <ul class="hero-facts rv" style="--d:6">
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>3 дня бесплатно</li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>от 39&nbsp;₽ за неделю</li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg>до 3 устройств</li>
       </ul>
-    </div></div>
+    </div>
+
+    <!-- Интерфейс продукта: только существующие данные (пробный период: 3 дня, 10 ГБ, 1 устройство; сервер — Финляндия) -->
+    <div class="stage rv" style="--d:3" id="stage" aria-label="Пример интерфейса YarVpn" role="img">
+      <div class="stage-in" id="stageIn">
+        <div class="layer win float-y" data-z="0">
+          <div class="win-in">
+            <div class="win-top"><span class="brand">YarVpn</span><span class="win-tag" id="winTag">Пробный период · 3 дня</span></div>
+            <div class="conn" id="conn" data-s="0">
+              <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="conn-ring" cx="50" cy="50" r="45"/><circle class="conn-arc" id="connArc" cx="50" cy="50" r="45"/></svg>
+              <div class="conn-btn"><svg aria-hidden="true"><use href="#i-power"/></svg></div>
+            </div>
+            <div class="conn-state"><b id="connText">Нажми, чтобы подключиться</b></div>
+            <div class="rows">
+              <div class="row"><span>Сервер</span><b><i class="dot" id="srvDot" style="opacity:.35"></i>Финляндия</b></div>
+              <div class="row"><span>Трафик</span><b class="tnum" id="winTraffic">10 ГБ</b></div>
+              <div class="row"><span>Устройства</span><b class="tnum" id="winDevices">1</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="layer bubble float-y b" data-z="70" aria-hidden="true">
+          <div class="bubble-h"><svg><use href="#i-tg"/></svg>@yarVpnRubot</div>
+          <p><b>YarVpn</b><br>Быстрый и надёжный VPN. Выбирай, что нужно:</p>
+          <div class="kb" id="kb"><span id="kbConnect">Подключиться</span><span>Профиль</span><span>Пробный период</span><span>Инструкция</span></div>
+        </div>
+        <div class="layer chip-float float-y c" data-z="110" aria-hidden="true">
+          <small>Пробный период</small><b>3 дня бесплатно</b>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ===================== ПОЧЕМУ ===================== -->
-<section class="sec" id="why" aria-labelledby="why-h">
-  <div class="wrap">
+<!-- ============ СЕРВЕРЫ / КАРТА ============ -->
+<section class="sec" id="servers" aria-labelledby="servers-h">
+  <div class="container">
     <header class="sec-head">
-      <p class="sec-idx mono rv">02<i></i><span>Почему YarVpn</span></p>
-      <h2 class="h2 rv" id="why-h">Всё, что нужно от ВПН, и&nbsp;ничего <span class="ember">лишнего</span></h2>
+      <p class="eyebrow rv">Серверы</p>
+      <h2 class="h2 rv" id="servers-h">Быстрые сервера&nbsp;<em>YarVpn</em></h2>
+      <p class="lede rv">Подписка сама подтягивает актуальный сервер — ничего добавлять вручную не нужно.</p>
     </header>
 
+    <div class="net rv" id="net">
+      <div class="map-plane" id="map" role="group" aria-label="Карта серверов YarVpn">
+        <div class="map-face"><canvas id="mapCanvas" aria-hidden="true"></canvas></div>
+        <div class="pins" id="pins"></div>
+        <div class="map-ui" role="group" aria-label="Масштаб карты">
+          <button type="button" data-view="eu" aria-pressed="true">Европа</button>
+          <button type="button" data-view="world" aria-pressed="false">Весь мир</button>
+        </div>
+      </div>
+      <div class="net-list">
+        <!-- Список серверов — единственный источник данных для карты. Добавить/убрать сервер = добавить/убрать <li>.
+             data-dir — куда ставить подпись у точки: r/l/t/b. data-main — основной узел. Сейчас в проекте один сервер — Финляндия. -->
+        <div class="srv-list">
+          <p class="srv-head">Сервер</p>
+          <ul id="srvList">
+            <li class="srv on" data-id="fi" data-code="HEL" data-city="Хельсинки" data-country="Финляндия" data-lat="60.1699" data-lon="24.9384" data-dir="r" data-main="1">
+              <button class="srv-btn" type="button" aria-pressed="true">
+                <span class="srv-name"><b>Финляндия</b><small>Хельсинки · столица</small></span>
+                <span class="srv-mark" aria-hidden="true"><i></i></span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ПРЕИМУЩЕСТВА ============ -->
+<section class="sec" id="features" aria-labelledby="features-h">
+  <div class="container">
+    <header class="sec-head">
+      <p class="eyebrow rv">Информация</p>
+      <h2 class="h2 rv" id="features-h">Почему YarVpn</h2>
+    </header>
     <div class="feats">
-      <article class="feat rv" style="--d:0">
-        <span class="feat-n mono">01 / Скорость</span>
-        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path class="streak" d="M6 20h30"/><path class="streak" d="M14 32h44"/><path class="streak" d="M6 44h24"/><circle cx="54" cy="20" r="2.5" fill="currentColor" stroke="none"/><circle cx="8" cy="32" r="2.5" fill="currentColor" stroke="none"/></svg>
-        <h3>Высокая скорость</h3>
-        <p>Широкий канал на серверах: видео, звонки и игры идут без просадок и лишних задержек.</p>
+      <article class="card feat rv" style="--d:0">
+        <div class="feat-art"><div class="art-speed" aria-hidden="true"><i></i><i></i><i></i></div></div>
+        <div class="feat-body"><h3>Высокая скорость</h3><p>Широкий канал на серверах — видео, звонки и игры без просадок и лишних задержек.</p></div>
       </article>
-      <article class="feat rv" style="--d:1">
-        <span class="feat-n mono">02 / Сеть</span>
-        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path class="dash" d="M14 46 32 14 52 42M14 46h38"/><circle cx="14" cy="46" r="5" fill="#0a0705"/><circle cx="32" cy="14" r="5" fill="#0a0705"/><circle cx="52" cy="42" r="5" fill="#0a0705"/><circle cx="32" cy="14" r="1.8" fill="currentColor" stroke="none"/></svg>
-        <h3>Несколько стран</h3>
-        <p>Узлы в столицах Европы — выбирай локацию под задачу, а не мирись с единственным сервером.</p>
+      <article class="card feat rv" style="--d:1">
+        <div class="feat-art"><canvas class="art-map" id="miniMap" aria-hidden="true"></canvas></div>
+        <div class="feat-body"><h3>Несколько стран</h3><p>Выбирай сервер под задачу — локации на выбор, а не один-единственный узел.</p></div>
       </article>
-      <article class="feat rv" style="--d:2">
-        <span class="feat-n mono">03 / Telegram</span>
-        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M56 10 8 29.5l13 4.5 5 15.5 8-8 13 9.5z"/><path d="m21 34 24-16-17 20"/></svg>
-        <h3>Всё в одном чате</h3>
-        <p>Без нового аккаунта и пароля: подписка, оплата и поддержка — прямо в боте.</p>
+      <article class="card feat rv" style="--d:2">
+        <div class="feat-art"><div class="art-tg" aria-hidden="true"><div class="b"><svg><use href="#i-tg"/></svg>@yarVpnRubot</div><div class="b r">/start</div></div></div>
+        <div class="feat-body"><h3>Всё в Telegram</h3><p>Без нового аккаунта и отдельного приложения — подписка и поддержка в одном чате.</p></div>
       </article>
-      <article class="feat rv" style="--d:0">
-        <span class="feat-n mono">04 / Лимиты</span>
-        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 20h48M8 44h48"/><circle cx="38" cy="20" r="6" fill="#0a0705"/><circle cx="22" cy="44" r="6" fill="#0a0705"/><circle cx="38" cy="20" r="1.8" fill="currentColor" stroke="none"/><circle cx="22" cy="44" r="1.8" fill="currentColor" stroke="none"/></svg>
-        <h3>Гибкие лимиты</h3>
-        <p>Начни с малого тарифа и докупай трафик или устройства отдельно, когда понадобится.</p>
+      <article class="card feat rv" style="--d:0">
+        <div class="feat-art"><div class="art-limits" aria-hidden="true"><div class="sl"><i></i></div><div class="sl"><i></i></div></div></div>
+        <div class="feat-body"><h3>Гибкие лимиты</h3><p>Начни с малого тарифа и докупай трафик или устройства отдельно, когда понадобится.</p></div>
       </article>
-      <article class="feat rv" style="--d:1">
-        <span class="feat-n mono">05 / Цена</span>
-        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="32" cy="32" r="22"/><circle class="dash" cx="32" cy="32" r="16"/><text x="32" y="40" text-anchor="middle" font-family="Geologica,sans-serif" font-weight="800" font-size="22" fill="currentColor" stroke="none">₽</text></svg>
-        <h3>Честная цена</h3>
-        <p>От 39&nbsp;₽ за неделю, без скрытых доплат. Три дня бесплатно — сначала попробуй, потом решай.</p>
+      <article class="card feat rv" style="--d:1">
+        <div class="feat-art"><div class="art-price" aria-hidden="true"><small>От</small>39<sup>₽</sup></div></div>
+        <div class="feat-body"><h3>Честная цена</h3><p>От 39&nbsp;₽ за неделю, без скрытых доплат. 3 дня — бесплатно, чтобы сначала попробовать.</p></div>
       </article>
-      <article class="feat rv" style="--d:2">
-        <span class="feat-n mono">06 / Поддержка</span>
-        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M10 14h44v30H30L18 54V44h-8z"/><circle class="blink" cx="24" cy="29" r="2" fill="currentColor" stroke="none"/><circle class="blink" style="animation-delay:.2s" cx="32" cy="29" r="2" fill="currentColor" stroke="none"/><circle class="blink" style="animation-delay:.4s" cx="40" cy="29" r="2" fill="currentColor" stroke="none"/></svg>
-        <h3>Живая поддержка</h3>
-        <p>Пиши прямо в бота или в Telegram — отвечает человек, а не автоответчик.</p>
+      <article class="card feat rv" style="--d:2">
+        <div class="feat-art"><div class="art-sup" aria-hidden="true"><span class="av">@</span><span>entoni<small>Поддержка</small></span></div></div>
+        <div class="feat-body"><h3>Живая поддержка</h3><p>Пиши прямо в бота или напрямую в Telegram — отвечает человек, а не автоответчик.</p></div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ===================== КАК ПОДКЛЮЧИТЬ ===================== -->
+<!-- ============ КАК ЭТО РАБОТАЕТ ============ -->
 <section class="sec" id="how" aria-labelledby="how-h">
-  <div class="wrap">
+  <div class="container">
     <header class="sec-head">
-      <p class="sec-idx mono rv">03<i></i><span>Подключение</span></p>
-      <h2 class="h2 rv" id="how-h">Как подключить VPN за&nbsp;<span class="ember">минуту</span></h2>
-      <p class="sec-lede rv">Работает на iPhone, Android, Windows и Mac. Отдельная регистрация не нужна — достаточно Telegram.</p>
+      <p class="eyebrow rv">Подключение</p>
+      <h2 class="h2 rv" id="how-h">Как это работает</h2>
     </header>
 
     <div class="how">
       <div>
-        <ol class="steps">
-          <li class="step rv"><span class="step-n">01</span><h3>Открой бота</h3><p>Запусти <a class="link" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">@yarVpnRubot</a> командой <code>/start</code>, пройди короткую проверку и прими условия.</p></li>
-          <li class="step rv"><span class="step-n">02</span><h3>Забери 3&nbsp;дня бесплатно или выбери тариф</h3><p>Пробный период активируется один раз прямо из главного меню — без карты.</p></li>
-          <li class="step rv"><span class="step-n">03</span><h3>Оплати за пару тапов</h3><p>TON, Telegram Stars, криптовалюта или баланс — выбирай, что удобнее.</p></li>
-          <li class="step rv"><span class="step-n">04</span><h3>Добавь подписку в приложение</h3><p>Бот пришлёт ссылку и QR-код. В приложении — «Добавить подписку по URL», вставь ссылку и включи VPN.</p></li>
+        <ol class="steps" id="steps">
+          <li class="step on" data-step="0"><span class="step-n">1</span><h3>Открой бота</h3><p>Запусти его командой <code>/start</code> — это займёт пару секунд.</p><i class="step-bar"></i></li>
+          <li class="step" data-step="1"><span class="step-n">2</span><h3>Забери 3 дня бесплатно или выбери тариф</h3><p>Пробный период активируется один раз прямо из главного меню.</p><i class="step-bar"></i></li>
+          <li class="step" data-step="2"><span class="step-n">3</span><h3>Оплати за пару тапов</h3><p>Способ оплаты — на твой выбор, ниже в тарифах.</p><i class="step-bar"></i></li>
+          <li class="step" data-step="3"><span class="step-n">4</span><h3>Подключись</h3><p>Ссылка и QR-код приходят сразу — добавляй и включай VPN.</p><i class="step-bar"></i></li>
         </ol>
-
         <div class="apps rv" aria-label="Приложения для подключения">
-          <a class="app" href="https://apps.apple.com/app/happ-proxy-utility/id6504287215" target="_blank" rel="noopener"><small class="mono">iPhone · iPad · Mac</small><b>Happ</b><span>App Store<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
-          <a class="app" href="https://play.google.com/store/apps/details?id=com.v2ray.ang" target="_blank" rel="noopener"><small class="mono">Android</small><b>v2rayNG</b><span>Google Play<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
-          <a class="app" href="https://github.com/2dust/v2rayN/releases" target="_blank" rel="noopener"><small class="mono">Windows</small><b>v2rayN</b><span>GitHub<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
+          <a class="app" href="https://apps.apple.com/app/happ-proxy-utility/id6504287215" target="_blank" rel="noopener"><small>iOS / macOS</small><b>Happ</b><span>App Store<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
+          <a class="app" href="https://play.google.com/store/apps/details?id=com.v2ray.ang" target="_blank" rel="noopener"><small>Android</small><b>v2rayNG</b><span>Google Play<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
+          <a class="app" href="https://github.com/2dust/v2rayN/releases" target="_blank" rel="noopener"><small>Windows</small><b>v2rayN</b><span>GitHub<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
         </div>
       </div>
 
-      <div class="phone rv" aria-label="Пример диалога с ботом YarVpn" role="img">
-        <div class="phone-scr">
-          <div class="chat-hd"><div class="chat-ava"><svg aria-hidden="true"><use href="#i-mark"/></svg></div><div><b>YarVpn</b><small>бот</small></div></div>
-          <div class="chat" id="chat" aria-hidden="true"><span class="chat-day">Сегодня</span></div>
-          <div class="chat-in" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Сообщение</span><svg viewBox="0 0 24 24"><rect x="9" y="4" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 11.5a6 6 0 0 0 12 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+      <div class="phone-wrap rv">
+        <div class="phone" id="phone" role="img" aria-label="Пример диалога с ботом YarVpn">
+          <div class="phone-scr">
+            <div class="chat-hd"><div class="chat-ava">Y</div><div><b>YarVpn</b><small>бот</small></div></div>
+            <div class="chat" id="chat" aria-hidden="true"></div>
+            <div class="chat-in" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Сообщение</span><svg viewBox="0 0 24 24"><rect x="9" y="4" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 11.5a6 6 0 0 0 12 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== ТАРИФЫ ===================== -->
+<!-- ============ ТАРИФЫ ============ -->
 <section class="sec" id="pricing" aria-labelledby="pricing-h">
-  <div class="wrap">
+  <div class="container">
     <header class="sec-head">
-      <p class="sec-idx mono rv">04<i></i><span>Тарифы</span></p>
-      <h2 class="h2 rv" id="pricing-h">Сколько стоит <span class="ember">VPN</span></h2>
-      <p class="sec-lede rv">Платишь один раз за срок — никаких автопродлений и скрытых списаний.</p>
+      <p class="eyebrow rv">Тарифы</p>
+      <h2 class="h2 rv" id="pricing-h">Тарифы</h2>
+      <p class="lede rv">От 39&nbsp;₽ за неделю, без скрытых доплат.</p>
     </header>
 
     <div class="trial rv">
-      <div class="trial-price">0&nbsp;₽</div>
-      <div><h3>Пробный период — 3 дня</h3><p>10&nbsp;ГБ трафика и 1&nbsp;устройство, все серверы. Активируется один раз, карта не нужна.</p></div>
-      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Попробовать<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      <div><h3>Пробный период — 3 дня бесплатно</h3><p>3 дня и 10&nbsp;ГБ трафика — без карты, без обязательств.</p></div>
+      <a class="btn btn-white" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать бесплатно<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
     </div>
 
-    <div class="plans rv">
-      <article class="plan">
-        <div class="plan-name">7 дней<small>для знакомства</small></div>
-        <ul class="plan-spec"><li>120 ГБ трафика</li><li>До 3 устройств</li><li>Все серверы</li></ul>
-        <div class="plan-price"><span class="js-price" data-n="39">39</span><sup>₽</sup><small>≈ 5,6 ₽ в день</small></div>
-        <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить</a>
+    <div class="plans" id="plans">
+      <article class="card plan rv" style="--d:0">
+        <div class="plan-top"><h3 class="plan-name">7 дней</h3></div>
+        <div class="plan-price"><span class="js-price" data-n="39">39</span><sup>₽</sup></div>
+        <p class="plan-per">разово</p>
+        <ul class="plan-spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>120 ГБ трафика</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>До 3 устройств</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Все сервера</li></ul>
+        <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Попробовать</a>
       </article>
-      <article class="plan hit">
-        <div class="plan-name">1 месяц<small>популярный выбор</small></div>
-        <ul class="plan-spec"><li>500 ГБ трафика</li><li>До 3 устройств</li><li>Все серверы</li></ul>
-        <div class="plan-price"><span class="js-price" data-n="79">79</span><sup>₽</sup><small>≈ 2,6 ₽ в день</small></div>
+      <article class="card plan pop rv" style="--d:1">
+        <div class="plan-top"><h3 class="plan-name">1 месяц</h3><span class="badge">Популярный выбор</span></div>
+        <div class="plan-price"><span class="js-price" data-n="79">79</span><sup>₽</sup></div>
+        <p class="plan-per">разово</p>
+        <ul class="plan-spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>500 ГБ трафика</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>До 3 устройств</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Все сервера</li></ul>
         <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
       </article>
-      <article class="plan">
-        <div class="plan-name">3 месяца<small>максимум выгоды</small></div>
-        <ul class="plan-spec"><li>1500 ГБ трафика</li><li>До 3 устройств</li><li>Все серверы</li></ul>
-        <div class="plan-price"><span class="js-price" data-n="199">199</span><sup>₽</sup><small>≈ 2,2 ₽ в день</small></div>
+      <article class="card plan rv" style="--d:2">
+        <div class="plan-top"><h3 class="plan-name">3 месяца</h3></div>
+        <div class="plan-price"><span class="js-price" data-n="199">199</span><sup>₽</sup></div>
+        <p class="plan-per">разово</p>
+        <ul class="plan-spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>1500 ГБ трафика</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>До 3 устройств</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Все сервера</li></ul>
         <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить</a>
       </article>
     </div>
 
+    <p class="lede rv" style="margin-top:44px;max-width:640px">Не хватает лимитов? Докупай отдельно: <b style="color:var(--text);font-weight:600">устройства — от&nbsp;49&nbsp;₽</b>, <b style="color:var(--text);font-weight:600">трафик — от&nbsp;49&nbsp;₽ за 50&nbsp;ГБ</b>.</p>
     <div class="addons">
-      <div class="panel rv">
-        <p class="mono">Докупка</p><h3>Больше устройств</h3>
-        <ul class="addon-list"><li>+1 устройство<b>49 ₽</b></li><li>+3 устройства<b>99 ₽</b></li><li>+10 устройств<b>209 ₽</b></li></ul>
+      <div class="card addon rv">
+        <h3>Устройства</h3>
+        <ul><li>+1 устройство<b>49 ₽</b></li><li>+3 устройства<b>99 ₽</b></li><li>+10 устройств<b><em>ХИТ</em>209 ₽</b></li></ul>
       </div>
-      <div class="panel rv" style="--d:1">
-        <p class="mono">Докупка</p><h3>Больше трафика</h3>
-        <ul class="addon-list"><li>+50 ГБ<b>49 ₽</b></li><li>+250 ГБ<b>199 ₽</b></li><li>+500 ГБ<b>399 ₽</b></li></ul>
+      <div class="card addon rv" style="--d:1">
+        <h3>Трафик</h3>
+        <ul><li>+50 ГБ<b>49 ₽</b></li><li>+250 ГБ<b>199 ₽</b></li><li>+500 ГБ<b>399 ₽</b></li></ul>
       </div>
     </div>
-
-    <div class="pay rv">
-      <span class="mono">Оплата</span>
-      <span class="chip">TON</span><span class="chip">Telegram Stars</span><span class="chip">Криптовалюта</span><span class="chip">Баланс</span>
-    </div>
+    <div class="pay rv"><span>Оплата</span><span class="chip">TON</span><span class="chip">Telegram Stars</span><span class="chip">Криптовалюта</span><span class="chip">Баланс</span></div>
   </div>
 </section>
 
-<!-- ===================== КАБИНЕТ ===================== -->
+<!-- ============ ЛИЧНЫЙ КАБИНЕТ ============ -->
 <section class="sec" id="cabinet" aria-labelledby="cab-h">
-  <div class="wrap">
+  <div class="container">
     <header class="sec-head">
-      <p class="sec-idx mono rv">05<i></i><span>Личный кабинет</span></p>
-      <h2 class="h2 rv" id="cab-h">Кабинет, который знает тебя по&nbsp;<span class="ember">Telegram</span></h2>
+      <p class="eyebrow rv">Личный кабинет</p>
+      <h2 class="h2 rv" id="cab-h">Личный кабинет</h2>
     </header>
 
     <div class="cab rv" id="cab">
-      <div class="cab-out" id="cabOut">
-        <div>
-          <h3>Войди через бота — без пароля</h3>
-          <p>Нажми кнопку, открой бота и подтверди вход. Кабинет откроется сам — и синхронизируется с твоим аккаунтом в Telegram.</p>
-          <ul class="cab-perks">
-            <li>Баланс и активная подписка</li>
-            <li>Трафик, устройства и срок действия</li>
-            <li>Ссылка подписки — копируется в один клик</li>
-            <li>Реферальная ссылка и статистика друзей</li>
-          </ul>
+      <!-- не вошли -->
+      <div class="gate" id="cabOut">
+        <div class="preview" aria-hidden="true">
+          <div class="tile"><p class="lbl">Баланс</p><div class="val">—</div></div>
+          <div class="tile"><p class="lbl">Подписка</p><div class="val">—</div></div>
+          <div class="tile"><p class="lbl">Устройства</p><div class="val">—</div></div>
+          <div class="tile"><p class="lbl">Друзья</p><div class="val">—</div></div>
+          <div class="tile w2"><p class="lbl">Пробный период</p><div class="val">—</div></div>
         </div>
-        <div class="cab-cta">
+        <div class="gate-box">
           <div id="loginIdle">
-            <button class="btn btn-primary" id="loginBtn" type="button"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</button>
-            <p class="cab-hint" style="margin-top:14px">Бот покажет, откуда идёт вход, и попросит подтвердить. Пароли и данные карты не нужны.</p>
+            <h3>Войди через Telegram — увидишь баланс, подписку, устройства и статистику приглашений.</h3>
+            <div style="margin-top:28px"><button class="btn btn-primary" id="loginBtn" type="button"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</button></div>
+            <p class="cab-hint" style="margin-top:14px">Бот покажет, откуда идёт вход, и попросит подтвердить. Пароль не нужен.</p>
           </div>
           <div class="wait" id="loginWait" hidden>
-            <ol class="wait-steps">
-              <li><i>01</i><span>Открой бота по кнопке или QR-коду</span></li>
-              <li><i>02</i><span>Нажми <b style="color:var(--ink)">Start</b>, если бот ещё не запущен</span></li>
-              <li><i>03</i><span>Подтверди вход кнопкой <b style="color:var(--ink)">«Да, это я»</b></span></li>
-            </ol>
+            <p>Открой бота, нажми Start и подтверди вход кнопкой «Да, это я». Кабинет откроется сам.</p>
             <a class="btn btn-primary" id="loginLink" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Открыть бота</a>
             <div class="qr" id="loginQr" hidden><div class="qr-box" id="qrBox"></div><small>Или наведи камеру телефона — откроется тот же бот</small></div>
-            <div class="timer mono"><span id="timerText">5:00</span><div class="timer-bar"><i id="timerBar"></i></div></div>
-            <button class="linkbtn" id="loginCancel" type="button">Отменить</button>
+            <div class="timer"><span id="timerText">5:00</span><div class="timer-bar"><i id="timerBar"></i></div></div>
+            <button class="linkbtn" id="loginCancel" type="button">Отмена</button>
           </div>
           <div class="note" id="cabNote" role="status" hidden></div>
         </div>
       </div>
 
-      <div class="cab-in" id="cabIn" hidden>
-        <div class="cab-top">
-          <div class="cab-ava" id="cabAva">Я</div>
-          <div class="cab-who"><b id="cabName"></b><span id="cabUser"></span></div>
-          <div class="cab-tools">
+      <!-- вошли -->
+      <div class="dash" id="cabIn" hidden>
+        <div class="dash-top">
+          <div class="ava" id="cabAva">Y</div>
+          <div class="who"><b id="cabName"></b><span id="cabUser"></span></div>
+          <div class="dash-tools">
             <button class="btn btn-ghost btn-sm" id="cabRefresh" type="button">Обновить</button>
             <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">Выйти</button>
           </div>
         </div>
-        <div class="cab-grid" id="cabGrid">
-          <div class="tile c4"><p class="mono">Баланс</p><div class="tile-v" id="tBal">0<small>₽</small></div><p class="tile-s">тратится на подписку и докупки</p>
-            <div class="tile-act"><a class="btn btn-ghost btn-sm" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Пополнить в боте</a></div></div>
-          <div class="tile c8"><p class="mono">Подписка</p><div class="tile-v" id="tSub">—</div><p class="tile-s" id="tSubS"></p>
-            <div class="tile-act" id="tSubAct"></div></div>
-          <div class="tile c4"><p class="mono">Трафик</p><div class="tile-v" id="tTr">—</div><p class="tile-s" id="tTrS"></p><div class="meter" id="tMeter" hidden><i id="tMeterI"></i></div></div>
-          <div class="tile c4"><p class="mono">Устройства</p><div class="tile-v" id="tDev">—</div><p class="tile-s">одновременных подключений</p></div>
-          <div class="tile c4"><p class="mono">Пробный период</p><div class="tile-v" id="tTrial" style="font-size:clamp(22px,2.4vw,30px)">—</div><p class="tile-s" id="tTrialS"></p></div>
-          <div class="tile c12" id="tLinkBox"><p class="mono">Ссылка подписки</p><p class="tile-s">Вставь в приложение через «Добавить подписку по URL». Никому не передавай — по ней работает твой VPN.</p>
-            <div class="copy-row"><code id="tLink">—</code><button class="btn btn-primary btn-sm" id="copyLink" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
-          <div class="tile c12"><p class="mono">Реферальная программа</p><div class="tile-v" id="tRef">0</div><p class="tile-s" id="tRefS"></p>
-            <div class="copy-row"><code id="tRefLink">—</code><button class="btn btn-ghost btn-sm" id="copyRef" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
+        <div class="grid" id="cabGrid">
+          <div class="tile c4"><p class="lbl">Баланс</p><div class="val tnum" id="tBal">0<small>₽</small></div><p class="sub">можно тратить на подписку</p></div>
+          <div class="tile c8"><p class="lbl">Подписка</p><div class="val tnum" id="tSub">—</div><p class="sub" id="tSubS"></p><div class="act" id="tSubAct"></div></div>
+          <div class="tile c4"><p class="lbl">Трафик</p><div class="val tnum" id="tTr">—</div><p class="sub" id="tTrS"></p><div class="meter" id="tMeter" hidden><i id="tMeterI"></i></div></div>
+          <div class="tile c4"><p class="lbl">Устройства</p><div class="val tnum" id="tDev">—</div></div>
+          <div class="tile c4"><p class="lbl">Пробный период</p><div class="val" id="tTrial" style="font-size:clamp(24px,2.4vw,30px);margin-top:14px">—</div></div>
+          <div class="tile c12" id="tLinkBox"><p class="lbl">Ссылка подписки</p><p class="sub">Вставь в приложение через «Добавить подписку по URL». Никому не передавай — по ней работает твой VPN.</p>
+            <div class="copy"><code id="tLink">—</code><button class="btn btn-primary btn-sm" id="copyLink" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
+          <div class="tile c12"><p class="lbl">Друзья</p><div class="val tnum" id="tRef">0</div><p class="sub" id="tRefS"></p>
+            <div class="copy"><code id="tRefLink">—</code><button class="btn btn-ghost btn-sm" id="copyRef" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== БОНУСЫ ===================== -->
+<!-- ============ БОНУСЫ ============ -->
 <section class="sec" id="bonus" aria-labelledby="bonus-h">
-  <div class="wrap">
+  <div class="container">
     <header class="sec-head">
-      <p class="sec-idx mono rv">06<i></i><span>Бонусы</span></p>
-      <h2 class="h2 rv" id="bonus-h">Пользуйся и&nbsp;<span class="ember">зарабатывай</span></h2>
+      <p class="eyebrow rv">Реферальная программа</p>
+      <h2 class="h2 rv" id="bonus-h">Зови друзей — <em>копи баланс</em></h2>
     </header>
-
     <div class="duo">
-      <article class="panel rv">
-        <p class="mono">Реферальная программа</p>
-        <h3>Зови друзей — копи баланс</h3>
-        <p>10&nbsp;₽ на баланс за каждого друга, который подключил VPN, — за первых 15 друзей. Начиная с 16-го — 20% от каждой его покупки, без ограничений по времени.</p>
-        <div class="big"><span class="js-price" data-n="150">150</span><small>₽ за 15 друзей</small></div>
+      <article class="card rv">
+        <p class="k">Реферальная программа</p>
+        <h3>10&nbsp;₽ за каждого друга, который подключил VPN</h3>
+        <p>Получай баланс за приглашение друзей и сразу трать его на подписку. Так — за первых 15 друзей, а с 16-го друга — 20% от каждой его покупки. Своя ссылка — в разделе «Реферальная программа» в боте.</p>
+        <div class="big tnum"><span class="js-price" data-n="150">150</span><small>₽ за 15 друзей</small></div>
       </article>
-      <article class="panel rv" style="--d:1">
+      <article class="card rv" style="--d:1">
         <svg class="wheel" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="100" cy="100" r="96" stroke-dasharray="2 6"/><circle cx="100" cy="100" r="70"/><circle cx="100" cy="100" r="14"/><path d="M100 30v56M100 114v56M30 100h56M114 100h56M50.5 50.5l39.6 39.6M109.9 109.9l39.6 39.6M149.5 50.5l-39.6 39.6M90.1 109.9l-39.6 39.6"/></svg>
-        <p class="mono">Ежедневная рулетка</p>
-        <h3>Бесплатный билет каждый день</h3>
-        <p>Новый билет — каждый день в 14:00 по Москве. Крути колесо в боте и забирай приз: деньги на баланс, день подписки или бонус к пополнению.</p>
-        <div class="prizes"><span class="chip">до 150 ₽ на баланс</span><span class="chip">+1 день подписки</span><span class="chip">+20% к пополнению</span></div>
+        <p class="k">Ежедневная рулетка</p>
+        <h3>Бесплатный билетик каждый день</h3>
+        <p>Новый билетик — каждый день в 14:00 по Москве. Кнопка «Ежедневная рулетка» — в главном меню бота.</p>
+        <div class="prizes"><span class="chip">150 ₽ на баланс</span><span class="chip">100 ₽ на баланс</span><span class="chip">50 ₽ на баланс</span><span class="chip">20 ₽ на баланс</span><span class="chip">5 ₽ на баланс</span><span class="chip">Подписка на 1 день</span><span class="chip">Промокод +20% к депозиту</span></div>
       </article>
     </div>
   </div>
 </section>
 
-<!-- ===================== FAQ ===================== -->
+<!-- ============ FAQ ============ -->
 <section class="sec" id="faq" aria-labelledby="faq-h">
-  <div class="wrap">
+  <div class="container">
     <div class="faq">
       <div class="faq-side">
-        <p class="sec-idx mono rv">07<i></i><span>Вопросы</span></p>
-        <h2 class="h2 rv" id="faq-h">Частые <span class="ember">вопросы</span></h2>
-        <p class="rv">Не нашёл ответ? Напиши в поддержку — отвечаем в Telegram и на почту.</p>
-        <div class="rv"><a class="btn btn-ghost" href="https://t.me/entoni" target="_blank" rel="noopener">Написать @entoni<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a></div>
+        <p class="eyebrow rv">Поддержка</p>
+        <h2 class="h2 rv" id="faq-h">Частые вопросы</h2>
+        <p class="lede rv">Что-то не работает — пиши в бота, в Telegram или на почту.</p>
+        <div class="rv"><a class="btn btn-ghost" href="https://t.me/entoni" target="_blank" rel="noopener">Поддержка @entoni<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a></div>
       </div>
       <div class="qas rv" id="qas">
-        <div class="qa open"><h3><button class="qa-q" type="button" aria-expanded="true">Что такое YarVpn (Яр ВПН)?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>YarVpn — это VPN-сервис, который целиком живёт в Telegram. Открываешь бота <a class="link" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">@yarVpnRubot</a>, выбираешь тариф или берёшь пробный период, а бот присылает ссылку-подписку и QR-код. Добавляешь её в приложение — и VPN готов. Отдельный аккаунт и пароль не нужны.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Зачем нужен VPN (ВПН)?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>VPN шифрует трафик между устройством и сервером. Это защищает данные в общественных Wi-Fi-сетях, скрывает от провайдера, какие сайты ты открываешь, и даёт стабильное соединение с выбранным сервером в другой стране.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Как подключить VPN на телефоне и компьютере?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Установи приложение: на Android — v2rayNG, на iPhone, iPad и Mac — Happ, на Windows — v2rayN. В боте нажми «Подключиться», в приложении выбери «Добавить подписку по URL» и вставь ссылку (или отсканируй QR-код), затем включи VPN.</p><p>Подписка сама подтягивает актуальный сервер — ничего добавлять вручную не нужно.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Сколько стоит VPN?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>7&nbsp;дней — 39&nbsp;₽, 1&nbsp;месяц — 79&nbsp;₽, 3&nbsp;месяца — 199&nbsp;₽. Во всех тарифах есть трафик (120, 500 и 1500&nbsp;ГБ) и до 3 устройств. На длинном тарифе выходит около 2,2&nbsp;₽ в день.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Есть ли бесплатный пробный период?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Да: 3&nbsp;дня, 10&nbsp;ГБ трафика и 1&nbsp;устройство, доступ ко всем серверам, как в платной подписке. Активируется один раз из главного меню бота, банковская карта не нужна.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Сколько устройств можно подключить?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>В каждом тарифе — до 3 устройств одновременно. Нужно больше — докупи пакет прямо в боте: +1 устройство за 49&nbsp;₽, +3 за 99&nbsp;₽, +10 за 209&nbsp;₽.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Какие способы оплаты доступны?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>TON, Telegram Stars, криптовалюта и внутренний баланс. Баланс можно пополнить или заработать на приглашениях друзей — и сразу потратить на подписку.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Трафик закончился раньше срока — что делать?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Докупи гигабайты, не дожидаясь продления: +50&nbsp;ГБ за 49&nbsp;₽, +250&nbsp;ГБ за 199&nbsp;₽, +500&nbsp;ГБ за 399&nbsp;₽. Лимит увеличится сразу.</p></div></div></div>
+        <div class="qa open"><h3><button class="qa-q" type="button" aria-expanded="true">Что такое YarVpn (Яр ВПН)?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>VPN, который живёт в Telegram: открой бота, выбери тариф и подключись за секунды. Без нового аккаунта и отдельного приложения — подписка и поддержка в одном чате.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Сколько устройств можно подключить?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>В тарифах — до 3 одновременно. Нужно больше? Докупи пакет прямо в боте: +1 устройство за 49&nbsp;₽, +3 за 99&nbsp;₽, +10 за 209&nbsp;₽.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Что даёт бесплатный пробный период?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>3 дня, 10&nbsp;ГБ трафика и 1 устройство — доступ ко всем серверам, как в платной подписке. Активируется один раз из главного меню бота.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Какие есть способы оплаты?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>TON, Telegram Stars, криптовалюта, а ещё баланс — деньги, заработанные на рефералах, можно сразу потратить на подписку.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Закончился трафик раньше срока — что делать?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Докупи гигабайты, не дожидаясь продления: +50&nbsp;ГБ за 49&nbsp;₽, +250&nbsp;ГБ за 199&nbsp;₽, +500&nbsp;ГБ за 399&nbsp;₽.</p></div></div></div>
         <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Как быстро включается доступ после оплаты?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Сразу. Бот подтверждает платёж и присылает ссылку с QR-кодом за несколько секунд.</p></div></div></div>
-        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Как войти в личный кабинет на сайте?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Через Telegram: нажми «Войти через Telegram», открой бота по ссылке и подтверди вход кнопкой «Да, это я». Пароль не нужен, а бот заранее покажет, с какого устройства запрошен вход.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Как подключить VPN на телефоне и компьютере?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Установи приложение: на Android — v2rayNG, на iPhone, iPad и Mac — Happ, на Windows — v2rayN. В боте нажми «Подключиться», в приложении добавь подписку по URL (или отсканируй QR-код) и включи VPN. Подписка сама подтягивает актуальный сервер — ничего добавлять вручную не нужно.</p></div></div></div>
         <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Что-то не работает — куда писать?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>В поддержку прямо в боте, в Telegram — <a class="link" href="https://t.me/entoni" target="_blank" rel="noopener">@entoni</a>, или на почту <a class="link" href="mailto:yarsup@proton.me">yarsup@proton.me</a>.</p></div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== ФИНАЛЬНЫЙ ПРИЗЫВ ===================== -->
+<!-- ============ ФИНАЛЬНЫЙ ПРИЗЫВ ============ -->
 <section class="cta" aria-labelledby="cta-h">
-  <div class="wrap">
+  <div class="container">
     <div class="cta-card rv">
-      <svg class="arcs" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#arcs-art"/></svg>
-      <div class="hero-slit" aria-hidden="true"></div>
-      <h2 id="cta-h">Готов подключиться? Начни <span class="ember">бесплатно</span></h2>
-      <p>3 дня и 10&nbsp;ГБ трафика — без карты и обязательств. Открой бота и нажми «Пробный период».</p>
-      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      <canvas class="lattice" id="lattice2" aria-hidden="true"></canvas>
+      <h2 id="cta-h">Попробуй бесплатно</h2>
+      <p>3 дня и 10&nbsp;ГБ трафика — без карты, без обязательств.</p>
+      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать бесплатно<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
     </div>
   </div>
 </section>
@@ -584,20 +501,15 @@
 </main>
 
 <footer class="foot">
-  <div class="wrap">
+  <div class="container">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a class="brand" href="#top"><span class="brand-mark"><svg aria-hidden="true"><use href="#i-mark"/></svg></span>YarVpn</a>
-        <p>YarVpn (Яр ВПН) — быстрый VPN-сервис в Telegram: серверы в Европе, честные цены и поддержка, которая отвечает.</p>
-        <div class="foot-soc">
-          <a href="https://t.me/YarVpnews" target="_blank" rel="noopener" aria-label="Канал YarVpn в Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a>
-          <a href="https://t.me/entoni" target="_blank" rel="noopener" aria-label="Поддержка в Telegram"><svg aria-hidden="true"><use href="#i-chat"/></svg></a>
-          <a href="mailto:yarsup@proton.me" aria-label="Почта поддержки"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
-        </div>
+        <a class="brand" href="#top">YarVpn<i aria-hidden="true"></i></a>
+        <p>YarVpn (Яр ВПН) — скорость без ограничений. VPN, который живёт в Telegram.</p>
       </div>
       <nav class="foot-col" aria-label="Разделы сайта">
         <h4>Разделы</h4>
-        <a href="#servers">Серверы</a><a href="#how">Подключение</a><a href="#pricing">Тарифы</a><a href="#cabinet">Личный кабинет</a><a href="#faq">Вопросы</a>
+        <a href="#servers">Серверы</a><a href="#how">Как это работает</a><a href="#pricing">Тарифы</a><a href="#cabinet">Личный кабинет</a><a href="#faq">Частые вопросы</a>
       </nav>
       <nav class="foot-col" aria-label="Документы">
         <h4>Документы</h4>
@@ -607,18 +519,19 @@
       <nav class="foot-col" aria-label="Связь">
         <h4>Связь</h4>
         <a href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Бот @yarVpnRubot</a>
-        <a href="https://t.me/YarVpnews" target="_blank" rel="noopener">Новости</a>
+        <a href="https://t.me/YarVpnews" target="_blank" rel="noopener">Новости в Telegram</a>
         <a href="https://t.me/entoni" target="_blank" rel="noopener">Поддержка @entoni</a>
         <a href="mailto:yarsup@proton.me">yarsup@proton.me</a>
       </nav>
     </div>
-    <div class="foot-end"><span>© <span id="year">2026</span> YarVpn. Все права защищены.</span><span class="mono">yarvpn.best</span></div>
+    <div class="foot-end"><span>© <span id="year">2026</span> YarVpn</span><span>yarvpn.best</span></div>
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=1" defer></script>
-<script src="assets/js/mapdata.js?v=1" defer></script>
-<script src="assets/js/map.js?v=1" defer></script>
-<script src="assets/js/cabinet.js?v=1" defer></script>
+<script src="assets/js/main.js?v=2" defer></script>
+<script src="assets/js/bg3d.js?v=2" defer></script>
+<script src="assets/js/mapdata.js?v=2" defer></script>
+<script src="assets/js/map.js?v=2" defer></script>
+<script src="assets/js/cabinet.js?v=2" defer></script>
 </body>
 </html>
