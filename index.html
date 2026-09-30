@@ -1,628 +1,624 @@
 <!DOCTYPE html>
-<html lang="ru" id="top">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>YarVpn — скорость без ограничений</title>
-<meta name="description" content="VPN, который живёт в Telegram. Быстрые сервера, честная цена от 39 ₽.">
-<meta name="theme-color" content="#08070f">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
-<script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" reveal-all"},4500);</script>
-<noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800;900&family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  :root{
-    box-sizing:border-box;
-    padding-top:env(safe-area-inset-top,0px);
-    padding-bottom:env(safe-area-inset-bottom,0px);
-    --bg:#08070f; --bg-soft:#121022; --bg-softer:#1a1730;
-    --ink:#f4f2fb; --ink-muted:#a29ec2; --ink-faint:#726d94;
-    --blue:#4f8cf7; --violet:#8b6ff5; --pink:#e26bf0;
-    --border:rgba(255,255,255,.09); --border-soft:rgba(255,255,255,.16);
-    --grad:linear-gradient(120deg,var(--blue),var(--violet) 55%,var(--pink));
-    --ease:cubic-bezier(.2,.8,.2,1);
-  }
-  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#08070f; --ink:#f4f2fb; } }
-  :root[data-theme="dark"]{ --bg:#08070f; --ink:#f4f2fb; }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>YarVpn (Яр ВПН) — быстрый VPN в Telegram от 39 ₽</title>
+<meta name="description" content="YarVpn (Яр ВПН) — быстрый VPN-сервис с подключением через Telegram-бота. Серверы в Финляндии и Европе, до 3 устройств, тарифы от 39 ₽ за неделю. 3 дня бесплатно.">
+<meta name="keywords" content="впн, vpn, яр впн, ярвпн, yarvpn, yar vpn, vpn в телеграм, vpn telegram бот, купить vpn, быстрый vpn">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="author" content="YarVpn">
+<meta name="theme-color" content="#0a0705">
+<meta name="color-scheme" content="dark">
+<link rel="canonical" href="https://yarvpn.best/">
+<!-- Адрес API бота для входа в кабинет (обязательно HTTPS, без слэша в конце). Пусто = кабинет отключён. -->
+<meta name="yarvpn-api" content="https://api.yarvpn.best/api/web">
 
-  *,*::before,*::after{ box-sizing:border-box; }
-  [hidden]{ display:none!important; }
-  html{ scroll-behavior:smooth; scroll-padding-top:calc(76px + env(safe-area-inset-top,0px)); }
-  body{ margin:0; background:var(--bg); color:var(--ink); font-family:"Golos Text",system-ui,sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden; }
-  body.lock{ overflow:hidden; }
-  h1,h2,h3{ font-family:"Golos Text",sans-serif; font-weight:800; margin:0; letter-spacing:-.01em; }
-  .display{ font-family:"Unbounded",system-ui,sans-serif; font-weight:800; letter-spacing:-.02em; }
-  p{ margin:0; }
-  a{ color:inherit; text-decoration:none; }
-  img{ max-width:100%; display:block; }
-  section{ position:relative; padding:92px 24px; max-width:1080px; margin:0 auto; }
-  @media (max-width:560px){ section{ padding:68px 20px; } }
-  section>h2{ font-size:clamp(26px,4.4vw,38px); }
-  section>h2::after{ content:""; display:block; width:56px; height:4px; border-radius:4px; margin-top:14px; background:var(--grad); transform-origin:left; transform:scaleX(0); transition:transform .9s var(--ease) .25s; }
-  section>h2.is-visible::after,.reveal-all section>h2::after{ transform:scaleX(1); }
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="YarVpn">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:url" content="https://yarvpn.best/">
+<meta property="og:title" content="YarVpn (Яр ВПН) — быстрый VPN в Telegram">
+<meta property="og:description" content="Быстрый VPN, который живёт в Telegram. Серверы в столицах Европы, до 3 устройств, от 39 ₽ за неделю. 3 дня бесплатно.">
+<meta property="og:image" content="https://yarvpn.best/assets/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="YarVpn — скорость без ограничений">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="YarVpn (Яр ВПН) — быстрый VPN в Telegram">
+<meta name="twitter:description" content="Серверы в столицах Европы, до 3 устройств, от 39 ₽ за неделю. 3 дня бесплатно.">
+<meta name="twitter:image" content="https://yarvpn.best/assets/img/og.png">
 
-  .grad-text{ background:linear-gradient(90deg,var(--blue),var(--violet),var(--pink),var(--blue)); background-size:300% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; color:transparent; animation:flow 7s linear infinite; }
-  @keyframes flow{ to{ background-position:-300% 0; } }
+<!-- Подтверждение прав на сайт (добавьте свои коды из Яндекс.Вебмастера и Google Search Console):
+<meta name="yandex-verification" content="КОД">
+<meta name="google-site-verification" content="КОД"> -->
 
-  .btn{ display:inline-flex; align-items:center; gap:8px; justify-content:center; position:relative; overflow:hidden; padding:15px 26px; border-radius:14px; font-weight:700; font-size:15.5px; font-family:"Golos Text",sans-serif; border:1px solid transparent; cursor:pointer; transition:transform .25s var(--ease), box-shadow .25s, background .25s, border-color .25s; white-space:nowrap; color:inherit; }
-  .btn::after{ content:""; position:absolute; top:0; left:-60%; width:45%; height:100%; background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent); transform:skewX(-20deg); transition:left .65s ease; pointer-events:none; }
-  .btn:hover::after{ left:130%; }
-  .btn.small{ padding:10px 16px; font-size:14px; border-radius:12px; }
-  .btn-primary{ background:linear-gradient(120deg,var(--blue),var(--violet)); color:#08070f; box-shadow:0 20px 60px -20px rgba(139,111,245,.55); }
-  .btn-primary:hover{ transform:translateY(-2px) scale(1.015); box-shadow:0 26px 70px -18px rgba(139,111,245,.75); }
-  .btn-ghost{ background:rgba(255,255,255,.05); border-color:var(--border-soft); color:var(--ink); }
-  .btn-ghost:hover{ background:rgba(255,255,255,.09); transform:translateY(-2px); }
-  .btn:active{ transform:translateY(0) scale(.98); }
-  .btn[disabled]{ opacity:.6; cursor:default; }
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
 
-  /* ---------- header + burger ---------- */
-  header{ position:sticky; top:env(safe-area-inset-top,0px); z-index:60; backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); background:rgba(8,7,15,.6); border-bottom:1px solid var(--border); transition:background .3s; }
-  header.scrolled{ background:rgba(8,7,15,.86); }
-  .nav-inner{ max-width:1080px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-  .brand{ display:flex; align-items:center; gap:11px; font-weight:800; }
-  .brand img{ width:34px; height:34px; border-radius:10px; object-fit:cover; box-shadow:0 6px 20px -6px rgba(139,111,245,.7); }
-  .nav-right{ display:flex; align-items:center; gap:10px; }
-  .burger{ width:44px; height:44px; border-radius:12px; border:1px solid var(--border-soft); background:rgba(255,255,255,.05); cursor:pointer; position:relative; padding:0; transition:background .25s; }
-  .burger:hover{ background:rgba(255,255,255,.1); }
-  .burger span{ position:absolute; left:12px; right:12px; height:2px; background:var(--ink); border-radius:2px; transition:transform .4s var(--ease), opacity .2s, top .4s var(--ease); }
-  .burger span:nth-child(1){ top:15px; } .burger span:nth-child(2){ top:21px; } .burger span:nth-child(3){ top:27px; }
-  .burger.open span:nth-child(1){ top:21px; transform:rotate(45deg); }
-  .burger.open span:nth-child(2){ opacity:0; }
-  .burger.open span:nth-child(3){ top:21px; transform:rotate(-45deg); }
-  .progress{ position:absolute; left:0; bottom:-1px; height:2px; width:100%; background:var(--grad); transform-origin:left; transform:scaleX(0); }
+<link rel="preload" href="assets/fonts/geologica-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/geologica-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/onest-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/main.css?v=1">
+<noscript><style>.map{display:none}.net-list{position:static;display:block;pointer-events:auto}.srv-list{width:100%}.hdr{background:rgba(10,7,5,.95)}</style></noscript>
+<script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},5000)</script>
 
-  /* ---------- drawer ---------- */
-  .scrim{ position:fixed; inset:0; z-index:70; background:rgba(4,3,10,.62); backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); opacity:0; pointer-events:none; transition:opacity .45s ease; }
-  .scrim.open{ opacity:1; pointer-events:auto; }
-  .drawer{ position:fixed; top:0; right:0; height:100%; width:min(88vw,340px); z-index:80; transform:translateX(105%); transition:transform .6s var(--ease); background:rgba(15,13,28,.94); backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px); border-left:1px solid var(--border-soft); box-shadow:-30px 0 90px -30px rgba(139,111,245,.35); padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(22px + env(safe-area-inset-bottom,0px)); display:flex; flex-direction:column; overflow-y:auto; }
-  .drawer.open{ transform:none; }
-  .drawer-top{ display:flex; align-items:center; justify-content:space-between; padding:2px 4px 18px; }
-  .drawer-close{ width:40px; height:40px; border-radius:12px; border:1px solid var(--border-soft); background:rgba(255,255,255,.05); color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:transform .4s var(--ease), background .2s; }
-  .drawer-close:hover{ background:rgba(255,255,255,.1); transform:rotate(90deg); }
-  .drawer-close svg{ width:18px; height:18px; }
-  .drawer-nav{ display:flex; flex-direction:column; gap:2px; }
-  .drawer .item{ display:flex; align-items:center; gap:14px; padding:13px 12px; border-radius:14px; font-weight:600; font-size:15.5px; opacity:0; transform:translateX(22px); transition:opacity .45s ease, transform .6s var(--ease), background .2s; }
-  .drawer.open .item{ opacity:1; transform:none; transition-delay:calc(var(--d,0) * 45ms + 140ms); }
-  .drawer .item:hover{ background:rgba(255,255,255,.07); }
-  .ic{ width:20px; height:20px; flex:none; stroke:var(--violet); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-  .drawer-sep{ height:1px; background:var(--border); margin:14px 8px; }
-  .drawer-foot{ margin-top:auto; padding:18px 12px 0; color:var(--ink-faint); font-size:13px; }
-
-  /* ---------- hero ---------- */
-  .hero{ padding-top:56px; text-align:center; overflow:hidden; max-width:none; }
-  .hero>*{ position:relative; }
-  .hero-inner{ max-width:1080px; margin:0 auto; }
-  .hero-bg{ position:absolute; inset:-10% -10% auto -10%; height:900px; z-index:-2; pointer-events:none; }
-  .aurora{ position:absolute; width:180%; padding-top:180%; left:-40%; top:-75%; border-radius:38% 62% 55% 45%/48% 40% 60% 52%; background:conic-gradient(from 0deg,rgba(79,140,247,.65),rgba(139,111,245,.7),rgba(226,107,240,.55),rgba(79,140,247,.6),rgba(139,111,245,.65)); filter:blur(70px); opacity:.6; animation:spin 28s linear infinite; }
-  @keyframes spin{ to{ transform:rotate(360deg); } }
-  @keyframes spin-rev{ to{ transform:rotate(-360deg); } }
-  .float-shape{ position:absolute; width:120px; height:120px; border-radius:26px; background:linear-gradient(135deg,rgba(79,140,247,.5),rgba(226,107,240,.4)); box-shadow:0 0 70px rgba(139,111,245,.55); opacity:.7; pointer-events:none; z-index:-1; animation:floaty 9s ease-in-out infinite; }
-  .fs-a{ left:-34px; top:150px; }
-  .fs-b{ right:-40px; top:470px; width:96px; height:96px; animation-delay:-3.5s; }
-  @keyframes floaty{ 0%,100%{ transform:skew(-14deg,-6deg) rotate(12deg) translateY(0); } 50%{ transform:skew(-14deg,-6deg) rotate(20deg) translateY(-28px); } }
-  .hero-tag{ display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:999px; background:rgba(255,255,255,.05); border:1px solid var(--border-soft); font-size:13.5px; color:var(--ink-muted); margin-bottom:22px; }
-  .hero-tag .dot{ width:7px; height:7px; border-radius:50%; background:var(--grad); }
-  .hero h1{ font-size:clamp(36px,7.4vw,68px); line-height:1.06; max-width:840px; margin:0 auto; }
-  .hero .lede{ max-width:540px; margin:22px auto 0; color:var(--ink-muted); font-size:17px; line-height:1.65; }
-  .hero-ctas{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:30px; }
-
-  /* globe + plane */
-  .globe-scene{ position:relative; width:min(280px,70vw); aspect-ratio:1/1; margin:46px auto 0; }
-  .globe{ position:absolute; inset:0; z-index:1; border-radius:50%; overflow:hidden; background:linear-gradient(160deg,#3a6be0,#6a52e6 55%,#a94fe0); box-shadow:0 0 110px rgba(139,111,245,.6),0 0 40px rgba(79,140,247,.4); }
-  .globe::before{ content:""; position:absolute; inset:0; z-index:2; border-radius:50%; pointer-events:none; background:repeating-linear-gradient(0deg,rgba(255,255,255,.09) 0 1px,transparent 1px 36px); }
-  .globe::after{ content:""; position:absolute; inset:0; z-index:3; border-radius:50%; pointer-events:none; background:radial-gradient(circle at 30% 26%,rgba(255,255,255,.42),transparent 42%),radial-gradient(circle at 74% 82%,rgba(8,6,24,.8),transparent 64%); }
-  .globe-surface{ position:absolute; top:0; left:0; width:200%; height:100%; z-index:1; will-change:transform; animation:slide 20s linear infinite; background-repeat:repeat-x; background-size:50% 100%;
-    background-image:
-      radial-gradient(ellipse 14% 20% at 20% 36%,rgba(200,215,255,.6),transparent 72%),
-      radial-gradient(ellipse 10% 14% at 30% 66%,rgba(205,185,255,.5),transparent 72%),
-      radial-gradient(ellipse 13% 22% at 52% 30%,rgba(220,200,255,.5),transparent 72%),
-      radial-gradient(ellipse 9% 12% at 60% 72%,rgba(180,205,255,.5),transparent 72%),
-      radial-gradient(ellipse 12% 16% at 80% 44%,rgba(215,195,255,.5),transparent 72%); }
-  @keyframes slide{ to{ transform:translateX(-50%); } }
-  .gdot{ position:absolute; width:9px; height:9px; margin:-4.5px 0 0 -4.5px; border-radius:50%; background:#fff; box-shadow:0 0 12px 3px rgba(255,255,255,.75),0 0 22px 6px rgba(139,111,245,.8); }
-  .gdot::after{ content:""; position:absolute; inset:-6px; border-radius:50%; border:1.5px solid rgba(255,255,255,.75); animation:ripple 2.6s ease-out infinite; }
-  .gdot:nth-child(2n)::after{ animation-delay:-1.3s; } .gdot:nth-child(3n)::after{ animation-delay:-.7s; }
-  @keyframes ripple{ from{ transform:scale(.4); opacity:.9; } to{ transform:scale(2.6); opacity:0; } }
-  .orbit{ position:absolute; inset:-22%; transform:rotate(-18deg) scaleY(.36); pointer-events:none; }
-  .orbit-back{ z-index:0; } .orbit-front{ z-index:2; }
-  .orbit-ring{ position:absolute; inset:0; border-radius:50%; border:1.5px dashed rgba(255,255,255,.2); box-shadow:0 0 34px rgba(139,111,245,.3); }
-  .orbit-front .orbit-ring{ clip-path:inset(50% 0 0 0); border-color:rgba(255,255,255,.42); box-shadow:none; }
-  .orbit-spin{ position:absolute; inset:0; animation:spin 11s linear infinite; }
-  .plane-pos{ position:absolute; top:-13px; left:50%; width:26px; height:26px; margin-left:-13px; }
-  .plane-counter{ width:100%; height:100%; animation:spin-rev 11s linear infinite; }
-  .plane-fix{ width:100%; height:100%; transform:scaleY(2.7778) rotate(18deg); }
-  .plane-flip{ width:100%; height:100%; animation:flip 11s linear infinite; }
-  .plane-depth{ width:100%; height:100%; position:relative; animation:depth 11s linear infinite; filter:drop-shadow(0 0 8px rgba(139,111,245,.95)); }
-  .plane-depth svg{ width:100%; height:100%; display:block; }
-  .plane-depth::before{ content:""; position:absolute; right:100%; top:50%; width:54px; height:2px; margin-top:-1px; border-radius:2px; background:linear-gradient(90deg,transparent,rgba(255,255,255,.9)); }
-  @keyframes flip{ 0%,24.9%{ transform:scaleX(1); } 25%,74.9%{ transform:scaleX(-1); } 75%,100%{ transform:scaleX(1); } }
-  @keyframes depth{ 0%{ opacity:0; transform:scale(.7); } 10%{ opacity:0; } 18%{ opacity:1; } 50%{ transform:scale(1.25); } 82%{ opacity:1; } 90%{ opacity:0; } 100%{ opacity:0; transform:scale(.7); } }
-  .switch-chip{ display:inline-flex; align-items:center; gap:10px; margin-top:34px; padding:9px 16px; border-radius:999px; background:rgba(255,255,255,.06); border:1px solid var(--border-soft); font-size:14px; color:var(--ink-muted); }
-  .pulse{ width:8px; height:8px; border-radius:50%; background:#5cf2a3; box-shadow:0 0 0 0 rgba(92,242,163,.6); animation:pulse 1.8s ease-out infinite; }
-  @keyframes pulse{ to{ box-shadow:0 0 0 9px rgba(92,242,163,0); } }
-  #switchText{ display:inline-block; transition:opacity .35s, transform .35s; }
-  #switchText.out{ opacity:0; transform:translateY(6px); }
-
-  /* reveal */
-  .js .reveal{ opacity:0; transform:translateY(22px); transition:opacity .75s var(--ease), transform .75s var(--ease); }
-  .js .reveal.is-visible,.reveal-all .reveal{ opacity:1; transform:none; }
-  .hero .reveal{ transition-delay:calc(var(--i,0) * 110ms); }
-
-  /* cards */
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; }
-  @media (max-width:820px){ .grid{ grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:560px){ .grid{ grid-template-columns:1fr; } }
-  .card,.price-card{ position:relative; background:var(--bg-soft); border:1px solid var(--border); transition:border-color .3s, transform .35s var(--ease), box-shadow .35s; }
-  .card::before,.price-card::before{ content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0; opacity:0; transition:opacity .35s; background:radial-gradient(260px circle at var(--x,50%) var(--y,50%),rgba(139,111,245,.22),transparent 62%); }
-  .card:hover::before,.price-card:hover::before{ opacity:1; }
-  .card>*,.price-card>*:not(.badge){ position:relative; z-index:1; }
-  .card{ border-radius:18px; padding:26px; }
-  .card:hover{ border-color:var(--border-soft); transform:translateY(-4px); box-shadow:0 24px 60px -30px rgba(139,111,245,.6); }
-  .icon{ width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,rgba(79,140,247,.22),rgba(226,107,240,.2)); margin-bottom:16px; }
-  .card h3{ font-size:17px; margin-bottom:8px; }
-  .card p{ color:var(--ink-muted); font-size:14.5px; line-height:1.6; }
-
-  .steps{ margin-top:44px; display:flex; flex-direction:column; }
-  .step{ display:flex; gap:20px; padding:22px 0; border-top:1px solid var(--border); }
-  .step:last-child{ border-bottom:1px solid var(--border); }
-  .step-n{ flex:none; width:42px; height:42px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-family:"Unbounded",sans-serif; font-weight:700; font-size:14px; background:var(--bg-softer); color:var(--ink-muted); transition:background .6s, color .6s, box-shadow .6s; }
-  .step.is-visible .step-n,.reveal-all .step-n{ background:linear-gradient(120deg,var(--blue),var(--violet)); color:#08070f; box-shadow:0 10px 30px -10px rgba(139,111,245,.8); }
-  .step-body h3{ font-size:16.5px; margin-bottom:4px; }
-  .step-body p{ color:var(--ink-muted); font-size:14.5px; }
-
-  .price-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; align-items:stretch; }
-  @media (max-width:820px){ .price-grid{ grid-template-columns:1fr; } }
-  .price-card{ border-radius:20px; padding:30px 26px; display:flex; flex-direction:column; }
-  .price-card:hover{ transform:translateY(-5px); border-color:var(--border-soft); }
-  .price-card.featured{ background:linear-gradient(180deg,rgba(139,111,245,.16),rgba(79,140,247,.05) 60%,var(--bg-soft)); border:1px solid rgba(139,111,245,.5); box-shadow:0 30px 80px -40px rgba(139,111,245,.8); }
-  .badge{ position:absolute; top:-13px; left:26px; z-index:2; background:linear-gradient(120deg,var(--blue),var(--violet)); color:#08070f; font-weight:700; font-size:12px; padding:5px 12px; border-radius:999px; }
-  .plan-name{ font-size:15px; color:var(--ink-muted); font-weight:600; }
-  .price-amount{ font-family:"Unbounded",sans-serif; font-size:42px; font-weight:800; margin:10px 0 2px; }
-  .price-amount sup{ font-size:18px; font-weight:700; margin-left:2px; }
-  .period{ color:var(--ink-faint); font-size:13.5px; margin-bottom:20px; }
-  .spec-list{ list-style:none; margin:0 0 24px; padding:0; display:flex; flex-direction:column; gap:10px; flex:1; }
-  .spec-list li{ display:flex; gap:10px; font-size:14.5px; color:var(--ink-muted); }
-  .spec-list li::before{ content:"✓"; color:var(--blue); font-weight:800; }
-  .addon-note{ margin-top:34px; padding:18px 22px; border-radius:16px; background:var(--bg-soft); border:1px solid var(--border); color:var(--ink-muted); font-size:14.5px; }
-  .addon-note strong{ color:var(--ink); }
-  .pay-row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; justify-content:center; }
-  .pay-chip{ display:flex; align-items:center; gap:10px; padding:12px 18px; border-radius:14px; background:var(--bg-soft); border:1px solid var(--border); font-weight:600; font-size:14.5px; }
-  .pay-chip i{ width:8px; height:8px; border-radius:50%; background:var(--grad); }
-
-  /* cabinet */
-  .cab{ position:relative; margin-top:36px; border-radius:24px; padding:34px 30px; border:1px solid transparent; background:linear-gradient(var(--bg-soft),var(--bg-soft)) padding-box,linear-gradient(120deg,rgba(79,140,247,.7),rgba(139,111,245,.4),rgba(226,107,240,.65)) border-box; box-shadow:0 30px 90px -40px rgba(139,111,245,.65); overflow:hidden; }
-  .cab::before{ content:""; position:absolute; width:340px; height:340px; right:-120px; top:-160px; border-radius:50%; background:radial-gradient(circle,rgba(139,111,245,.32),transparent 70%); animation:drift2 12s ease-in-out infinite alternate; pointer-events:none; }
-  @keyframes drift2{ to{ transform:translate(-40px,30px) scale(1.15); } }
-  .cab-out{ position:relative; text-align:center; max-width:520px; margin:0 auto; }
-  .cab-out p{ color:var(--ink-muted); margin-bottom:22px; }
-  .wait-dots{ display:flex; gap:8px; justify-content:center; margin:22px 0 6px; }
-  .wait-dots i{ width:9px; height:9px; border-radius:50%; background:var(--grad); animation:bounce 1.2s ease-in-out infinite; }
-  .wait-dots i:nth-child(2){ animation-delay:.15s; } .wait-dots i:nth-child(3){ animation-delay:.3s; }
-  @keyframes bounce{ 0%,80%,100%{ transform:translateY(0); opacity:.5; } 40%{ transform:translateY(-8px); opacity:1; } }
-  .link-btn{ background:none; border:none; color:var(--ink-faint); cursor:pointer; font:inherit; text-decoration:underline; margin-top:10px; }
-  .cab-out .cab-note{ color:#ffb4c1; margin:16px 0 0; font-size:14px; }
-  .cab-in{ position:relative; }
-  .cab-head{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:24px; }
-  .avatar{ width:52px; height:52px; border-radius:16px; background:var(--grad); color:#08070f; font-family:"Unbounded",sans-serif; font-weight:800; font-size:20px; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 30px -10px rgba(139,111,245,.85); }
-  .cab-name{ font-weight:800; font-size:18px; line-height:1.2; } .cab-user{ color:var(--ink-muted); font-size:14px; }
-  .cab-head .btn{ margin-left:auto; }
-  .cab-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
-  @media (max-width:760px){ .cab-grid{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:480px){ .cab-grid{ grid-template-columns:1fr; } .cab{ padding:26px 20px; } }
-  .stat{ background:var(--bg-softer); border:1px solid var(--border); border-radius:16px; padding:18px; animation:pop .6s var(--ease) both; }
-  .stat:nth-child(2){ animation-delay:.08s; } .stat:nth-child(3){ animation-delay:.16s; } .stat:nth-child(4){ animation-delay:.24s; } .stat:nth-child(5){ animation-delay:.32s; }
-  @keyframes pop{ from{ opacity:0; transform:translateY(14px) scale(.97); } to{ opacity:1; transform:none; } }
-  .stat.wide{ grid-column:span 2; } @media (max-width:480px){ .stat.wide{ grid-column:auto; } }
-  .stat-l{ color:var(--ink-faint); font-size:13px; margin-bottom:6px; }
-  .stat-v{ font-family:"Unbounded",sans-serif; font-weight:800; font-size:22px; }
-  .stat-s{ color:var(--ink-muted); font-size:13px; margin-top:4px; }
-  .bar{ height:6px; border-radius:6px; background:rgba(255,255,255,.08); margin-top:12px; overflow:hidden; }
-  .bar i{ display:block; height:100%; width:0; border-radius:6px; background:var(--grad); transition:width 1.2s var(--ease); }
-
-  .ref-wrap{ margin-top:36px; border-radius:22px; padding:44px 30px; background:var(--bg-soft); border:1px solid var(--border); text-align:center; position:relative; overflow:hidden; }
-  .ref-wrap::before{ content:""; position:absolute; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,rgba(139,111,245,.28),transparent 70%); top:-190px; right:-140px; animation:spin 22s linear infinite; pointer-events:none; }
-  .ref-wrap h3{ font-size:clamp(22px,3.4vw,30px); max-width:520px; margin:0 auto 14px; position:relative; }
-  .ref-wrap p{ color:var(--ink-muted); font-size:15px; max-width:500px; margin:0 auto; position:relative; }
-  .ref-wrap b{ color:var(--ink); }
-
-  .faq-item{ border-top:1px solid var(--border); }
-  .faq-item:last-child{ border-bottom:1px solid var(--border); }
-  .faq-q{ width:100%; text-align:left; background:none; border:none; color:var(--ink); cursor:pointer; padding:22px 4px; display:flex; justify-content:space-between; align-items:center; gap:16px; font-family:"Golos Text",sans-serif; font-weight:700; font-size:16px; }
-  .plus{ flex:none; width:22px; height:22px; position:relative; }
-  .plus::before,.plus::after{ content:""; position:absolute; background:var(--ink-muted); top:50%; left:50%; transform:translate(-50%,-50%); transition:transform .4s var(--ease), background .3s; }
-  .plus::before{ width:14px; height:2px; } .plus::after{ width:2px; height:14px; }
-  .faq-item.open .plus::before{ transform:translate(-50%,-50%) rotate(45deg); background:var(--violet); }
-  .faq-item.open .plus::after{ transform:translate(-50%,-50%) rotate(-45deg); background:var(--violet); }
-  .faq-a{ max-height:0; overflow:hidden; transition:max-height .45s var(--ease); }
-  .faq-item.open .faq-a{ max-height:240px; }
-  .faq-a p{ padding:0 4px 22px; color:var(--ink-muted); font-size:14.5px; line-height:1.65; max-width:640px; }
-  .faq-a a{ color:var(--blue); text-decoration:underline; }
-
-  .cta-band{ position:relative; text-align:center; border-radius:26px; padding:64px 28px; margin:0 20px 88px; max-width:1032px; margin-left:auto; margin-right:auto; background:linear-gradient(135deg,rgba(79,140,247,.18),rgba(139,111,245,.15) 50%,rgba(226,107,240,.13)); border:1px solid var(--border-soft); overflow:hidden; }
-  .cta-band h2{ font-size:clamp(26px,4vw,38px); max-width:600px; margin:0 auto 14px; }
-  .cta-band p{ color:var(--ink-muted); max-width:460px; margin:0 auto 30px; }
-  .cta-band .float-shape{ z-index:0; width:90px; height:90px; right:-24px; top:-20px; opacity:.55; }
-  .cta-band>*:not(.float-shape){ position:relative; z-index:1; }
-
-  footer{ border-top:1px solid var(--border); padding:44px 24px calc(36px + env(safe-area-inset-bottom,0px)); }
-  .foot-inner{ max-width:1080px; margin:0 auto; display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:center; }
-  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; font-size:14px; color:var(--ink-muted); }
-  .foot-links a{ transition:color .2s; } .foot-links a:hover{ color:var(--ink); }
-  .foot-brand{ display:flex; align-items:center; gap:10px; font-weight:700; font-size:14.5px; }
-  .foot-brand img{ width:26px; height:26px; border-radius:7px; }
-  ::selection{ background:rgba(139,111,245,.35); }
-  @media (prefers-reduced-motion: reduce){ *{ animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; } html{ scroll-behavior:auto; } }
-</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://yarvpn.best/#org",
+      "name": "YarVpn",
+      "alternateName": ["Яр ВПН", "ЯрВПН", "YarVPN", "Yar VPN"],
+      "url": "https://yarvpn.best/",
+      "logo": "https://yarvpn.best/assets/img/apple-touch-icon.png",
+      "sameAs": ["https://t.me/yarVpnRubot", "https://t.me/YarVpnews"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "yarsup@proton.me",
+        "url": "https://t.me/entoni",
+        "availableLanguage": ["ru"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://yarvpn.best/#site",
+      "url": "https://yarvpn.best/",
+      "name": "YarVpn",
+      "alternateName": ["Яр ВПН", "YarVPN"],
+      "inLanguage": "ru",
+      "publisher": { "@id": "https://yarvpn.best/#org" }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://yarvpn.best/#service",
+      "name": "YarVpn — VPN в Telegram",
+      "alternateName": "Яр ВПН",
+      "serviceType": "VPN-сервис",
+      "description": "Быстрый VPN с подключением через Telegram-бота: серверы в столицах Европы, до 3 устройств, 3 дня бесплатно.",
+      "provider": { "@id": "https://yarvpn.best/#org" },
+      "url": "https://yarvpn.best/",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Тарифы YarVpn",
+        "itemListElement": [
+          { "@type": "Offer", "name": "7 дней, 120 ГБ, до 3 устройств", "price": "39", "priceCurrency": "RUB", "url": "https://t.me/yarVpnRubot" },
+          { "@type": "Offer", "name": "1 месяц, 500 ГБ, до 3 устройств", "price": "79", "priceCurrency": "RUB", "url": "https://t.me/yarVpnRubot" },
+          { "@type": "Offer", "name": "3 месяца, 1500 ГБ, до 3 устройств", "price": "199", "priceCurrency": "RUB", "url": "https://t.me/yarVpnRubot" }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Что такое YarVpn (Яр ВПН)?", "acceptedAnswer": { "@type": "Answer", "text": "YarVpn — это VPN-сервис, который целиком живёт в Telegram. Открываешь бота @yarVpnRubot, выбираешь тариф или берёшь пробный период, а бот присылает ссылку-подписку и QR-код. Добавляешь её в приложение — и VPN готов. Отдельный аккаунт и пароль не нужны." } },
+        { "@type": "Question", "name": "Как подключить VPN на телефоне и компьютере?", "acceptedAnswer": { "@type": "Answer", "text": "Установи приложение: на Android — v2rayNG, на iPhone, iPad и Mac — Happ, на Windows — v2rayN. В боте нажми «Подключиться», в приложении выбери «Добавить подписку по URL» и вставь ссылку (или отсканируй QR-код), затем включи VPN." } },
+        { "@type": "Question", "name": "Сколько стоит VPN YarVpn?", "acceptedAnswer": { "@type": "Answer", "text": "7 дней — 39 ₽, 1 месяц — 79 ₽, 3 месяца — 199 ₽. Во всех тарифах есть трафик (120, 500 и 1500 ГБ) и до 3 устройств. На длинном тарифе выходит около 2,2 ₽ в день." } },
+        { "@type": "Question", "name": "Есть ли бесплатный пробный период?", "acceptedAnswer": { "@type": "Answer", "text": "Да: 3 дня, 10 ГБ трафика и 1 устройство, со всеми серверами. Активируется один раз из главного меню бота, банковская карта не нужна." } },
+        { "@type": "Question", "name": "Сколько устройств можно подключить?", "acceptedAnswer": { "@type": "Answer", "text": "В каждом тарифе — до 3 устройств одновременно. Нужно больше — докупи пакет в боте: +1 устройство за 49 ₽, +3 за 99 ₽, +10 за 209 ₽." } },
+        { "@type": "Question", "name": "Какие способы оплаты доступны?", "acceptedAnswer": { "@type": "Answer", "text": "TON, Telegram Stars, криптовалюта и внутренний баланс. Баланс можно пополнить или заработать на приглашениях друзей." } },
+        { "@type": "Question", "name": "Что делать, если трафик закончился раньше срока?", "acceptedAnswer": { "@type": "Answer", "text": "Докупи гигабайты, не дожидаясь продления: +50 ГБ за 49 ₽, +250 ГБ за 199 ₽, +500 ГБ за 399 ₽." } },
+        { "@type": "Question", "name": "Как войти в личный кабинет на сайте?", "acceptedAnswer": { "@type": "Answer", "text": "Через Telegram: нажми «Войти через Telegram», открой бота по ссылке и подтверди вход кнопкой «Да, это я». Пароль не нужен." } }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
-<header id="hdr">
-  <div class="nav-inner">
-    <a class="brand" href="#top"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCAB4AHgDASIAAhEBAxEB/8QAHAAAAgMBAQEBAAAAAAAAAAAAAAQBAgMFBgcI/8QANxAAAQMCBQIEAwYFBQAAAAAAAQACAwQRBQYSITETUQciQXEUYZEIIzJCcoEVFlKhsTNDwdHw/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwD4lMCTYAkngBIVET2OLXxva7sQQV0nPfE9sjCQ5jgWnsQl6yrqKqXqyylz7AagAODcIOTUQviID2ObcXFxZKvaupiFbPXyh9RJrc1ukey57wECb22WTgmZGqjWBwNx6oFyoKYMY7BRoHYIF0Lfpt/pCh0YDSbDhBkpt3ULRvmsDYAIM0XTTKXqDbe+wso+AksSfT0UCyEx8G+2xQqPYVFmx87kpJ52TNW/Vv6A24sk3FArJ+JyXf3W8h87vdYPN0GEgURtu0+6s9Wgbdh90FHMVdCZ0KOndAvpVZGHpusPRM9P5LOdtoX+yBSP7twdvf2Rs5w0loF9rlZlx4PoqoNxM5h8jgB3C3hq5CNH4i4/iSX7JqGLpi52cefkgedID5RzblCVc9wdsSPZCD0VZI3UA3e++/olS6/5f7pitcHVUhaNLbmwHosgzZArIy5JtysHssvaSeGWcf5e/mJuXquTCBB8T8XG5jmdK19Wzr2tzttuuVlzI+Zs6MqX5dwSrxNlKWiZ0IFmF17Akkbmx2QeYeLLWkF4nfq/4WmMYfV4NiNThuIQGnq6Z5imic4ExvHLTYkXCwpp2RRkOO5dfhAzpVg1ZCpjc0kHYc3XpsR8Pc24RhDsZrcDqIcOZG2V1RrY5oY61nbOJsbj6oPPlgslqttoJP0rs4Bl3Gs1SVEeCYdLXOpg10vTLRoBJAvcjmx+iQzBhlbgdRPh2J05pquNoL4nOBLbgEXsT6EIOCVClQdkG1LFreXEbN/ymyLKlOA2FoG5O5VxK3UNLmkoCWFzWl5IA9N+ULSqlD44w3YW3b2Qg7kjmTPc7SBc8f8ASDGGEW4KWa/Tt/6y2Ml4yeNO4QfoH7MfiDCHVOQsUcx8U4fUYeJNw64vLD7EXcB+tek8QMXwL7PHhlLh2WYhDX180woWOIc/qvN3SnuI26QPZg7r8++E2IUlB4o5Zra2phpqaCtD5ZpnhjI26Hblx2AX0X7Qudcvy59yJjNFW0GNUmGPdPUx0szJRZs0btJsSLkA2B5sg7mWcIyzSYBh87PBbHMTq56aOSrqqqkic+SYtBebzyanXdc3sAUh4reEGU5aTBMdwzCP4M+XEqOnrKSIdMSRTSNaQWAkNe0m12/PnYr1Gccx5Kz3SUeKU/ijU4LSwte57cPxFlO+UOsfvGOGsOFrcepXNzznbK1flPCYsPzHQVTWYjhkg11bXS9Ns7CXPudVwBdxO/N0EZ/l8MvDaGiZiWT6JzKxz44m0uHxvIDALklxH9Q9SVz/AAkxWlzx4XzYBVuMgpWy4ZIH/i6Lgek4+zTb3YvJfaPzBhOOtwAYZidFXdKSpL/hp2yaLhlr2JtexXlvAzOMGWs4zUlbUx09DiMBje+V4axkjPMwknYfmb+6D6d4T5eZ4d5DxCuxhvSmMs9TVFwsRHFdrfqGuI/UFzKbK+VsHwGfPGd6aOtrsQIrJzMwythMpBZExnBIBaLnt6ALHx0z9hr8mnC8HxWjq5sRlDJfhp2yaIm+Y3sTa50j6r0+YKDBcYyFTUWP1LaWhlp6YGYyCPpv0t0kOOwN++26Dw+ccg5TzXkuTNGUqeOkkihfUM6DSxkzWX1scz8rhY7j1HqCpwrJ2Tsl5Jp8cx3D46+SSGKWaWWPqnVJazWM4A3A/vdaZpzZlbIWQpctZfroq2okgkgiZFKJSDJfXI9w2HJ272FrLDxAxzCavwrgoqbE6KaoEVE3osna5+2i+wN9vVQI55yVl2uye/M2XKdlJpgFS0RAtZLGebtPDh8uy+QUjd3O7bBfZ241hY8GxQnEqIVf8KLOh1m9TVc7ab3v8l8ap9oz8yVRrI+7QN9vRCo4oQdSKVnmLySbbe/zVuvdtrm3a6RdqY1hPLhdQZSPVA45zdBb3CRkIaSLBT1iVhK/zH2QO0+AYhiAc+np2v0ktPnaDsAT69nD6puLJ2MNZc0jPMbj7xvH1+R+i4RcbWBIHYFaxyPewapHutcC7ibDn/O6DrQ5XxF1RAQ2JrJn9MSawWtNibG242BNrKH5TxSmla2WFhMjgwedvLgSL77bNK52p176nXve9zz3QHEADU7bjfhB0BkvFZiRDTsO5a4NkadJAuRz817PMGZM5ZkyyzL1ThWHR07hFG1zJAJHdO1uX2/LvsvnnUfpDdbtLb2FzYX5Wcn+m63ZB0I8mY29+j4RjRq0k9Vlh9CuTPTuo6t8MgaJIpCx1iCLg2O6p87lQgZkiY87ixB5UtGhum6gP1AHuFBcgHFCqShAwHnSRGDtufZWcy7dek3N77KsVSWA8WFrAj17roB0FRDIQDsNhfjug5VyBc8LN7ruTkscP+2QQDyTcHvZKzxGN3cFBndaROsz91irtNm/uoNdaNazvui6o01qHu8jvZULlVxuCgpdBQhBpG7y6e26km6yBsVYn6IJJQqkoUFw/be62jkLGtIsRe5WTA213fRSXjbg/sqAzOLrgm5Wzp3PhtIbntx+57pYk3vdVJQF1IO37qqkHZBa6i6i6i6gm6L7FQhBClChUSgG3shCAKEIQX17W9FBchCgglQhCoFN0IQRdF0IQF0IQgFCEKCUIQgEIQqP/9k=" alt="YarVpn" width="34" height="34"><span class="display" style="font-size:16px">YarVpn</span></a>
-    <div class="nav-right">
-      <a class="btn btn-ghost small" href="#cabinet">Кабинет</a>
-      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+<!-- SVG-спрайт: логотип-«Я», иконки и общий рисунок дуг (используется в hero и в финальном блоке) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gRim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff7a2e" stop-opacity="0"/>
+      <stop offset=".45" stop-color="#ff7a2e" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#ffb066" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="gBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff6a1f" stop-opacity="0"/>
+      <stop offset=".6" stop-color="#ff6a1f" stop-opacity=".10"/>
+      <stop offset="1" stop-color="#ff6a1f" stop-opacity=".30"/>
+    </linearGradient>
+    <radialGradient id="gSpark" cx=".5" cy=".5" r=".5">
+      <stop offset="0" stop-color="#fff1d6" stop-opacity="1"/>
+      <stop offset=".25" stop-color="#ffb066" stop-opacity=".9"/>
+      <stop offset=".6" stop-color="#ff6a1f" stop-opacity=".35"/>
+      <stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gFloor" cx=".5" cy="1" r=".75">
+      <stop offset="0" stop-color="#ff6a1f" stop-opacity=".26"/>
+      <stop offset="1" stop-color="#ff6a1f" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fBlur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter>
+    <filter id="fBlurS" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="3"/></filter>
+
+    <symbol id="i-mark" viewBox="0 0 24 24"><path d="M16.6 4.4v15.2M16.6 4.4h-5.5a3.95 3.95 0 0 0 0 7.9h5.5" fill="none" stroke="#1c0a02" stroke-width="3" stroke-linecap="square" stroke-linejoin="round"/><path d="M12.2 12.7 6.9 20.4" fill="none" stroke="#1c0a02" stroke-width="3"/></symbol>
+    <symbol id="i-go" viewBox="0 0 16 16"><path d="M4 12 12 4M5.5 4H12v6.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-tg" viewBox="0 0 24 24"><path d="M21.4 3.6 2.9 10.8c-.9.4-.9 1.1-.2 1.3l4.7 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.5l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.2-.5-1.8-1.3-1.7ZM9.3 13.5l9-5.7c.4-.3.8-.1.5.2l-7.4 6.7-.3 3.1-1.8-4.3Z" fill="currentColor"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H10.5L6 19.5V16H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.5 6.5h17v11h-17zM3.8 7l8.2 6.2L20.2 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 16 16"><rect x="5.5" y="5.5" width="8" height="8" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 3.5v-.2A1.3 1.3 0 0 0 9.2 2H3.8A1.8 1.8 0 0 0 2 3.8v5.4a1.3 1.3 0 0 0 1.3 1.3h.2" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+
+    <!-- общий рисунок дуг: два «занавеса» и искры у основания, как свет из-под арки -->
+    <symbol id="arcs-art" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice">
+      <ellipse cx="720" cy="900" rx="640" ry="240" fill="url(#gFloor)" class="arc-breath"/>
+      <g class="arc-flick">
+        <path d="M60 0A640 930 0 0 0 420 812L468 770A560 830 0 0 1 176 0Z" fill="url(#gBand)"/>
+        <path d="M1380 0A640 930 0 0 1 1020 812L972 770A560 830 0 0 0 1264 0Z" fill="url(#gBand)"/>
+      </g>
+      <g fill="none" stroke="url(#gRim)" stroke-width="2.2" stroke-linecap="round">
+        <path d="M60 0A640 930 0 0 0 420 812"/>
+        <path d="M1380 0A640 930 0 0 1 1020 812"/>
+      </g>
+      <g fill="none" stroke="url(#gRim)" stroke-width="10" stroke-linecap="round" filter="url(#fBlur)" opacity=".7" class="arc-flick b">
+        <path d="M60 0A640 930 0 0 0 420 812"/>
+        <path d="M1380 0A640 930 0 0 1 1020 812"/>
+      </g>
+      <g class="arc-flick b">
+        <ellipse cx="428" cy="806" rx="70" ry="34" fill="url(#gSpark)"/>
+        <ellipse cx="1012" cy="806" rx="70" ry="34" fill="url(#gSpark)"/>
+        <circle cx="452" cy="784" r="3" fill="#ffd9a8"/><circle cx="486" cy="770" r="2" fill="#ffb066"/><circle cx="410" cy="760" r="2" fill="#ff9048"/>
+        <circle cx="988" cy="784" r="3" fill="#ffd9a8"/><circle cx="954" cy="770" r="2" fill="#ffb066"/><circle cx="1030" cy="760" r="2" fill="#ff9048"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<canvas id="embers" aria-hidden="true"></canvas>
+<div class="bg-heat" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
+<a class="skip" href="#main">К содержимому</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap hdr-in">
+    <a class="brand" href="#top" aria-label="YarVpn — на главную">
+      <span class="brand-mark"><svg aria-hidden="true"><use href="#i-mark"/></svg></span>YarVpn
+    </a>
+    <nav class="nav" aria-label="Основная навигация" id="nav">
+      <a href="#servers">Серверы</a>
+      <a href="#how">Подключение</a>
+      <a href="#pricing">Тарифы</a>
+      <a href="#cabinet">Кабинет</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="hdr-act">
+      <a class="me-chip" id="meChip" href="#cabinet" aria-label="Личный кабинет"><b id="meAva">Я</b><span id="meName"></span></a>
+      <a class="btn btn-ghost btn-sm" id="hdrCab" href="#cabinet">Войти</a>
+      <a class="btn btn-primary btn-sm" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть бота<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      <button class="burger" id="burger" type="button" aria-label="Меню" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
     </div>
   </div>
-  <div class="progress" id="progress"></div>
 </header>
 
-<div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Меню">
-  <div class="drawer-top">
-    <div class="brand"><img src="data:image/jpeg;base64,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" alt="" width="30" height="30"><span class="display" style="font-size:15px">YarVpn</span></div>
-    <button class="drawer-close" id="drawerClose" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
-  </div>
-  <nav class="drawer-nav">
-    <a class="item" style="--d:0" href="#top"><svg class="ic" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Главная</a>
-    <a class="item" style="--d:1" href="#cabinet"><svg class="ic" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Личный кабинет</a>
-    <a class="item" style="--d:2" href="#pricing"><svg class="ic" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Тарифы</a>
-    <a class="item" style="--d:3" href="#features"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>Информация</a>
-    <a class="item" style="--d:4" href="#how"><svg class="ic" viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>Как это работает</a>
-    <a class="item" style="--d:5" href="#referral"><svg class="ic" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>Реферальная программа</a>
-    <a class="item" style="--d:6" href="#faq"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Частые вопросы</a>
+<div class="menu" id="menu" aria-hidden="true">
+  <nav aria-label="Мобильное меню">
+    <a href="#servers" style="--i:0"><small>01</small>Серверы</a>
+    <a href="#how" style="--i:1"><small>02</small>Подключение</a>
+    <a href="#pricing" style="--i:2"><small>03</small>Тарифы</a>
+    <a href="#cabinet" style="--i:3"><small>04</small>Кабинет</a>
+    <a href="#faq" style="--i:4"><small>05</small>Вопросы</a>
   </nav>
-  <div class="drawer-sep"></div>
-  <nav class="drawer-nav">
-    <a class="item" style="--d:7" href="https://telegra.ph/polzovatelskoe-soglashenie-09-17-24" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Пользовательское соглашение</a>
-    <a class="item" style="--d:8" href="https://telegra.ph/Politika-konfidencialnosti-09-17-68" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Политика конфиденциальности</a>
-    <a class="item" style="--d:9" href="https://t.me/YarVpnews" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Новости в Telegram</a>
-    <a class="item" style="--d:10" href="https://t.me/entoni" target="_blank" rel="noopener"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>Поддержка @entoni</a>
-    <a class="item" style="--d:11" href="mailto:yarsup@proton.me"><svg class="ic" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>yarsup@proton.me</a>
-  </nav>
-  <div class="drawer-foot">YarVpn — скорость без ограничений</div>
-</aside>
-
-<section class="hero">
-  <div class="hero-bg" aria-hidden="true"><div class="aurora"></div></div>
-  <div class="float-shape fs-a" aria-hidden="true"></div>
-  <div class="float-shape fs-b" aria-hidden="true"></div>
-  <div class="hero-inner">
-    <div class="hero-tag reveal" style="--i:0"><span class="dot"></span>Работает прямо в Telegram</div>
-    <h1 class="display reveal" style="--i:1">Скорость <span class="grad-text">без ограничений</span></h1>
-    <p class="lede reveal" style="--i:2">Открой бота, выбери тариф и подключись за секунды. Быстрые сервера в нескольких странах, честная цена от 39&nbsp;₽.</p>
-
-    <div class="globe-scene reveal" style="--i:3" aria-hidden="true">
-      <div class="orbit orbit-back"><div class="orbit-ring"></div></div>
-      <div class="globe">
-        <div class="globe-surface">
-          <i class="gdot" style="left:9%;top:38%"></i><i class="gdot" style="left:21%;top:64%"></i><i class="gdot" style="left:33%;top:30%"></i><i class="gdot" style="left:41%;top:58%"></i>
-          <i class="gdot" style="left:59%;top:38%"></i><i class="gdot" style="left:71%;top:64%"></i><i class="gdot" style="left:83%;top:30%"></i><i class="gdot" style="left:91%;top:58%"></i>
-        </div>
-      </div>
-      <div class="orbit orbit-front">
-        <div class="orbit-ring"></div>
-        <div class="orbit-spin"><div class="plane-pos"><div class="plane-counter"><div class="plane-fix"><div class="plane-flip"><div class="plane-depth">
-          <svg viewBox="0 0 24 24"><path d="M2 12 22 3l-5 18-4.5-7.5z" fill="#fff"/><path d="M12.5 13.5 22 3" stroke="rgba(139,111,245,.95)" stroke-width="1.3" fill="none"/></svg>
-        </div></div></div></div></div></div>
-      </div>
-    </div>
-    <div class="switch-chip reveal" style="--i:4"><span class="pulse"></span><span id="switchText">Выбираем ближайший сервер…</span></div>
-
-    <div class="hero-ctas reveal" style="--i:5">
-      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать в Telegram</a>
-      <a class="btn btn-ghost" href="#pricing">Тарифы</a>
-    </div>
+  <div class="menu-foot">
+    <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть бота в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+    <a class="btn btn-ghost" href="https://t.me/entoni" target="_blank" rel="noopener">Поддержка @entoni</a>
   </div>
-</section>
-
-<section id="cabinet">
-  <h2 class="reveal">Личный кабинет</h2>
-  <div class="cab reveal">
-    <div class="cab-out" id="cabOut">
-      <div id="loginIdle">
-        <p>Войди через Telegram — увидишь баланс, подписку, устройства и статистику приглашений.</p>
-        <button class="btn btn-primary" id="loginBtn" type="button">Войти через Telegram</button>
-      </div>
-      <div id="loginWait" hidden>
-        <p>Открой бота, нажми Start и подтверди вход кнопкой «Да, это я». Кабинет откроется сам.</p>
-        <a class="btn btn-ghost" id="loginLink" href="#" target="_blank" rel="noopener">Открыть бота</a>
-        <div class="wait-dots"><i></i><i></i><i></i></div>
-        <button class="link-btn" id="loginCancel" type="button">Отмена</button>
-      </div>
-      <p class="cab-note" id="cabNote" hidden></p>
-    </div>
-    <div class="cab-in" id="cabIn" hidden>
-      <div class="cab-head">
-        <div class="avatar" id="avatar">Y</div>
-        <div><div class="cab-name" id="cabName"></div><div class="cab-user" id="cabUser"></div></div>
-        <button class="btn btn-ghost small" id="logoutBtn" type="button">Выйти</button>
-      </div>
-      <div class="cab-grid">
-        <div class="stat"><div class="stat-l">Баланс</div><div class="stat-v" id="stBalance">0 ₽</div><div class="stat-s">можно тратить на подписку</div></div>
-        <div class="stat wide"><div class="stat-l">Подписка</div><div class="stat-v" id="stSub">—</div><div class="stat-s" id="stSubSub"></div><div class="stat-s" id="stTraffic"></div><div class="bar" id="stBar" hidden><i id="stBarFill"></i></div></div>
-        <div class="stat"><div class="stat-l">Устройства</div><div class="stat-v" id="stDev">—</div></div>
-        <div class="stat"><div class="stat-l">Друзья</div><div class="stat-v" id="stRef">0</div><div class="stat-s" id="stRefSub"></div></div>
-        <div class="stat"><div class="stat-l">Пробный период</div><div class="stat-v" id="stTrial" style="font-size:18px">—</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="features">
-  <h2 class="reveal">Почему YarVpn</h2>
-  <div class="grid">
-    <div class="card reveal"><div class="icon"><svg class="ic" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><h3>Высокая скорость</h3><p>Широкий канал на серверах — видео, звонки и игры без просадок и лишних задержек.</p></div>
-    <div class="card reveal"><div class="icon"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div><h3>Несколько стран</h3><p>Выбирай сервер под задачу — локации на выбор, а не один-единственный узел.</p></div>
-    <div class="card reveal"><div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div><h3>Всё в Telegram</h3><p>Без нового аккаунта и отдельного приложения — подписка и поддержка в одном чате.</p></div>
-    <div class="card reveal"><div class="icon"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></div><h3>Гибкие лимиты</h3><p>Начни с малого тарифа и докупай трафик или устройства отдельно, когда понадобится.</p></div>
-    <div class="card reveal"><div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Честная цена</h3><p>От 39&nbsp;₽ за неделю, без скрытых доплат. 3 дня — бесплатно, чтобы сначала попробовать.</p></div>
-    <div class="card reveal"><div class="icon"><svg class="ic" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Живая поддержка</h3><p>Пиши прямо в бота или напрямую в Telegram — отвечает человек, а не автоответчик.</p></div>
-  </div>
-</section>
-
-<section id="how">
-  <h2 class="reveal">Как это работает</h2>
-  <div class="steps">
-    <div class="step reveal"><div class="step-n">01</div><div class="step-body"><h3>Открой бота</h3><p>Запусти его командой /start — это займёт пару секунд.</p></div></div>
-    <div class="step reveal"><div class="step-n">02</div><div class="step-body"><h3>Забери 3 дня бесплатно или выбери тариф</h3><p>Пробный период активируется один раз прямо из главного меню.</p></div></div>
-    <div class="step reveal"><div class="step-n">03</div><div class="step-body"><h3>Оплати за пару тапов</h3><p>Способ оплаты — на твой выбор, ниже в тарифах.</p></div></div>
-    <div class="step reveal"><div class="step-n">04</div><div class="step-body"><h3>Подключись</h3><p>Ссылка и QR-код приходят сразу — добавляй и включай VPN.</p></div></div>
-  </div>
-</section>
-
-<section id="pricing">
-  <h2 class="reveal">Тарифы</h2>
-  <div class="price-grid">
-    <div class="price-card reveal"><div class="plan-name">7 дней</div><div class="price-amount"><span class="js-price" data-target="39">39</span><sup>₽</sup></div><div class="period">разово</div>
-      <ul class="spec-list"><li>120 ГБ трафика</li><li>До 3 устройств</li><li>Все сервера</li></ul>
-      <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Попробовать</a></div>
-    <div class="price-card featured reveal"><span class="badge">Популярный выбор</span><div class="plan-name">1 месяц</div><div class="price-amount"><span class="js-price" data-target="79">79</span><sup>₽</sup></div><div class="period">разово</div>
-      <ul class="spec-list"><li>500 ГБ трафика</li><li>До 3 устройств</li><li>Все сервера</li></ul>
-      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить</a></div>
-    <div class="price-card reveal"><div class="plan-name">3 месяца</div><div class="price-amount"><span class="js-price" data-target="199">199</span><sup>₽</sup></div><div class="period">разово</div>
-      <ul class="spec-list"><li>1500 ГБ трафика</li><li>До 3 устройств</li><li>Все сервера</li></ul>
-      <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить</a></div>
-  </div>
-  <p class="addon-note reveal">Не хватает лимитов? Докупай отдельно: <strong>устройства — от 49&nbsp;₽</strong>, <strong>трафик — от 49&nbsp;₽ за 50&nbsp;ГБ</strong>.</p>
-  <div class="pay-row reveal"><div class="pay-chip"><i></i>TON</div><div class="pay-chip"><i></i>Telegram Stars</div><div class="pay-chip"><i></i>Криптовалюта</div><div class="pay-chip"><i></i>Баланс</div></div>
-</section>
-
-<section id="referral">
-  <div class="ref-wrap reveal">
-    <h3 class="display">Зови друзей — <span class="grad-text">копи баланс</span></h3>
-    <p>Получай баланс за приглашение друзей и сразу трать его на подписку. Своя ссылка — в разделе <b>«Реферальная программа»</b> в боте.</p>
-  </div>
-</section>
-
-<section id="faq">
-  <h2 class="reveal">Частые вопросы</h2>
-  <div class="reveal" style="margin-top:8px">
-    <div class="faq-item"><button class="faq-q" type="button"><span>Сколько устройств можно подключить?</span><span class="plus"></span></button><div class="faq-a"><p>В тарифах — до 3 одновременно. Нужно больше? Докупи пакет прямо в боте: +1 устройство за 49&nbsp;₽, +3 за 99&nbsp;₽, +10 за 209&nbsp;₽.</p></div></div>
-    <div class="faq-item"><button class="faq-q" type="button"><span>Что даёт бесплатный пробный период?</span><span class="plus"></span></button><div class="faq-a"><p>3 дня, 10&nbsp;ГБ трафика и 1 устройство — доступ ко всем серверам, как в платной подписке. Активируется один раз из главного меню бота.</p></div></div>
-    <div class="faq-item"><button class="faq-q" type="button"><span>Какие есть способы оплаты?</span><span class="plus"></span></button><div class="faq-a"><p>TON, Telegram Stars, криптовалюта, а ещё баланс — деньги, заработанные на рефералах, можно сразу потратить на подписку.</p></div></div>
-    <div class="faq-item"><button class="faq-q" type="button"><span>Закончился трафик раньше срока — что делать?</span><span class="plus"></span></button><div class="faq-a"><p>Докупи гигабайты, не дожидаясь продления: +50&nbsp;ГБ за 49&nbsp;₽, +250&nbsp;ГБ за 199&nbsp;₽, +500&nbsp;ГБ за 399&nbsp;₽.</p></div></div>
-    <div class="faq-item"><button class="faq-q" type="button"><span>Как быстро включается доступ после оплаты?</span><span class="plus"></span></button><div class="faq-a"><p>Сразу. Бот подтверждает платёж и присылает ссылку с QR-кодом за несколько секунд.</p></div></div>
-    <div class="faq-item"><button class="faq-q" type="button"><span>Что-то не работает — куда писать?</span><span class="plus"></span></button><div class="faq-a"><p>В поддержку прямо в боте, в Telegram — <a href="https://t.me/entoni" target="_blank" rel="noopener">@entoni</a>, или на почту <a href="mailto:yarsup@proton.me">yarsup@proton.me</a>.</p></div></div>
-  </div>
-</section>
-
-<div class="cta-band reveal">
-  <div class="float-shape" aria-hidden="true"></div>
-  <h2 class="display">Попробуй <span class="grad-text">бесплатно</span></h2>
-  <p>3 дня и 10 ГБ трафика — без карты, без обязательств.</p>
-  <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать бесплатно</a>
 </div>
 
-<footer>
-  <div class="foot-inner">
-    <div class="foot-brand"><img src="data:image/jpeg;base64,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" alt="YarVpn" width="26" height="26"><span>YarVpn</span></div>
-    <div class="foot-links">
-      <a href="https://t.me/entoni" target="_blank" rel="noopener">@entoni</a>
-      <a href="mailto:yarsup@proton.me">yarsup@proton.me</a>
-      <a href="https://t.me/YarVpnews" target="_blank" rel="noopener">Канал</a>
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top" aria-labelledby="h1">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-slit" aria-hidden="true"></div>
+  <svg class="hero-arcs" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#arcs-art"/></svg>
+  <div class="wrap hero-in">
+    <p class="kicker rv"><span class="live-dot"></span><b>YarVpn</b><span class="sep">/</span>Яр ВПН<span class="k-node"><span class="sep">/</span>основной узел — Хельсинки</span></p>
+    <h1 class="h1" id="h1">
+      <span class="ln" style="--d:0"><span>Быстрый VPN</span></span>
+      <span class="ln" style="--d:1"><span class="ember">в&nbsp;Telegram</span></span>
+    </h1>
+    <p class="lede rv" style="--d:3"><b>YarVpn (Яр ВПН)</b> — VPN без ограничений скорости. Открой бота, возьми 3&nbsp;дня бесплатно и подключись за минуту: серверы в столицах Европы, до&nbsp;3&nbsp;устройств, от&nbsp;39&nbsp;₽ за неделю.</p>
+    <div class="hero-cta rv" style="--d:4">
+      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      <a class="btn btn-ghost" href="#pricing">Смотреть тарифы</a>
     </div>
+    <ul class="facts mono rv" style="--d:5">
+      <li><b>3 дня</b> бесплатно</li>
+      <li>от <b>39 ₽</b> / 7 дней</li>
+      <li>до <b>3</b> устройств</li>
+      <li>TON · Stars · крипто</li>
+    </ul>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"></div>
+</section>
+
+<!-- ===================== СЕРВЕРА / КАРТА ===================== -->
+<section class="sec" id="servers" aria-labelledby="servers-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-idx mono rv">01<i></i><span>Сеть</span></p>
+      <h2 class="h2 rv" id="servers-h">Узлы в столицах <span class="ember">Европы</span></h2>
+      <p class="sec-lede rv">Основной узел — Финляндия, Хельсинки. Подписка сама подтягивает актуальный сервер: ничего добавлять вручную не нужно. Нажми на точку или строку — покажем узел на карте.</p>
+    </header>
+  </div>
+
+  <div class="net">
+    <div class="map rv" id="map" role="group" aria-label="Карта серверов YarVpn">
+      <canvas id="mapCanvas" aria-hidden="true"></canvas>
+      <div class="pins" id="pins"></div>
+      <div class="map-ui" role="group" aria-label="Масштаб карты">
+        <button type="button" data-view="eu" aria-pressed="true">Европа</button>
+        <button type="button" data-view="world" aria-pressed="false">Весь мир</button>
+      </div>
+      <div class="hud" id="hud" aria-live="polite">
+        <div class="hud-top mono"><span id="hudCode">HEL</span><span class="state"><i class="live-dot"></i>Доступен</span></div>
+        <div class="hud-city" id="hudCity">Хельсинки</div>
+        <div class="hud-sub" id="hudSub">Финляндия · столица</div>
+        <div class="hud-row mono"><span>Координаты</span><b id="hudCoord">60.17° N · 24.94° E</b></div>
+      </div>
+    </div>
+
+    <div class="net-list"><div class="wrap">
+    <!-- Список узлов — единственный источник данных для карты. Добавить/убрать сервер = добавить/убрать <li>.
+           data-dir — куда ставить подпись у точки: r/l/t/b. data-main — основной узел. -->
+      <ul class="srv-list rv" id="srvList">
+        <li class="srv on" data-id="hel" data-code="HEL" data-city="Хельсинки" data-country="Финляндия" data-lat="60.1699" data-lon="24.9384" data-dir="r" data-main="1">
+          <button class="srv-btn" type="button" aria-pressed="true">
+            <span class="srv-code mono">HEL</span>
+            <span class="srv-name"><b>Хельсинки<span class="badge">основной</span></b><small>Финляндия · столица</small></span>
+            <span class="state mono"><i class="live-dot"></i>Доступен</span>
+          </button>
+        </li>
+        <li class="srv" data-id="sto" data-code="STO" data-city="Стокгольм" data-country="Швеция" data-lat="59.3293" data-lon="18.0686" data-dir="l">
+          <button class="srv-btn" type="button" aria-pressed="false">
+            <span class="srv-code mono">STO</span>
+            <span class="srv-name"><b>Стокгольм</b><small>Швеция · столица</small></span>
+            <span class="state mono"><i class="live-dot"></i>Доступен</span>
+          </button>
+        </li>
+        <li class="srv" data-id="ber" data-code="BER" data-city="Берлин" data-country="Германия" data-lat="52.52" data-lon="13.405" data-dir="b">
+          <button class="srv-btn" type="button" aria-pressed="false">
+            <span class="srv-code mono">BER</span>
+            <span class="srv-name"><b>Берлин</b><small>Германия · столица</small></span>
+            <span class="state mono"><i class="live-dot"></i>Доступен</span>
+          </button>
+        </li>
+        <li class="srv" data-id="ams" data-code="AMS" data-city="Амстердам" data-country="Нидерланды" data-lat="52.3676" data-lon="4.9041" data-dir="l">
+          <button class="srv-btn" type="button" aria-pressed="false">
+            <span class="srv-code mono">AMS</span>
+            <span class="srv-name"><b>Амстердам</b><small>Нидерланды · столица</small></span>
+            <span class="state mono"><i class="live-dot"></i>Доступен</span>
+          </button>
+        </li>
+        <li class="srv" data-id="war" data-code="WAW" data-city="Варшава" data-country="Польша" data-lat="52.2297" data-lon="21.0122" data-dir="r">
+          <button class="srv-btn" type="button" aria-pressed="false">
+            <span class="srv-code mono">WAW</span>
+            <span class="srv-name"><b>Варшава</b><small>Польша · столица</small></span>
+            <span class="state mono"><i class="live-dot"></i>Доступен</span>
+          </button>
+        </li>
+      </ul>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===================== ПОЧЕМУ ===================== -->
+<section class="sec" id="why" aria-labelledby="why-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-idx mono rv">02<i></i><span>Почему YarVpn</span></p>
+      <h2 class="h2 rv" id="why-h">Всё, что нужно от ВПН, и&nbsp;ничего <span class="ember">лишнего</span></h2>
+    </header>
+
+    <div class="feats">
+      <article class="feat rv" style="--d:0">
+        <span class="feat-n mono">01 / Скорость</span>
+        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path class="streak" d="M6 20h30"/><path class="streak" d="M14 32h44"/><path class="streak" d="M6 44h24"/><circle cx="54" cy="20" r="2.5" fill="currentColor" stroke="none"/><circle cx="8" cy="32" r="2.5" fill="currentColor" stroke="none"/></svg>
+        <h3>Высокая скорость</h3>
+        <p>Широкий канал на серверах: видео, звонки и игры идут без просадок и лишних задержек.</p>
+      </article>
+      <article class="feat rv" style="--d:1">
+        <span class="feat-n mono">02 / Сеть</span>
+        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path class="dash" d="M14 46 32 14 52 42M14 46h38"/><circle cx="14" cy="46" r="5" fill="#0a0705"/><circle cx="32" cy="14" r="5" fill="#0a0705"/><circle cx="52" cy="42" r="5" fill="#0a0705"/><circle cx="32" cy="14" r="1.8" fill="currentColor" stroke="none"/></svg>
+        <h3>Несколько стран</h3>
+        <p>Узлы в столицах Европы — выбирай локацию под задачу, а не мирись с единственным сервером.</p>
+      </article>
+      <article class="feat rv" style="--d:2">
+        <span class="feat-n mono">03 / Telegram</span>
+        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M56 10 8 29.5l13 4.5 5 15.5 8-8 13 9.5z"/><path d="m21 34 24-16-17 20"/></svg>
+        <h3>Всё в одном чате</h3>
+        <p>Без нового аккаунта и пароля: подписка, оплата и поддержка — прямо в боте.</p>
+      </article>
+      <article class="feat rv" style="--d:0">
+        <span class="feat-n mono">04 / Лимиты</span>
+        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 20h48M8 44h48"/><circle cx="38" cy="20" r="6" fill="#0a0705"/><circle cx="22" cy="44" r="6" fill="#0a0705"/><circle cx="38" cy="20" r="1.8" fill="currentColor" stroke="none"/><circle cx="22" cy="44" r="1.8" fill="currentColor" stroke="none"/></svg>
+        <h3>Гибкие лимиты</h3>
+        <p>Начни с малого тарифа и докупай трафик или устройства отдельно, когда понадобится.</p>
+      </article>
+      <article class="feat rv" style="--d:1">
+        <span class="feat-n mono">05 / Цена</span>
+        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="32" cy="32" r="22"/><circle class="dash" cx="32" cy="32" r="16"/><text x="32" y="40" text-anchor="middle" font-family="Geologica,sans-serif" font-weight="800" font-size="22" fill="currentColor" stroke="none">₽</text></svg>
+        <h3>Честная цена</h3>
+        <p>От 39&nbsp;₽ за неделю, без скрытых доплат. Три дня бесплатно — сначала попробуй, потом решай.</p>
+      </article>
+      <article class="feat rv" style="--d:2">
+        <span class="feat-n mono">06 / Поддержка</span>
+        <svg class="feat-art" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true"><path d="M10 14h44v30H30L18 54V44h-8z"/><circle class="blink" cx="24" cy="29" r="2" fill="currentColor" stroke="none"/><circle class="blink" style="animation-delay:.2s" cx="32" cy="29" r="2" fill="currentColor" stroke="none"/><circle class="blink" style="animation-delay:.4s" cx="40" cy="29" r="2" fill="currentColor" stroke="none"/></svg>
+        <h3>Живая поддержка</h3>
+        <p>Пиши прямо в бота или в Telegram — отвечает человек, а не автоответчик.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== КАК ПОДКЛЮЧИТЬ ===================== -->
+<section class="sec" id="how" aria-labelledby="how-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-idx mono rv">03<i></i><span>Подключение</span></p>
+      <h2 class="h2 rv" id="how-h">Как подключить VPN за&nbsp;<span class="ember">минуту</span></h2>
+      <p class="sec-lede rv">Работает на iPhone, Android, Windows и Mac. Отдельная регистрация не нужна — достаточно Telegram.</p>
+    </header>
+
+    <div class="how">
+      <div>
+        <ol class="steps">
+          <li class="step rv"><span class="step-n">01</span><h3>Открой бота</h3><p>Запусти <a class="link" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">@yarVpnRubot</a> командой <code>/start</code>, пройди короткую проверку и прими условия.</p></li>
+          <li class="step rv"><span class="step-n">02</span><h3>Забери 3&nbsp;дня бесплатно или выбери тариф</h3><p>Пробный период активируется один раз прямо из главного меню — без карты.</p></li>
+          <li class="step rv"><span class="step-n">03</span><h3>Оплати за пару тапов</h3><p>TON, Telegram Stars, криптовалюта или баланс — выбирай, что удобнее.</p></li>
+          <li class="step rv"><span class="step-n">04</span><h3>Добавь подписку в приложение</h3><p>Бот пришлёт ссылку и QR-код. В приложении — «Добавить подписку по URL», вставь ссылку и включи VPN.</p></li>
+        </ol>
+
+        <div class="apps rv" aria-label="Приложения для подключения">
+          <a class="app" href="https://apps.apple.com/app/happ-proxy-utility/id6504287215" target="_blank" rel="noopener"><small class="mono">iPhone · iPad · Mac</small><b>Happ</b><span>App Store<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
+          <a class="app" href="https://play.google.com/store/apps/details?id=com.v2ray.ang" target="_blank" rel="noopener"><small class="mono">Android</small><b>v2rayNG</b><span>Google Play<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
+          <a class="app" href="https://github.com/2dust/v2rayN/releases" target="_blank" rel="noopener"><small class="mono">Windows</small><b>v2rayN</b><span>GitHub<svg aria-hidden="true"><use href="#i-go"/></svg></span></a>
+        </div>
+      </div>
+
+      <div class="phone rv" aria-label="Пример диалога с ботом YarVpn" role="img">
+        <div class="phone-scr">
+          <div class="chat-hd"><div class="chat-ava"><svg aria-hidden="true"><use href="#i-mark"/></svg></div><div><b>YarVpn</b><small>бот</small></div></div>
+          <div class="chat" id="chat" aria-hidden="true"><span class="chat-day">Сегодня</span></div>
+          <div class="chat-in" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Сообщение</span><svg viewBox="0 0 24 24"><rect x="9" y="4" width="6" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M6 11.5a6 6 0 0 0 12 0M12 17.5V21" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ТАРИФЫ ===================== -->
+<section class="sec" id="pricing" aria-labelledby="pricing-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-idx mono rv">04<i></i><span>Тарифы</span></p>
+      <h2 class="h2 rv" id="pricing-h">Сколько стоит <span class="ember">VPN</span></h2>
+      <p class="sec-lede rv">Платишь один раз за срок — никаких автопродлений и скрытых списаний.</p>
+    </header>
+
+    <div class="trial rv">
+      <div class="trial-price">0&nbsp;₽</div>
+      <div><h3>Пробный период — 3 дня</h3><p>10&nbsp;ГБ трафика и 1&nbsp;устройство, все серверы. Активируется один раз, карта не нужна.</p></div>
+      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Попробовать<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+    </div>
+
+    <div class="plans rv">
+      <article class="plan">
+        <div class="plan-name">7 дней<small>для знакомства</small></div>
+        <ul class="plan-spec"><li>120 ГБ трафика</li><li>До 3 устройств</li><li>Все серверы</li></ul>
+        <div class="plan-price"><span class="js-price" data-n="39">39</span><sup>₽</sup><small>≈ 5,6 ₽ в день</small></div>
+        <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить</a>
+      </article>
+      <article class="plan hit">
+        <div class="plan-name">1 месяц<small>популярный выбор</small></div>
+        <ul class="plan-spec"><li>500 ГБ трафика</li><li>До 3 устройств</li><li>Все серверы</li></ul>
+        <div class="plan-price"><span class="js-price" data-n="79">79</span><sup>₽</sup><small>≈ 2,6 ₽ в день</small></div>
+        <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      </article>
+      <article class="plan">
+        <div class="plan-name">3 месяца<small>максимум выгоды</small></div>
+        <ul class="plan-spec"><li>1500 ГБ трафика</li><li>До 3 устройств</li><li>Все серверы</li></ul>
+        <div class="plan-price"><span class="js-price" data-n="199">199</span><sup>₽</sup><small>≈ 2,2 ₽ в день</small></div>
+        <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить</a>
+      </article>
+    </div>
+
+    <div class="addons">
+      <div class="panel rv">
+        <p class="mono">Докупка</p><h3>Больше устройств</h3>
+        <ul class="addon-list"><li>+1 устройство<b>49 ₽</b></li><li>+3 устройства<b>99 ₽</b></li><li>+10 устройств<b>209 ₽</b></li></ul>
+      </div>
+      <div class="panel rv" style="--d:1">
+        <p class="mono">Докупка</p><h3>Больше трафика</h3>
+        <ul class="addon-list"><li>+50 ГБ<b>49 ₽</b></li><li>+250 ГБ<b>199 ₽</b></li><li>+500 ГБ<b>399 ₽</b></li></ul>
+      </div>
+    </div>
+
+    <div class="pay rv">
+      <span class="mono">Оплата</span>
+      <span class="chip">TON</span><span class="chip">Telegram Stars</span><span class="chip">Криптовалюта</span><span class="chip">Баланс</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== КАБИНЕТ ===================== -->
+<section class="sec" id="cabinet" aria-labelledby="cab-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-idx mono rv">05<i></i><span>Личный кабинет</span></p>
+      <h2 class="h2 rv" id="cab-h">Кабинет, который знает тебя по&nbsp;<span class="ember">Telegram</span></h2>
+    </header>
+
+    <div class="cab rv" id="cab">
+      <div class="cab-out" id="cabOut">
+        <div>
+          <h3>Войди через бота — без пароля</h3>
+          <p>Нажми кнопку, открой бота и подтверди вход. Кабинет откроется сам — и синхронизируется с твоим аккаунтом в Telegram.</p>
+          <ul class="cab-perks">
+            <li>Баланс и активная подписка</li>
+            <li>Трафик, устройства и срок действия</li>
+            <li>Ссылка подписки — копируется в один клик</li>
+            <li>Реферальная ссылка и статистика друзей</li>
+          </ul>
+        </div>
+        <div class="cab-cta">
+          <div id="loginIdle">
+            <button class="btn btn-primary" id="loginBtn" type="button"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</button>
+            <p class="cab-hint" style="margin-top:14px">Бот покажет, откуда идёт вход, и попросит подтвердить. Пароли и данные карты не нужны.</p>
+          </div>
+          <div class="wait" id="loginWait" hidden>
+            <ol class="wait-steps">
+              <li><i>01</i><span>Открой бота по кнопке или QR-коду</span></li>
+              <li><i>02</i><span>Нажми <b style="color:var(--ink)">Start</b>, если бот ещё не запущен</span></li>
+              <li><i>03</i><span>Подтверди вход кнопкой <b style="color:var(--ink)">«Да, это я»</b></span></li>
+            </ol>
+            <a class="btn btn-primary" id="loginLink" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Открыть бота</a>
+            <div class="qr" id="loginQr" hidden><div class="qr-box" id="qrBox"></div><small>Или наведи камеру телефона — откроется тот же бот</small></div>
+            <div class="timer mono"><span id="timerText">5:00</span><div class="timer-bar"><i id="timerBar"></i></div></div>
+            <button class="linkbtn" id="loginCancel" type="button">Отменить</button>
+          </div>
+          <div class="note" id="cabNote" role="status" hidden></div>
+        </div>
+      </div>
+
+      <div class="cab-in" id="cabIn" hidden>
+        <div class="cab-top">
+          <div class="cab-ava" id="cabAva">Я</div>
+          <div class="cab-who"><b id="cabName"></b><span id="cabUser"></span></div>
+          <div class="cab-tools">
+            <button class="btn btn-ghost btn-sm" id="cabRefresh" type="button">Обновить</button>
+            <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">Выйти</button>
+          </div>
+        </div>
+        <div class="cab-grid" id="cabGrid">
+          <div class="tile c4"><p class="mono">Баланс</p><div class="tile-v" id="tBal">0<small>₽</small></div><p class="tile-s">тратится на подписку и докупки</p>
+            <div class="tile-act"><a class="btn btn-ghost btn-sm" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Пополнить в боте</a></div></div>
+          <div class="tile c8"><p class="mono">Подписка</p><div class="tile-v" id="tSub">—</div><p class="tile-s" id="tSubS"></p>
+            <div class="tile-act" id="tSubAct"></div></div>
+          <div class="tile c4"><p class="mono">Трафик</p><div class="tile-v" id="tTr">—</div><p class="tile-s" id="tTrS"></p><div class="meter" id="tMeter" hidden><i id="tMeterI"></i></div></div>
+          <div class="tile c4"><p class="mono">Устройства</p><div class="tile-v" id="tDev">—</div><p class="tile-s">одновременных подключений</p></div>
+          <div class="tile c4"><p class="mono">Пробный период</p><div class="tile-v" id="tTrial" style="font-size:clamp(22px,2.4vw,30px)">—</div><p class="tile-s" id="tTrialS"></p></div>
+          <div class="tile c12" id="tLinkBox"><p class="mono">Ссылка подписки</p><p class="tile-s">Вставь в приложение через «Добавить подписку по URL». Никому не передавай — по ней работает твой VPN.</p>
+            <div class="copy-row"><code id="tLink">—</code><button class="btn btn-primary btn-sm" id="copyLink" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
+          <div class="tile c12"><p class="mono">Реферальная программа</p><div class="tile-v" id="tRef">0</div><p class="tile-s" id="tRefS"></p>
+            <div class="copy-row"><code id="tRefLink">—</code><button class="btn btn-ghost btn-sm" id="copyRef" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== БОНУСЫ ===================== -->
+<section class="sec" id="bonus" aria-labelledby="bonus-h">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="sec-idx mono rv">06<i></i><span>Бонусы</span></p>
+      <h2 class="h2 rv" id="bonus-h">Пользуйся и&nbsp;<span class="ember">зарабатывай</span></h2>
+    </header>
+
+    <div class="duo">
+      <article class="panel rv">
+        <p class="mono">Реферальная программа</p>
+        <h3>Зови друзей — копи баланс</h3>
+        <p>10&nbsp;₽ на баланс за каждого друга, который подключил VPN, — за первых 15 друзей. Начиная с 16-го — 20% от каждой его покупки, без ограничений по времени.</p>
+        <div class="big"><span class="js-price" data-n="150">150</span><small>₽ за 15 друзей</small></div>
+      </article>
+      <article class="panel rv" style="--d:1">
+        <svg class="wheel" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="100" cy="100" r="96" stroke-dasharray="2 6"/><circle cx="100" cy="100" r="70"/><circle cx="100" cy="100" r="14"/><path d="M100 30v56M100 114v56M30 100h56M114 100h56M50.5 50.5l39.6 39.6M109.9 109.9l39.6 39.6M149.5 50.5l-39.6 39.6M90.1 109.9l-39.6 39.6"/></svg>
+        <p class="mono">Ежедневная рулетка</p>
+        <h3>Бесплатный билет каждый день</h3>
+        <p>Новый билет — каждый день в 14:00 по Москве. Крути колесо в боте и забирай приз: деньги на баланс, день подписки или бонус к пополнению.</p>
+        <div class="prizes"><span class="chip">до 150 ₽ на баланс</span><span class="chip">+1 день подписки</span><span class="chip">+20% к пополнению</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="sec" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <div class="faq">
+      <div class="faq-side">
+        <p class="sec-idx mono rv">07<i></i><span>Вопросы</span></p>
+        <h2 class="h2 rv" id="faq-h">Частые <span class="ember">вопросы</span></h2>
+        <p class="rv">Не нашёл ответ? Напиши в поддержку — отвечаем в Telegram и на почту.</p>
+        <div class="rv"><a class="btn btn-ghost" href="https://t.me/entoni" target="_blank" rel="noopener">Написать @entoni<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a></div>
+      </div>
+      <div class="qas rv" id="qas">
+        <div class="qa open"><h3><button class="qa-q" type="button" aria-expanded="true">Что такое YarVpn (Яр ВПН)?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>YarVpn — это VPN-сервис, который целиком живёт в Telegram. Открываешь бота <a class="link" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">@yarVpnRubot</a>, выбираешь тариф или берёшь пробный период, а бот присылает ссылку-подписку и QR-код. Добавляешь её в приложение — и VPN готов. Отдельный аккаунт и пароль не нужны.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Зачем нужен VPN (ВПН)?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>VPN шифрует трафик между устройством и сервером. Это защищает данные в общественных Wi-Fi-сетях, скрывает от провайдера, какие сайты ты открываешь, и даёт стабильное соединение с выбранным сервером в другой стране.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Как подключить VPN на телефоне и компьютере?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Установи приложение: на Android — v2rayNG, на iPhone, iPad и Mac — Happ, на Windows — v2rayN. В боте нажми «Подключиться», в приложении выбери «Добавить подписку по URL» и вставь ссылку (или отсканируй QR-код), затем включи VPN.</p><p>Подписка сама подтягивает актуальный сервер — ничего добавлять вручную не нужно.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Сколько стоит VPN?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>7&nbsp;дней — 39&nbsp;₽, 1&nbsp;месяц — 79&nbsp;₽, 3&nbsp;месяца — 199&nbsp;₽. Во всех тарифах есть трафик (120, 500 и 1500&nbsp;ГБ) и до 3 устройств. На длинном тарифе выходит около 2,2&nbsp;₽ в день.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Есть ли бесплатный пробный период?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Да: 3&nbsp;дня, 10&nbsp;ГБ трафика и 1&nbsp;устройство, доступ ко всем серверам, как в платной подписке. Активируется один раз из главного меню бота, банковская карта не нужна.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Сколько устройств можно подключить?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>В каждом тарифе — до 3 устройств одновременно. Нужно больше — докупи пакет прямо в боте: +1 устройство за 49&nbsp;₽, +3 за 99&nbsp;₽, +10 за 209&nbsp;₽.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Какие способы оплаты доступны?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>TON, Telegram Stars, криптовалюта и внутренний баланс. Баланс можно пополнить или заработать на приглашениях друзей — и сразу потратить на подписку.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Трафик закончился раньше срока — что делать?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Докупи гигабайты, не дожидаясь продления: +50&nbsp;ГБ за 49&nbsp;₽, +250&nbsp;ГБ за 199&nbsp;₽, +500&nbsp;ГБ за 399&nbsp;₽. Лимит увеличится сразу.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Как быстро включается доступ после оплаты?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Сразу. Бот подтверждает платёж и присылает ссылку с QR-кодом за несколько секунд.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Как войти в личный кабинет на сайте?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Через Telegram: нажми «Войти через Telegram», открой бота по ссылке и подтверди вход кнопкой «Да, это я». Пароль не нужен, а бот заранее покажет, с какого устройства запрошен вход.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Что-то не работает — куда писать?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>В поддержку прямо в боте, в Telegram — <a class="link" href="https://t.me/entoni" target="_blank" rel="noopener">@entoni</a>, или на почту <a class="link" href="mailto:yarsup@proton.me">yarsup@proton.me</a>.</p></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ФИНАЛЬНЫЙ ПРИЗЫВ ===================== -->
+<section class="cta" aria-labelledby="cta-h">
+  <div class="wrap">
+    <div class="cta-card rv">
+      <svg class="arcs" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><use href="#arcs-art"/></svg>
+      <div class="hero-slit" aria-hidden="true"></div>
+      <h2 id="cta-h">Готов подключиться? Начни <span class="ember">бесплатно</span></h2>
+      <p>3 дня и 10&nbsp;ГБ трафика — без карты и обязательств. Открой бота и нажми «Пробный период».</p>
+      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top"><span class="brand-mark"><svg aria-hidden="true"><use href="#i-mark"/></svg></span>YarVpn</a>
+        <p>YarVpn (Яр ВПН) — быстрый VPN-сервис в Telegram: серверы в Европе, честные цены и поддержка, которая отвечает.</p>
+        <div class="foot-soc">
+          <a href="https://t.me/YarVpnews" target="_blank" rel="noopener" aria-label="Канал YarVpn в Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a>
+          <a href="https://t.me/entoni" target="_blank" rel="noopener" aria-label="Поддержка в Telegram"><svg aria-hidden="true"><use href="#i-chat"/></svg></a>
+          <a href="mailto:yarsup@proton.me" aria-label="Почта поддержки"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+        </div>
+      </div>
+      <nav class="foot-col" aria-label="Разделы сайта">
+        <h4>Разделы</h4>
+        <a href="#servers">Серверы</a><a href="#how">Подключение</a><a href="#pricing">Тарифы</a><a href="#cabinet">Личный кабинет</a><a href="#faq">Вопросы</a>
+      </nav>
+      <nav class="foot-col" aria-label="Документы">
+        <h4>Документы</h4>
+        <a href="https://telegra.ph/polzovatelskoe-soglashenie-09-17-24" target="_blank" rel="noopener">Пользовательское соглашение</a>
+        <a href="https://telegra.ph/Politika-konfidencialnosti-09-17-68" target="_blank" rel="noopener">Политика конфиденциальности</a>
+      </nav>
+      <nav class="foot-col" aria-label="Связь">
+        <h4>Связь</h4>
+        <a href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Бот @yarVpnRubot</a>
+        <a href="https://t.me/YarVpnews" target="_blank" rel="noopener">Новости</a>
+        <a href="https://t.me/entoni" target="_blank" rel="noopener">Поддержка @entoni</a>
+        <a href="mailto:yarsup@proton.me">yarsup@proton.me</a>
+      </nav>
+    </div>
+    <div class="foot-end"><span>© <span id="year">2026</span> YarVpn. Все права защищены.</span><span class="mono">yarvpn.best</span></div>
   </div>
 </footer>
 
-<script>
-(function(){
-  "use strict";
-
-  /* ===== НАСТРОЙКА ===================================================
-     Адрес веб-API бота (файл webapi.py в архиве бота), БЕЗ слеша в конце.
-     Пример: "https://api.yarvpn.ru/api"
-     Пока пусто — кнопка "Войти через Telegram" покажет, что кабинет недоступен. */
-  var API_BASE = "";
-  /* =================================================================== */
-
-  var LS_KEY = "yarvpn_session";
-  var memSession = null;
-  function $(id){ return document.getElementById(id); }
-  function on(el, ev, fn, opt){ if(el) el.addEventListener(ev, fn, opt); }
-
-  /* ---- scroll reveal (+ ступенчатая задержка в сетках) ---- */
-  try{
-    document.querySelectorAll(".grid, .price-grid, .steps").forEach(function(g){
-      Array.prototype.forEach.call(g.children, function(c, i){
-        c.style.transitionDelay = (i * 90) + "ms";
-        c.addEventListener("transitionend", function(e){ if(e.propertyName === "opacity"){ c.style.transitionDelay = ""; } });
-      });
-    });
-    var els = document.querySelectorAll(".reveal");
-    if("IntersectionObserver" in window){
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add("is-visible"); io.unobserve(en.target); } });
-      }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-      els.forEach(function(el){ io.observe(el); });
-    } else { els.forEach(function(el){ el.classList.add("is-visible"); }); }
-  }catch(e){ document.documentElement.className += " reveal-all"; }
-
-  /* ---- FAQ ---- */
-  document.querySelectorAll(".faq-q").forEach(function(b){ on(b, "click", function(){ b.closest(".faq-item").classList.toggle("open"); }); });
-
-  /* ---- счётчики цен ---- */
-  function countTo(el, target, dur, fmt){
-    var start = null;
-    function step(ts){
-      if(!start) start = ts;
-      var p = Math.min((ts - start) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(target * e);
-      if(p < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-  try{
-    var ps = $("pricing"), done = false;
-    function runPrices(){
-      if(done) return; done = true;
-      document.querySelectorAll(".js-price").forEach(function(el){
-        countTo(el, parseInt(el.getAttribute("data-target"), 10) || 0, 900, function(v){ return Math.round(v); });
-      });
-    }
-    if(ps && "IntersectionObserver" in window){
-      var io2 = new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){ runPrices(); io2.disconnect(); } }); }, { threshold: 0.25 });
-      io2.observe(ps);
-    }
-  }catch(e){}
-
-  /* ---- подсветка карточек за курсором ---- */
-  document.querySelectorAll(".card, .price-card").forEach(function(el){
-    on(el, "pointermove", function(e){
-      var r = el.getBoundingClientRect();
-      el.style.setProperty("--x", (e.clientX - r.left) + "px");
-      el.style.setProperty("--y", (e.clientY - r.top) + "px");
-    });
-  });
-
-  /* ---- шапка: прогресс скролла ---- */
-  var hdr = $("hdr"), prog = $("progress"), ticking = false;
-  function onScroll(){
-    if(ticking) return; ticking = true;
-    requestAnimationFrame(function(){
-      var st = window.pageYOffset || document.documentElement.scrollTop;
-      var h = document.documentElement.scrollHeight - window.innerHeight;
-      if(prog) prog.style.transform = "scaleX(" + (h > 0 ? Math.min(st / h, 1) : 0) + ")";
-      if(hdr) hdr.classList.toggle("scrolled", st > 10);
-      ticking = false;
-    });
-  }
-  on(window, "scroll", onScroll, { passive: true }); onScroll();
-
-  /* ---- шторка ---- */
-  var drawer = $("drawer"), scrim = $("scrim"), burger = $("burger");
-  function setDrawer(open){
-    drawer.classList.toggle("open", open); scrim.classList.toggle("open", open); burger.classList.toggle("open", open);
-    burger.setAttribute("aria-expanded", open ? "true" : "false"); drawer.setAttribute("aria-hidden", open ? "false" : "true");
-    document.body.classList.toggle("lock", open);
-  }
-  on(burger, "click", function(){ setDrawer(!drawer.classList.contains("open")); });
-  on(scrim, "click", function(){ setDrawer(false); });
-  on($("drawerClose"), "click", function(){ setDrawer(false); });
-  drawer.querySelectorAll("a").forEach(function(a){ on(a, "click", function(){ setDrawer(false); }); });
-  on(document, "keydown", function(e){ if(e.key === "Escape") setDrawer(false); });
-
-  /* ---- подпись под глобусом ---- */
-  var msgs = ["Выбираем ближайший сервер…", "Переключаемся на быстрый канал…", "Подключено — можно пользоваться"], mi = 0, sw = $("switchText");
-  if(sw){ setInterval(function(){ sw.classList.add("out"); setTimeout(function(){ mi = (mi + 1) % msgs.length; sw.textContent = msgs[mi]; sw.classList.remove("out"); }, 350); }, 3700); }
-
-  /* ================= ЛИЧНЫЙ КАБИНЕТ ================= */
-  function getSession(){ try{ return localStorage.getItem(LS_KEY) || memSession; }catch(e){ return memSession; } }
-  function saveSession(s){ memSession = s; try{ localStorage.setItem(LS_KEY, s); }catch(e){} }
-  function clearSession(){ memSession = null; try{ localStorage.removeItem(LS_KEY); }catch(e){} }
-  function note(t){ var n = $("cabNote"); n.textContent = t || ""; n.hidden = !t; }
-  function showOut(){ $("cabOut").hidden = false; $("cabIn").hidden = true; $("loginIdle").hidden = false; $("loginWait").hidden = true; $("loginBtn").disabled = false; }
-  function showIn(){ $("cabOut").hidden = true; $("cabIn").hidden = false; }
-  function showWait(){ $("loginIdle").hidden = true; $("loginWait").hidden = false; }
-
-  function api(path, opts){
-    return fetch(API_BASE + path, opts).then(function(r){
-      return r.json().catch(function(){ return {}; }).then(function(j){ return { status: r.status, data: j }; });
-    });
-  }
-  function fmtDate(ts){ try{ return new Date(ts * 1000).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" }); }catch(e){ return ""; } }
-
-  function renderAccount(d){
-    showIn(); note("");
-    var name = d.first_name || d.username || ("ID " + d.id);
-    $("cabName").textContent = name;
-    $("cabUser").textContent = d.username ? "@" + d.username : "ID " + d.id;
-    $("avatar").textContent = String(name).trim().charAt(0).toUpperCase() || "Y";
-    countTo($("stBalance"), Number(d.balance) || 0, 900, function(v){ return v.toFixed(2) + " ₽"; });
-    var sub = d.subscription, bar = $("stBar"), fill = $("stBarFill");
-    bar.hidden = true; fill.style.width = "0%"; $("stTraffic").textContent = "";
-    if(sub){
-      $("stSub").textContent = sub.left_days + " дн.";
-      $("stSubSub").textContent = "активна до " + fmtDate(sub.expires_at);
-      $("stDev").textContent = sub.devices || "—";
-      var total = Number(sub.total_gb) || 0, used = sub.used_gb == null ? null : Number(sub.used_gb);
-      if(total > 0 && used != null){
-        $("stTraffic").textContent = "Трафик: " + used.toFixed(1) + " из " + total + " ГБ";
-        bar.hidden = false;
-        requestAnimationFrame(function(){ requestAnimationFrame(function(){ fill.style.width = Math.min(used / total * 100, 100) + "%"; }); });
-      } else if(total > 0){ $("stTraffic").textContent = "Лимит трафика: " + total + " ГБ"; }
-    } else {
-      $("stSub").textContent = "Нет"; $("stSubSub").textContent = "оформи подписку в боте"; $("stDev").textContent = "—";
-    }
-    $("stRef").textContent = d.referrals || 0;
-    $("stRefSub").textContent = (d.referrals_trial_activated || 0) + " активировали пробный";
-    $("stTrial").textContent = d.trial_used ? "Использован" : "Доступен";
-  }
-
-  function loadAccount(session){
-    api("/account/" + encodeURIComponent(session)).then(function(res){
-      if(res.status === 401){ clearSession(); showOut(); return; }
-      if(res.status !== 200){ throw new Error("http " + res.status); }
-      renderAccount(res.data);
-    }).catch(function(){ showOut(); note("Не удалось загрузить данные кабинета. Попробуй ещё раз позже."); });
-  }
-
-  var pollTimer = null, deadline = 0, curToken = null;
-  function stopLogin(){ clearTimeout(pollTimer); pollTimer = null; curToken = null; showOut(); }
-  function poll(){
-    if(!curToken) return;
-    if(Date.now() > deadline){ stopLogin(); note("Время подтверждения вышло — попробуй ещё раз."); return; }
-    api("/login/status/" + encodeURIComponent(curToken)).then(function(res){
-      if(!curToken) return;
-      var d = res.data || {};
-      if(d.status === "confirmed" && d.session){ saveSession(d.session); stopLogin(); loadAccount(d.session); return; }
-      if(d.status === "denied"){ stopLogin(); note("Вход отклонён в Telegram."); return; }
-      if(d.status === "expired"){ stopLogin(); note("Ссылка устарела — попробуй ещё раз."); return; }
-      pollTimer = setTimeout(poll, 1800);
-    }).catch(function(){ pollTimer = setTimeout(poll, 3200); });
-  }
-  function startLogin(){
-    note("");
-    if(!API_BASE){ note("Личный кабинет временно недоступен."); return; }
-    $("loginBtn").disabled = true;
-    api("/login/start", { method: "POST" }).then(function(res){
-      if(res.status === 429){ $("loginBtn").disabled = false; note("Слишком много попыток входа. Подожди немного."); return; }
-      if(res.status !== 200 || !res.data.token){ throw new Error("bad"); }
-      curToken = res.data.token; deadline = Date.now() + (res.data.expires_in || 300) * 1000;
-      $("loginLink").href = res.data.link; showWait(); poll();
-    }).catch(function(){ $("loginBtn").disabled = false; note("Не удалось связаться с сервером. Попробуй позже."); });
-  }
-  on($("loginBtn"), "click", startLogin);
-  on($("loginCancel"), "click", stopLogin);
-  on($("logoutBtn"), "click", function(){
-    var s = getSession(); clearSession(); showOut();
-    if(s && API_BASE){ try{ fetch(API_BASE + "/logout/" + encodeURIComponent(s), { method: "POST" }); }catch(e){} }
-  });
-  var s0 = getSession();
-  if(s0 && API_BASE){ loadAccount(s0); }
-})();
-</script>
+<script src="assets/js/main.js?v=1" defer></script>
+<script src="assets/js/mapdata.js?v=1" defer></script>
+<script src="assets/js/map.js?v=1" defer></script>
+<script src="assets/js/cabinet.js?v=1" defer></script>
 </body>
 </html>

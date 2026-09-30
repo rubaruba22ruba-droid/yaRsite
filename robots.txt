@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Host: https://yarvpn.best
+Sitemap: https://yarvpn.best/sitemap.xml
