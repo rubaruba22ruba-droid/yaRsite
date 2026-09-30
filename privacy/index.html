@@ -6,7 +6,7 @@
 <title>Политика конфиденциальности — YarVpn</title>
 <meta name="description" content="Какие данные обрабатывает сайт YarVpn: вход через Telegram, хранение сессии в браузере, cookie и статистика.">
 <meta name="robots" content="index,follow">
-<meta name="theme-color" content="#030716">
+<meta name="theme-color" content="#09090b">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://yarvpn.best/privacy/">
 <meta property="og:type" content="website">
@@ -20,20 +20,16 @@
 <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
-<link rel="preload" href="../assets/fonts/cormorant-garamond-cyrillic-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/main.css?v=6">
-<link rel="stylesheet" href="../assets/css/v5.css?v=6">
+<link rel="preload" href="../assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../assets/css/site.css?v=7">
 <script>if(location.protocol==="http:"&&/(^|\.)yarvpn\.best$/.test(location.hostname))location.replace("https://"+location.host+location.pathname);document.documentElement.className+=" js"</script>
 </head>
-<body class="tone-dark">
-<div class="space-base" aria-hidden="true"></div>
-<canvas class="space" id="space" aria-hidden="true"></canvas>
-<div class="twinkle" id="twinkle" aria-hidden="true"></div>
-<div class="grain" id="grain" aria-hidden="true"></div>
-<header class="nav stuck" style="transform:translate(-50%,0)">
+<body>
+<div class="bg" aria-hidden="true"><canvas id="bg"></canvas></div>
+<div class="bg-grid" aria-hidden="true"></div>
+<header class="nav stuck">
   <div class="nav-in">
-    <a class="brand" href="../" aria-label="YarVpn — на главную">Yar<em>Vpn</em></a>
+    <a class="brand" href="../" aria-label="YarVpn — на главную"><span class="logo"><b>YAR</b></span><span class="brand-t">VPN</span></a>
     <div class="nav-act"><a class="btn btn-glass btn-sm" href="../">На главную</a></div>
   </div>
 </header>
@@ -74,7 +70,7 @@
     <div class="foot-end"><span>© 2026 YarVpn</span><span><a href="../privacy/">Политика конфиденциальности</a> · <a href="../terms/">Условия использования</a></span></div>
   </div>
 </footer>
-<script src="../assets/js/space.js?v=6" defer></script>
-<script src="../assets/js/consent.js?v=6" defer></script>
+<script src="../assets/js/bg.js?v=7" defer></script>
+<script src="../assets/js/consent.js?v=7" defer></script>
 </body>
 </html>

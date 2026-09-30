@@ -1,4 +1,4 @@
-/* YarVpn — интерфейс: навигация, появление блоков, FAQ и глобус в первом экране. */
+/* YarVpn — интерфейс: меню, появление блоков, прогресс прокрутки, цены, FAQ. */
 (function () {
   "use strict";
   var doc = document, root = doc.documentElement, body = doc.body;
@@ -14,31 +14,13 @@
     if (window.qrcode) { cb(); return; }
     if (qrWaiters) { qrWaiters.push(cb); return; }
     qrWaiters = [cb];
-    var s = doc.createElement("script"); s.src = "assets/js/qr.js?v=6";
+    var s = doc.createElement("script"); s.src = "assets/js/qr.js?v=7";
     s.onload = function () { var w = qrWaiters; qrWaiters = null; w.forEach(function (f) { f(); }); };
     doc.head.appendChild(s);
   };
 
   function ready() { root.className += " js-ready"; }
-  if (doc.fonts && doc.fonts.ready) { doc.fonts.ready.then(function () { setTimeout(ready, 60); }); setTimeout(ready, 1200); } else { ready(); }
-
-  /* заголовки: слова выезжают по очереди */
-  $$(".h2").forEach(function (h) {
-    var w = 0;
-    (function walk(node) {
-      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
-        if (n.nodeType === 3) {
-          var frag = doc.createDocumentFragment();
-          n.nodeValue.split(/(\s+)/).forEach(function (p) {
-            if (!p) return;
-            if (/^\s+$/.test(p)) { frag.appendChild(doc.createTextNode(p)); return; }
-            var a = doc.createElement("span"), b = doc.createElement("span"); a.className = "wd"; a.style.setProperty("--w", w++); b.textContent = p; a.appendChild(b); frag.appendChild(a);
-          });
-          node.replaceChild(frag, n);
-        } else if (n.nodeType === 1 && n.tagName !== "BR") walk(n);
-      });
-    })(h);
-  });
+  requestAnimationFrame(function () { requestAnimationFrame(ready); });
 
   /* навигация */
   var nav = $("#nav"), prog = $("#progress");
@@ -50,17 +32,22 @@
     }, { rootMargin: "-45% 0px -50% 0px" });
     $$("main section[id]").forEach(function (s) { navIO.observe(s); });
   }
+
+  /* мобильное меню */
   var burger = $("#burger"), sheet = $("#sheet");
   function setSheet(open) {
     if (!burger || !sheet) return;
     burger.setAttribute("aria-expanded", open ? "true" : "false");
+    burger.setAttribute("aria-label", open ? "Закрыть меню" : "Меню");
     sheet.classList.toggle("open", open); sheet.setAttribute("aria-hidden", open ? "false" : "true");
+    if ("inert" in sheet) sheet.inert = !open;
     body.classList.toggle("lock", open);
   }
+  if (sheet && "inert" in sheet) sheet.inert = true;
   if (burger) burger.addEventListener("click", function () { setSheet(burger.getAttribute("aria-expanded") !== "true"); });
   $$("#sheet a").forEach(function (a) { a.addEventListener("click", function () { setSheet(false); }); });
   doc.addEventListener("keydown", function (e) { if (e.key === "Escape") setSheet(false); });
-  window.addEventListener("resize", function () { if (window.innerWidth > 1020) setSheet(false); });
+  window.addEventListener("resize", function () { if (window.innerWidth > 959) setSheet(false); });
 
   /* появление блоков */
   if (hasIO) {
@@ -98,21 +85,10 @@
   });
   var yr = $("#year"); if (yr) yr.textContent = new Date().getFullYear();
 
-  var earth = null;
-
-  window.addEventListener("scroll", function () {
+  function onScroll() {
     if (nav) nav.classList.toggle("stuck", window.pageYOffset > 20);
     if (prog) { var max = Math.max(1, root.scrollHeight - window.innerHeight); prog.style.setProperty("--p", Math.min(1, window.pageYOffset / max).toFixed(4)); }
-    if (earth && !reduce) earth.setScroll(window.pageYOffset * 0.0011);
-  }, { passive: true });
-  if (nav) nav.classList.toggle("stuck", window.pageYOffset > 20);
-
-  /* ---------- глобус ---------- */
-  function startEarth() {
-    var cv = $("#earth");
-    if (!cv || !window.YVEarth) return;
-    try { earth = window.YVEarth.init(cv, { reduce: reduce }); } catch (e) { earth = null; }
-    if (!earth) { var w = $("#earthWrap"); if (w) w.style.display = "none"; }
   }
-  if (window.YVEarth) startEarth(); else window.addEventListener("load", startEarth);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 })();

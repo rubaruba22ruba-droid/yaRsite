@@ -15,23 +15,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<meta name="theme-color" content="#030716">
+<meta name="theme-color" content="#09090b">
 <title>Ежедневная рулетка — YarVpn</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
   /* шрифты берём с сайта YarVpn; если сайт недоступен — системные */
-  @font-face{font-family:"Cormorant Garamond";font-weight:600;font-display:swap;src:url(https://yarvpn.best/assets/fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2013-2026,U+20BD}
-  @font-face{font-family:"Cormorant Garamond";font-weight:600;font-display:swap;src:url(https://yarvpn.best/assets/fonts/cormorant-garamond-cyrillic-600-normal.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
-  @font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:600;font-display:swap;src:url(https://yarvpn.best/assets/fonts/cormorant-garamond-latin-600-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+2013-2026,U+20BD}
-  @font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:600;font-display:swap;src:url(https://yarvpn.best/assets/fonts/cormorant-garamond-cyrillic-600-italic.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
+  @font-face{font-family:"Unbounded";font-weight:200 900;font-display:swap;src:url(https://yarvpn.best/assets/fonts/unbounded-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+  @font-face{font-family:"Unbounded";font-weight:200 900;font-display:swap;src:url(https://yarvpn.best/assets/fonts/unbounded-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F,U+20AC}
   @font-face{font-family:"Manrope";font-weight:200 800;font-display:swap;src:url(https://yarvpn.best/assets/fonts/manrope-latin-wght-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2013-2026,U+20BD}
   @font-face{font-family:"Manrope";font-weight:200 800;font-display:swap;src:url(https://yarvpn.best/assets/fonts/manrope-cyrillic-wght-normal.woff2) format("woff2");unicode-range:U+0400-04FF,U+2116}
 
   :root{
-    --bg:#030716; --line:rgba(255,255,255,.12); --line2:rgba(255,255,255,.2);
-    --text:#f4f6fc; --muted:rgba(214,222,242,.8); --navy:#070d20; --danger:#ffc9b8; --ok:#c6f6e2; --gold:#d9b26f;
+    --bg:#09090b; --line:rgba(255,255,255,.14); --line2:rgba(255,255,255,.22); --or:#ff5a00;
+    --text:#f3f3f1; --muted:rgba(243,243,241,.7); --navy:#0c0c0e; --danger:#ffb59a; --ok:#b9f0d6; --gold:#ff5a00;
     --safe-b:env(safe-area-inset-bottom,0px);
-    --serif:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
+    --serif:"Unbounded","Arial Black",system-ui,sans-serif;
     font-family:"Manrope",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -39,53 +37,53 @@
   html,body{margin:0;color:var(--text);overflow-x:clip}
   body{min-height:100vh;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;}
   /* небо: картинка облаков, нарисованная один раз, плавно дрейфует (только transform — без рывков) */
-  .sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(120% 90% at 75% 20%,#0a1a44 0%,#030716 55%,#010208 100%)}
+  .sky{position:fixed;inset:0;z-index:-1;overflow:hidden;background:#09090b}
   .sky canvas{position:absolute;left:-3%;top:-3%;width:106%;height:106%;animation:drift 120s ease-in-out infinite alternate;will-change:transform}
   @keyframes drift{from{transform:translate3d(-1%,0,0) scale(1.01)}to{transform:translate3d(1%,-1%,0) scale(1.04)}}
   #fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
   main{max-width:520px;margin:0 auto;padding:6px 20px calc(120px + var(--safe-b))}
 
   .top{display:flex;align-items:center;justify-content:space-between;min-height:54px}
-  .brand{font:600 30px/1 var(--serif);letter-spacing:-.01em}
-  .brand em{font-style:italic;font-weight:600}
-  .balance{background:rgba(255,255,255,.06);border:1px solid var(--line2);border-radius:99px;padding:9px 16px;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;box-shadow:0 8px 24px -12px rgba(6,26,80,.6)}
+  .brand{display:grid;place-items:center;width:62px;height:42px;background:var(--or);transform:skewX(-9deg)}
+  .brand span{transform:skewX(9deg);font:900 italic 19px/1 var(--serif);letter-spacing:-.03em;color:#fff}
+    .balance{background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:4px;padding:11px 16px;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
   .balance span{color:var(--muted);font-weight:600}
 
   .wheel-box{position:relative;margin:14px auto 0;width:100%;max-width:400px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
   #wheel{display:block;pointer-events:none}
   .info{margin-top:26px;text-align:center}
-  h1{margin:0;display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:600 clamp(34px,10.4vw,48px)/1.08 var(--serif);letter-spacing:-.02em;font-variant-numeric:lining-nums}
-  .chip{display:inline-flex;margin-top:12px;padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--line2);font-size:14px;font-weight:700}
+  h1{margin:0;display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:800 clamp(22px,7.2vw,32px)/1.15 var(--serif);letter-spacing:-.02em;text-transform:uppercase;font-variant-numeric:lining-nums}
+  .chip{display:inline-flex;margin-top:14px;padding:9px 16px;border-radius:4px;background:rgba(255,255,255,.04);border:1px solid var(--line2);font-size:14px;font-weight:700}
   .note{margin:14px auto 0;max-width:420px;min-height:1.45em;font-size:15px;font-weight:500;color:var(--muted)}
   .note.ok{color:var(--ok);font-weight:700}
   .note.err{color:var(--danger);font-weight:700}
 
-  section.block{margin-top:34px;padding:22px 20px 12px;border-radius:28px;background:linear-gradient(140deg,rgba(15,22,46,.8),rgba(8,13,30,.68));border:1px solid rgba(255,255,255,.11);box-shadow:0 24px 50px -30px rgba(0,0,0,.8)}
-  h2{margin:0 0 6px;font:600 30px/1.1 var(--serif);letter-spacing:-.01em}
+  section.block{margin-top:30px;padding:24px 20px 12px;border-radius:0;background:#101013;border:1px solid var(--line)}
+  h2{margin:0 0 8px;font:800 18px/1.15 var(--serif);letter-spacing:-.01em;text-transform:uppercase}
   ul{list-style:none;margin:0;padding:0}
   .row{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
   .row:first-child{border-top:0}
-  .mini{flex:0 0 52px;width:52px;height:52px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#2a3560,#141c3c 70%,#0b1130);color:#fff;border:1px solid rgba(255,255,255,.22);display:grid;place-items:center;text-align:center;color:var(--navy);text-shadow:none;box-shadow:0 8px 16px -8px rgba(4,20,70,.7)}
-  .mini.hi{background:radial-gradient(circle at 35% 30%,#f7e8c2,#d9b26f 70%,#a67c35);color:#1b1407}
+  .mini{flex:0 0 52px;width:52px;height:52px;border-radius:2px;background:#1a1a1f;color:#fff;border:1px solid rgba(255,255,255,.2);display:grid;place-items:center;text-align:center;color:var(--navy);text-shadow:none;box-shadow:0 8px 16px -8px rgba(4,20,70,.7)}
+  .mini.hi{background:var(--or);color:#fff;border-color:var(--or)}
   .mini .big{font-size:14px;font-weight:800;letter-spacing:-.03em;line-height:1}
   .mini .small{display:none}
   .row .name{flex:1;font-weight:600}
   .row .meta{color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
   .empty{margin:4px 0 12px;color:var(--muted);font-weight:500}
-  .fair{margin:30px 4px 0;color:var(--muted);font-size:14px;font-weight:500;text-align:center}
+  .fair{margin:26px 4px 0;color:var(--muted);font-size:14px;font-weight:500;text-align:center}
 
-  .bar{position:fixed;left:0;right:0;bottom:0;padding:34px 20px calc(14px + var(--safe-b));background:linear-gradient(to top,rgba(1,2,8,.92) 30%,rgba(1,2,8,0));pointer-events:none;z-index:4}
-  .bar button{pointer-events:auto;display:block;width:100%;max-width:480px;height:60px;margin:0 auto;border:0;border-radius:99px;background:#fff;color:var(--navy);font:inherit;font-size:16.5px;font-weight:700;
-    font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:0 14px 34px -12px rgba(0,0,0,.8);transition:transform .25s,background .25s;text-shadow:none}
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:34px 20px calc(14px + var(--safe-b));background:linear-gradient(to top,rgba(9,9,11,.96) 40%,rgba(9,9,11,0));pointer-events:none;z-index:4}
+  .bar button{pointer-events:auto;display:block;width:100%;max-width:480px;height:60px;margin:0 auto;border:0;border-radius:4px;background:var(--or);color:#fff;font:inherit;font-size:16.5px;font-weight:700;
+    font-variant-numeric:tabular-nums;cursor:pointer;transition:transform .25s,background .25s;text-shadow:none}
   .bar button:active{transform:scale(.985)}
-  .bar button:disabled{background:#0d1430;color:#d6def2;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);cursor:default;transform:none}
+  .bar button:disabled{background:#16161a;color:rgba(255,255,255,.75);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);cursor:default;transform:none}
   button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
   /* экран «открыто не из Telegram» */
   .out{display:none;min-height:70vh;flex-direction:column;justify-content:center;gap:14px}
   .out h1{white-space:normal;overflow:visible}
   .out p{margin:0;color:var(--muted);max-width:380px;font-weight:500}
-  .out a{align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:99px;background:#fff;color:var(--navy);font-weight:700;text-decoration:none;text-shadow:none;box-shadow:0 0 0 4px rgba(255,255,255,.35)}
+  .out a{align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;height:54px;padding:0 28px;border-radius:4px;background:var(--or);color:#fff;font-weight:700;text-decoration:none;text-shadow:none;box-shadow:0 0 0 4px rgba(255,255,255,.35)}
   body.outside main>:not(.out):not(.top){display:none}
   body.outside .out{display:flex}
   body.outside .bar{display:none}
@@ -97,7 +95,7 @@
 <canvas id="fx" aria-hidden="true"></canvas>
 <main>
   <header class="top">
-    <div class="brand">Yar<em>Vpn</em></div>
+    <div class="brand"><span>YV</span></div>
     <div class="balance" id="balance" hidden></div>
   </header>
 
@@ -218,29 +216,29 @@ function buildFace() {
     const gold = L.hi, dark = !gold && i % 2 === 1, isText = gold ? false : true;
     c.beginPath(); c.moveTo(0, 0); c.arc(0, 0, rIn, a0, a1); c.closePath();
     const g = c.createRadialGradient(0, 0, rIn * 0.1, 0, 0, rIn);
-    if (gold) { g.addColorStop(0, "#f7e8c2"); g.addColorStop(.6, "#d9b26f"); g.addColorStop(1, "#9c7430"); }
-    else if (dark) { g.addColorStop(0, "#1a2550"); g.addColorStop(.6, "#101a3d"); g.addColorStop(1, "#080f28"); }
-    else { g.addColorStop(0, "#2b3763"); g.addColorStop(.65, "#1b2650"); g.addColorStop(1, "#101a3d"); }
+    if (gold) { g.addColorStop(0, "#ff7a2e"); g.addColorStop(.6, "#ff5a00"); g.addColorStop(1, "#c94400"); }
+    else if (dark) { g.addColorStop(0, "#26262c"); g.addColorStop(.6, "#18181d"); g.addColorStop(1, "#0d0d10"); }
+    else { g.addColorStop(0, "#3a3a42"); g.addColorStop(.65, "#26262c"); g.addColorStop(1, "#16161a"); }
     c.fillStyle = g; c.fill();
     c.save(); c.clip();                                   // боковая подсветка сегмента — объём
     const am = (a0 + a1) / 2, lg = c.createLinearGradient(Math.cos(a0) * rIn, Math.sin(a0) * rIn, Math.cos(a1) * rIn, Math.sin(a1) * rIn);
     lg.addColorStop(0, "rgba(255,255,255,.22)"); lg.addColorStop(.5, "rgba(255,255,255,0)"); lg.addColorStop(1, "rgba(0,0,30,.18)");
     c.fillStyle = lg; c.fillRect(-R, -R, R * 2, R * 2); c.restore();
-    c.strokeStyle = "rgba(255,255,255,.16)"; c.lineWidth = 1.2;
+    c.strokeStyle = "rgba(255,255,255,.22)"; c.lineWidth = 1.2;
     c.beginPath(); c.moveTo(Math.cos(a0) * R * 0.2, Math.sin(a0) * R * 0.2); c.lineTo(Math.cos(a0) * rIn, Math.sin(a0) * rIn); c.stroke();
     // подпись
     c.textAlign = "center"; c.textBaseline = "middle";
-    const col = gold ? "#1b1407" : "#f4f6fc";
+    const col = "#ffffff";
     const bigPx = Math.max(16, Math.min(R * 0.2, rIn * seg * 0.42));
     c.save(); c.translate(Math.cos(am) * R * 0.64, Math.sin(am) * R * 0.64); c.rotate(am + Math.PI / 2);
     c.fillStyle = col; c.font = (gold ? "700 " : "600 ") + bigPx.toFixed(1) + 'px Manrope,"Segoe UI",sans-serif';
     c.fillText(L.big, 0, -bigPx * 0.16);
     c.font = "700 " + Math.max(10, bigPx * 0.36).toFixed(1) + 'px Manrope,"Segoe UI",sans-serif';
-    c.fillStyle = gold ? "rgba(27,20,7,.7)" : "rgba(214,222,242,.75)"; c.fillText(L.small, 0, bigPx * 0.56);
+    c.fillStyle = gold ? "rgba(255,255,255,.85)" : "rgba(255,255,255,.65)"; c.fillText(L.small, 0, bigPx * 0.56);
     c.restore();
   }
   // тонкое внутреннее кольцо и ступица
-  c.lineWidth = 2; c.strokeStyle = "rgba(217,178,111,.7)"; c.beginPath(); c.arc(0, 0, rIn, 0, TAU); c.stroke();
+  c.lineWidth = 2; c.strokeStyle = "rgba(255,90,0,.9)"; c.beginPath(); c.arc(0, 0, rIn, 0, TAU); c.stroke();
   face = f;
 }
 
@@ -249,26 +247,26 @@ function drawRim(t) {
   const R = SZ / 2;
   cx.save(); cx.scale(DPR, DPR); cx.translate(PAD + R, PAD + R);
   // тень
-  cx.save(); cx.shadowColor = "rgba(0,0,0,.75)"; cx.shadowBlur = 34; cx.shadowOffsetY = 18; cx.fillStyle = "#050914"; cx.beginPath(); cx.arc(0, 0, R * .985, 0, TAU); cx.fill(); cx.restore();
+  cx.save(); cx.shadowColor = "rgba(0,0,0,.75)"; cx.shadowBlur = 34; cx.shadowOffsetY = 18; cx.fillStyle = "#000"; cx.beginPath(); cx.arc(0, 0, R * .985, 0, TAU); cx.fill(); cx.restore();
   // обод — литое серебро с голубыми отражениями неба
   let rg;
   if (cx.createConicGradient) {
     rg = cx.createConicGradient(-0.6, 0, 0);
-    [[0, "#f4e4bc"], [.12, "#8f6c30"], [.25, "#fff1cf"], [.38, "#a67c35"], [.5, "#f0dca8"], [.63, "#7f5f28"], [.78, "#fbeac4"], [.9, "#9a7433"], [1, "#f4e4bc"]].forEach((s) => rg.addColorStop(s[0], s[1]));
-  } else { rg = cx.createLinearGradient(-R, -R, R, R); rg.addColorStop(0, "#f4e4bc"); rg.addColorStop(.5, "#9a7433"); rg.addColorStop(1, "#fbeac4"); }
+    [[0, "#f3f3f1"], [.12, "#7d7d84"], [.25, "#ffffff"], [.38, "#8f8f96"], [.5, "#e9e9e6"], [.63, "#6f6f76"], [.78, "#ffffff"], [.9, "#9b9ba2"], [1, "#f3f3f1"]].forEach((s) => rg.addColorStop(s[0], s[1]));
+  } else { rg = cx.createLinearGradient(-R, -R, R, R); rg.addColorStop(0, "#f3f3f1"); rg.addColorStop(.5, "#7d7d84"); rg.addColorStop(1, "#ffffff"); }
   cx.fillStyle = rg; cx.beginPath(); cx.arc(0, 0, R, 0, TAU); cx.fill();
-  cx.fillStyle = radial(0, 0, R * .9, R, [[0, "rgba(20,12,0,0)"], [.6, "rgba(20,12,0,.0)"], [1, "rgba(20,12,0,.4)"]]); cx.beginPath(); cx.arc(0, 0, R, 0, TAU); cx.fill();
+  cx.fillStyle = radial(0, 0, R * .9, R, [[0, "rgba(0,0,0,0)"], [.6, "rgba(0,0,0,0)"], [1, "rgba(0,0,0,.35)"]]); cx.beginPath(); cx.arc(0, 0, R, 0, TAU); cx.fill();
   // канавка между ободом и колесом
   cx.lineWidth = 3; cx.strokeStyle = "rgba(4,6,16,.7)"; cx.beginPath(); cx.arc(0, 0, R * .915, 0, TAU); cx.stroke();
-  cx.lineWidth = 1.2; cx.strokeStyle = "rgba(255,241,207,.7)"; cx.beginPath(); cx.arc(0, 0, R * .925, 0, TAU); cx.stroke();
+  cx.lineWidth = 1.2; cx.strokeStyle = "rgba(255,255,255,.75)"; cx.beginPath(); cx.arc(0, 0, R * .925, 0, TAU); cx.stroke();
   // лампочки
   const nb = 24;
   for (let i = 0; i < nb; i++) {
     const a = -Math.PI / 2 + i / nb * TAU, x = Math.cos(a) * R * .955, y = Math.sin(a) * R * .955;
     const on = spinning ? ((Math.floor(t / 90) + i) % 3 === 0) : (glow > 0 ? (Math.floor(t / 220) + i) % 2 === 0 : true);
     const lit = on ? 1 : 0.28;
-    cx.fillStyle = radial(x - 1, y - 1.2, 0, R * .028, [[0, "rgba(255,255,255," + (0.95 * lit + .05) + ")"], [.5, on ? "#fff0c8" : "#6b5a3a"], [1, on ? "#d9b26f" : "#3a2f1a"]]);
-    if (on) { cx.shadowColor = "rgba(255,220,150,.85)"; cx.shadowBlur = 8; }
+    cx.fillStyle = radial(x - 1, y - 1.2, 0, R * .028, [[0, "rgba(255,255,255," + (0.95 * lit + .05) + ")"], [.5, on ? "#ffb98a" : "#5a4a42"], [1, on ? "#ff5a00" : "#2c211c"]]);
+    if (on) { cx.shadowColor = "rgba(255,110,30,.9)"; cx.shadowBlur = 8; }
     cx.beginPath(); cx.arc(x, y, R * .0245, 0, TAU); cx.fill(); cx.shadowBlur = 0;
   }
   cx.restore();
@@ -285,16 +283,16 @@ function drawTop() {
   // ступица
   const hr = R * .17;
   cx.save(); cx.shadowColor = "rgba(0,10,60,.5)"; cx.shadowBlur = 14; cx.shadowOffsetY = 5;
-  cx.fillStyle = radial(-hr * .35, -hr * .4, hr * .1, hr * 1.1, [[0, "#fff1cf"], [.45, "#d9b26f"], [1, "#7f5f28"]]); cx.beginPath(); cx.arc(0, 0, hr, 0, TAU); cx.fill(); cx.restore();
-  cx.fillStyle = radial(-hr * .2, -hr * .25, hr * .05, hr * .78, [[0, "#1d2a5a"], [1, "#070d20"]]); cx.beginPath(); cx.arc(0, 0, hr * .74, 0, TAU); cx.fill();
-  cx.fillStyle = "#f0dca8"; cx.font = "italic 600 " + (hr * .78).toFixed(1) + 'px "Cormorant Garamond",Georgia,serif'; cx.textAlign = "center"; cx.textBaseline = "middle"; cx.fillText("Y", 0, hr * .05);
+  cx.fillStyle = radial(-hr * .35, -hr * .4, hr * .1, hr * 1.1, [[0, "#ff9a5c"], [.45, "#ff5a00"], [1, "#a83800"]]); cx.beginPath(); cx.arc(0, 0, hr, 0, TAU); cx.fill(); cx.restore();
+  cx.fillStyle = radial(-hr * .2, -hr * .25, hr * .05, hr * .78, [[0, "#26262c"], [1, "#0a0a0c"]]); cx.beginPath(); cx.arc(0, 0, hr * .74, 0, TAU); cx.fill();
+  cx.fillStyle = "#fff"; cx.font = "italic 900 " + (hr * .62).toFixed(1) + 'px Unbounded,"Arial Black",sans-serif'; cx.textAlign = "center"; cx.textBaseline = "middle"; cx.fillText("Y", 0, hr * .05);
   // стрелка (пружинит на колышках)
   cx.save(); cx.translate(0, -R * .995); cx.rotate(pAng);
   const pw = R * .075, ph = R * .2;
   cx.shadowColor = "rgba(0,10,60,.55)"; cx.shadowBlur = 10; cx.shadowOffsetY = 4;
-  const pg = cx.createLinearGradient(-pw, 0, pw, 0); pg.addColorStop(0, "#9c7430"); pg.addColorStop(.5, "#f7e8c2"); pg.addColorStop(1, "#8a6528");
+  const pg = cx.createLinearGradient(-pw, 0, pw, 0); pg.addColorStop(0, "#c94400"); pg.addColorStop(.5, "#ff7a2e"); pg.addColorStop(1, "#b23c00");
   cx.fillStyle = pg; cx.beginPath(); cx.moveTo(-pw, -ph * .15); cx.quadraticCurveTo(-pw, ph * .45, 0, ph); cx.quadraticCurveTo(pw, ph * .45, pw, -ph * .15); cx.quadraticCurveTo(0, -ph * .45, -pw, -ph * .15); cx.fill();
-  cx.shadowBlur = 0; cx.fillStyle = radial(-pw * .2, -ph * .1, 0, pw * .7, [[0, "#fff"], [1, "#a89a78"]]); cx.beginPath(); cx.arc(0, -ph * .06, pw * .45, 0, TAU); cx.fill();
+  cx.shadowBlur = 0; cx.fillStyle = radial(-pw * .2, -ph * .1, 0, pw * .7, [[0, "#fff"], [1, "#b9b9bf"]]); cx.beginPath(); cx.arc(0, -ph * .06, pw * .45, 0, TAU); cx.fill();
   cx.restore(); cx.restore();
 }
 function drawWheel(t) {
@@ -307,7 +305,7 @@ function drawWheel(t) {
     if (glow > 0 && glowIdx >= 0) {                         // подсветка выигранного сегмента
       const seg = TAU / segCount(), a0 = -Math.PI / 2 + glowIdx * seg - seg / 2;
       cx.beginPath(); cx.moveTo(0, 0); cx.arc(0, 0, R * .905, a0, a0 + seg); cx.closePath();
-      cx.fillStyle = "rgba(255,240,190," + (0.42 * Math.min(1, glow) * (0.6 + 0.4 * Math.sin(t / 160))).toFixed(3) + ")"; cx.fill();
+      cx.fillStyle = "rgba(255,120,40," + (0.40 * Math.min(1, glow) * (0.6 + 0.4 * Math.sin(t / 160))).toFixed(3) + ")"; cx.fill();
     }
     cx.restore();
   }
@@ -525,7 +523,7 @@ function burst() {
   const ox = r.left + r.width / 2, oy = r.top + PAD + SZ / 2;
   for (let i = 0; i < 90; i++) {
     const a = Math.random() * TAU, v = 120 + Math.random() * 380;
-    sparks.push({ x: ox, y: oy, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 120, life: 1, d: 0.5 + Math.random() * 0.9, s: 1.5 + Math.random() * 3.2, h: Math.random() < 0.7 ? 40 : 45 });
+    sparks.push({ x: ox, y: oy, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 120, life: 1, d: 0.5 + Math.random() * 0.9, s: 1.5 + Math.random() * 3.2, h: Math.random() < 0.7 ? 22 : 30 });
   }
   if (!fxRun) { fxRun = true; let t0 = performance.now(); (function f(now) {
     const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
@@ -534,7 +532,7 @@ function burst() {
     for (const s of sparks) {
       s.vy += 520 * dt; s.vx *= 1 - 1.4 * dt; s.vy *= 1 - 0.9 * dt; s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt / s.d;
       const a = Math.max(0, s.life);
-      fc.fillStyle = "hsla(" + s.h + ",95%," + (s.h === 40 ? 66 : 88) + "%," + a.toFixed(2) + ")";
+      fc.fillStyle = "hsla(" + s.h + ",95%," + (s.h === 22 ? 58 : 82) + "%," + a.toFixed(2) + ")";
       fc.shadowColor = "hsla(" + s.h + ",100%,70%,.9)"; fc.shadowBlur = 8;
       fc.beginPath(); fc.arc(s.x, s.y, s.s * (0.5 + a * 0.6), 0, TAU); fc.fill();
     }
@@ -549,12 +547,12 @@ function burst() {
   const g = c.getContext("2d"); g.scale(D, D);
   let sd = 20260930; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
   const gauss = () => (rnd() + rnd() + rnd() + rnd() - 2) / 2;
-  const bg = g.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, "#010208"); bg.addColorStop(.5, "#030716"); bg.addColorStop(1, "#061029");
+  const bg = g.createLinearGradient(0, 0, 0, H); bg.addColorStop(0, "#050506"); bg.addColorStop(.5, "#08080a"); bg.addColorStop(1, "#0b0b0e");
   g.fillStyle = bg; g.fillRect(0, 0, W, H);
   g.globalCompositeOperation = "lighter";
   const s = Math.max(W, H);
   const glow = (x, y, r, rgb, a) => { const q = g.createRadialGradient(x, y, 0, x, y, r); q.addColorStop(0, "rgba(" + rgb + "," + a + ")"); q.addColorStop(.5, "rgba(" + rgb + "," + a * .35 + ")"); q.addColorStop(1, "rgba(" + rgb + ",0)"); g.fillStyle = q; g.fillRect(x - r, y - r, r * 2, r * 2); };
-  glow(W * .8, H * .22, s * .55, "28,64,150", .14); glow(W * .1, H * .75, s * .5, "22,58,110", .1); glow(W * .5, H * .98, s * .6, "18,44,96", .09);
+  glow(W * .8, H * .22, s * .55, "60,70,100", .10); glow(W * .1, H * .75, s * .5, "70,50,40", .06); glow(W * .5, H * .98, s * .6, "50,50,60", .07);
   const ax = -W * .1, ay = H * .86, bx = W * 1.1, by = H * .14, dx = bx - ax, dy = by - ay, len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len;
   for (let i = 0; i < 40; i++) { const t = rnd(), o = gauss() * s * .1; glow(ax + dx * t + nx * o, ay + dy * t + ny * o, s * (.07 + rnd() * .1), "80,105,160", .025 + rnd() * .02); }
   const dot = (x, y, r, a, col) => { g.globalAlpha = a; g.fillStyle = col; g.beginPath(); g.arc(x, y, r, 0, 6.2832); g.fill(); };
@@ -581,7 +579,7 @@ window.addEventListener("resize", () => { if (!S.busy) fitCanvas(); });
 
 if (tg) {
   tgTry(() => tg.ready()); tgTry(() => tg.expand());
-  tgTry(() => tg.setHeaderColor("#030716")); tgTry(() => tg.setBackgroundColor("#030716")); tgTry(() => tg.setBottomBarColor("#030716"));
+  tgTry(() => tg.setHeaderColor("#09090b")); tgTry(() => tg.setBackgroundColor("#09090b")); tgTry(() => tg.setBottomBarColor("#09090b"));
   tgTry(() => tg.disableVerticalSwipes());
 }
 
@@ -590,7 +588,7 @@ else {
   fitCanvas(); requestAnimationFrame(loop);
   renderAll();
   loadStatus();
-  if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('600 20px Manrope'), document.fonts.load('italic 600 20px "Cormorant Garamond"')]).then(() => { if (!S.busy) buildFace(); }).catch(() => {});
+  if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('600 20px Manrope'), document.fonts.load('800 20px Unbounded')]).then(() => { if (!S.busy) buildFace(); }).catch(() => {});
 }
 </script>
 </body>

@@ -1,22 +1,29 @@
 # YarVpn — сайт yarvpn.best
 
-Готовый сайт: собирать и устанавливать ничего не нужно. Загрузил файлы на GitHub — работает.
+Статический сайт (без сборки): чёрный фон, оранжевый акцент, шрифт Unbounded, живой волновой фон и карта серверов с самолётиком.
+Хостинг — GitHub Pages, домен из файла `CNAME`.
 
-## Загрузка (GitHub Pages)
-1. github.com → репозиторий **yaRsite** → **Add file → Upload files**.
-2. Перетащи всё содержимое папки (не саму папку) → **Commit changes**.
-3. **Settings → Pages**: Branch `main`, папка `/ (root)` → Save. Домен yarvpn.best берётся из файла `CNAME`.
+## Публикация (GitHub Pages)
+**Settings → Pages**: Branch `main`, папка `/ (root)`. Любой коммит в `main` публикуется автоматически.
 
-## Вход в кабинет и рулетка (нужен Cloudflare Worker — бесплатно, сервер и root не нужны)
-Сайт работает по HTTPS, а бот отвечает по http://…:порт — браузер такое блокирует. Воркер — «переходник» между ними.
-1. dash.cloudflare.com → регистрация → **Workers & Pages → Create → Create Worker** → имя `yarvpn-api` → **Deploy**.
-2. **Edit code** → удали весь код → вставь содержимое файла `worker/yarvpn-api-proxy.js` → **Deploy**.
-3. Скопируй адрес воркера (вид `https://yarvpn-api.твой-ник.workers.dev`).
-4. Проверка: открой `адрес-воркера/check` — должно быть `{"worker":true,"bot":true,...}`.
-5. В репозитории открой файл `api.json` → карандаш → между кавычками `"api": ""` вставь адрес воркера → Commit.
+## Вход в кабинет и рулетка: нужен HTTPS-адрес бота
+Сайт открывается по HTTPS, а бот на хостинге отвечает по `http://хост:порт`. Браузер запрещает HTTPS-странице ходить на обычный HTTP
+(mixed content), поэтому нужен «переходник» — Cloudflare Worker (бесплатно). Адрес вашего хостинга вписывается **в воркер**, а не на сайт.
 
-Если в шаге 4 `"bot":false` — воркер не видит бота: проверь, что бот запущен и порт в `config.py` (`WEBAPP_PORT`) совпадает с портом из панели хостинга.
+1. dash.cloudflare.com → **Workers & Pages → Create → Create Worker** → имя `yarvpn-api` → **Deploy**.
+2. **Edit code** → удалить всё → вставить содержимое `worker/yarvpn-api-proxy.js` → **Deploy**.
+3. **Settings → Variables → Add variable**: `UPSTREAM` = `http://хост-бота:порт` (без слэша в конце) → **Deploy**.
+4. Открыть `https://yarvpn-api.<ник>.workers.dev/check` — должно быть `{"worker":true,"bot":true,...}`.
+5. В `api.json` вписать адрес воркера: `{"api": "https://yarvpn-api.<ник>.workers.dev"}` → Commit.
+
+Если `"bot":false` — воркер не достучался до бота: проверьте, что бот запущен и порт в `config.py` (`WEBAPP_PORT`) совпадает с портом хостинга.
+Воркер пропускает только `/api/web/*` и `/api/roulette/*`.
+
+## Список стран
+Массив `SERVERS` в начале `assets/js/map.js` — из него строятся карта и список под ней. Страна добавляется или убирается одной строкой
+(координаты, название, город). Текст со списком стран в `index.html` (описание, блок «Серверы», FAQ, JSON-LD) правится вручную.
 
 ## Что где лежит
-- `index.html`, `assets/` — сайт (глобус — реальные снимки NASA Blue Marble; исходник глобуса — `tools/earth-src/`).
+- `index.html`, `privacy/`, `terms/`, `404.html` — страницы; `assets/css/site.css` — все стили.
+- `assets/js/bg.js` — анимированный фон; `map.js` + `map-data.js` — карта мира и самолёт; `main.js` — меню и анимации; `cabinet.js` — вход и кабинет.
 - `api.json` — адрес воркера. `worker/` — код воркера. `miniapp/index.html` — рулетка для Telegram.
