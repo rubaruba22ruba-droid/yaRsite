@@ -5,7 +5,8 @@
   приложение честно говорит об этом, а не крутит «ненастоящее» колесо. Призы и шансы приходят с сервера (config.ROULETTE_PRIZES).
 
   КАК ПОДКЛЮЧИТЬ (один раз):
-   1. Публичный HTTPS-адрес бота (тот же, что для входа на сайт, PUBLIC_BASE_URL в config.py) впишите в API_BASE ниже.
+   1. Адрес API берётся из файла https://yarvpn.best/api.json (поле "api" — HTTPS-адрес воркера Cloudflare, см. worker/ в репозитории сайта).
+      Тот же адрес использует вход на сайте, поэтому править в этом файле ничего не нужно. Запасной вариант — константа API_BASE ниже.
    2. Залейте этот файл как index.html в репозиторий мини-аппа (rubaruba22ruba-droid/YarVpn) или оставьте в сайте: /miniapp/.
    3. В config.py бота: ROULETTE_WEBAPP_URL = "<адрес, где лежит файл>" и перезапустите бота.
 -->
@@ -14,7 +15,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#050506">
+<meta name="theme-color" content="#04050c">
 <title>Ежедневная рулетка — YarVpn</title>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
@@ -25,8 +26,9 @@
   @font-face{font-family:"Geologica";font-weight:500 900;font-display:swap;src:url(https://yarvpn.best/assets/fonts/geologica-latin.woff2) format("woff2");unicode-range:U+0000-00FF}
 
   :root{
-    --bg:#050506; --s1:#0d0d10; --s2:#141418; --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.15);
-    --text:#f5f5f7; --muted:#8b8b95; --accent:#ff6a1a; --accent2:#ff8a3d; --soft:rgba(255,106,26,.13); --danger:#ffab92;
+    --bg:#04050c; --s1:rgba(16,19,46,.78); --s2:#141833; --line:rgba(150,165,255,.12); --line2:rgba(150,165,255,.22);
+    --text:#f3f5ff; --muted:#8a92bb; --accent:#ff9a4d; --accent2:#ffb478; --soft:rgba(255,154,77,.14); --danger:#ffab92;
+    --cyan:#4fe3ff; --violet:#8b7bff; --grad:linear-gradient(135deg,#ffbb74 0%,#ff9147 46%,#ff6f8c 100%);
     --card:104px; --gap:10px;
     --safe-b:env(safe-area-inset-bottom,0px);
     font-family:"Onest",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,Arial,sans-serif;
@@ -34,13 +36,13 @@
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;background:var(--bg);color:var(--text)}
   body{min-height:100vh;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased;overscroll-behavior-y:none;
-    background:radial-gradient(90% 38% at 50% -4%,rgba(255,255,255,.07),transparent 70%),var(--bg)}
+    background:radial-gradient(80% 40% at 88% -6%,rgba(110,84,255,.38),transparent 72%),radial-gradient(70% 38% at 0% 100%,rgba(40,170,255,.22),transparent 72%),radial-gradient(50% 30% at 50% 45%,rgba(255,90,160,.08),transparent 72%),var(--bg);background-attachment:fixed}
   main{max-width:520px;margin:0 auto;padding:6px 20px calc(126px + var(--safe-b))}
 
   .top{display:flex;align-items:center;justify-content:space-between;min-height:50px}
   .brand{font:800 20px/1 "Geologica","Onest",sans-serif;letter-spacing:-.045em;display:inline-flex;align-items:center;gap:8px}
-  .brand i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--soft)}
-  .balance{background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:8px 13px;font-size:14.5px;font-weight:600;font-variant-numeric:tabular-nums}
+  .brand i{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--soft),0 0 14px rgba(255,154,77,.9)}
+  .balance{background:var(--s1);border:1px solid var(--line2);border-radius:14px;padding:8px 13px;font-size:14.5px;font-weight:600;font-variant-numeric:tabular-nums}
   .balance span{color:var(--muted);font-weight:500}
 
   /* 3D-лента призов: карточки «выезжают» на центр, как в coverflow */
@@ -48,21 +50,21 @@
   .reel{position:absolute;inset:0;overflow:hidden;perspective:820px;perspective-origin:50% 45%;
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(90deg,transparent,#000 22%,#000 78%,transparent)}
   .strip{position:absolute;left:0;top:28px;display:flex;gap:var(--gap);will-change:transform;transform-style:preserve-3d}
-  .card{flex:0 0 var(--card);width:var(--card);height:var(--card);border-radius:24px;background:linear-gradient(180deg,#17171b,#0f0f12);border:1px solid var(--line2);display:grid;place-items:center;
-    text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 20px 30px -20px #000;will-change:transform,opacity}
-  .card .big{display:block;font-size:31px;font-weight:700;line-height:1;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+  .card{flex:0 0 var(--card);width:var(--card);height:var(--card);border-radius:24px;background:linear-gradient(170deg,rgba(34,40,92,.95),rgba(12,14,38,.98));border:1px solid var(--line2);display:grid;place-items:center;
+    text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 24px 34px -20px #000,0 0 30px -14px rgba(110,130,255,.5);will-change:transform,opacity}
+  .card .big{display:block;font:700 31px/1 "Geologica","Onest",sans-serif;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
   .card .small{display:block;margin-top:7px;font-size:12px;font-weight:500;color:var(--muted)}
-  .card.hi .big{color:var(--accent2)}
-  .frame{position:absolute;left:50%;top:20px;width:120px;height:120px;margin-left:-60px;border:1.5px solid var(--accent);border-radius:30px;pointer-events:none;box-shadow:0 0 0 5px var(--soft)}
+  .card.hi .big{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .frame{position:absolute;left:50%;top:20px;width:120px;height:120px;margin-left:-60px;border:1.5px solid var(--cyan);border-radius:30px;pointer-events:none;box-shadow:0 0 0 5px rgba(79,227,255,.12),0 0 34px -4px rgba(79,227,255,.55)}
   .frame.win{animation:pulse 1s cubic-bezier(.16,1,.3,1)}
-  .pointer{position:absolute;left:50%;top:6px;width:16px;height:9px;margin-left:-8px;color:var(--accent)}
-  @keyframes pulse{from{box-shadow:0 0 0 5px var(--soft),0 0 0 0 rgba(255,106,26,.6)}to{box-shadow:0 0 0 5px var(--soft),0 0 0 34px rgba(255,106,26,0)}}
+  .pointer{position:absolute;left:50%;top:6px;width:16px;height:9px;margin-left:-8px;color:var(--cyan);filter:drop-shadow(0 0 6px rgba(79,227,255,.9))}
+  @keyframes pulse{from{box-shadow:0 0 0 5px rgba(79,227,255,.12),0 0 0 0 rgba(79,227,255,.65)}to{box-shadow:0 0 0 5px rgba(79,227,255,.12),0 0 0 34px rgba(79,227,255,0)}}
 
   .info{margin-top:30px}
-  h1{margin:0;display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:clamp(28px,8.6vw,36px);line-height:1.1;font-weight:600;letter-spacing:-.05em}
-  .chip{display:inline-flex;margin-top:14px;padding:8px 14px;border-radius:12px;background:var(--s1);border:1px solid var(--line);font-size:15px;font-weight:500;color:var(--text)}
+  h1{margin:0;display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font:700 clamp(28px,8.6vw,36px)/1.1 "Geologica","Onest",sans-serif;letter-spacing:-.05em}
+  .chip{display:inline-flex;margin-top:14px;padding:8px 14px;border-radius:12px;background:var(--s1);border:1px solid var(--line2);font-size:15px;font-weight:500;color:var(--text)}
   .note{margin:16px 0 0;min-height:1.45em;font-size:15px;color:var(--muted)}
-  .note.ok{color:#ffd0b5}
+  .note.ok{color:#8ff5d0}
   .note.err{color:var(--danger)}
 
   section.block{margin-top:38px}
@@ -70,7 +72,7 @@
   ul{list-style:none;margin:0;padding:0}
   .row{display:flex;align-items:center;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
   .row:first-child{border-top:0}
-  .mini{flex:0 0 46px;width:46px;height:46px;border-radius:14px;background:var(--s1);border:1px solid var(--line);display:grid;place-items:center;text-align:center}
+  .mini{flex:0 0 46px;width:46px;height:46px;border-radius:14px;background:linear-gradient(170deg,rgba(34,40,92,.9),rgba(12,14,38,.95));border:1px solid var(--line2);display:grid;place-items:center;text-align:center}
   .mini .big{font-size:14px;font-weight:700;letter-spacing:-.03em;line-height:1}
   .mini .small{display:none}
   .row .name{flex:1;font-weight:500}
@@ -78,23 +80,23 @@
   .empty{margin:4px 0 0;color:var(--muted)}
   .fair{margin:36px 0 0;color:var(--muted);font-size:14px}
 
-  .bar{position:fixed;left:0;right:0;bottom:0;padding:34px 20px calc(14px + var(--safe-b));background:linear-gradient(to top,var(--bg) 60%,rgba(5,5,6,0));pointer-events:none}
-  .bar button{pointer-events:auto;display:block;width:100%;max-width:480px;height:58px;margin:0 auto;border:0;border-radius:18px;background:var(--accent);color:#1a0a00;font:inherit;font-size:17px;font-weight:600;
-    font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 12px 30px -12px rgba(255,106,26,.8);transition:transform .25s,background .25s}
+  .bar{position:fixed;left:0;right:0;bottom:0;padding:34px 20px calc(14px + var(--safe-b));background:linear-gradient(to top,var(--bg) 60%,rgba(4,5,12,0));pointer-events:none}
+  .bar button{pointer-events:auto;display:block;width:100%;max-width:480px;height:58px;margin:0 auto;border:0;border-radius:18px;background:var(--grad);color:#1d0c00;font:inherit;font-size:17px;font-weight:600;
+    font-variant-numeric:tabular-nums;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 14px 34px -12px rgba(255,120,70,.85);transition:transform .25s,background .25s}
   .bar button:active{transform:scale(.985)}
-  .bar button:disabled{background:var(--s2);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);cursor:default;transform:none}
+  .bar button:disabled{background:var(--s2);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line2);cursor:default;transform:none}
   button:focus-visible{outline:2px solid #fff;outline-offset:3px}
 
   /* экран «открыто не из Telegram» */
   .out{display:none;min-height:70vh;flex-direction:column;justify-content:center;gap:14px}
   .out h1{white-space:normal;overflow:visible}
   .out p{margin:0;color:var(--muted);max-width:380px}
-  .out a{align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:16px;background:var(--accent);color:#1a0a00;font-weight:600;text-decoration:none}
+  .out a{align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;height:52px;padding:0 24px;border-radius:16px;background:var(--grad);color:#1d0c00;font-weight:600;text-decoration:none}
   body.outside main>:not(.out):not(.top){display:none}
   body.outside .out{display:flex}
   body.outside .bar{display:none}
 
-  .skel{border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.1),rgba(255,255,255,.04));background-size:200% 100%;animation:sk 1.4s linear infinite}
+  .skel{border-radius:10px;background:linear-gradient(90deg,rgba(150,165,255,.06),rgba(150,165,255,.16),rgba(150,165,255,.06));background-size:200% 100%;animation:sk 1.4s linear infinite}
   @keyframes sk{to{background-position:-200% 0}}
   @media (prefers-reduced-motion:reduce){.frame.win{animation:none}}
 </style>
@@ -144,15 +146,24 @@
 "use strict";
 
 /* ===== НАСТРОЙКА ===== */
-// Публичный HTTPS-адрес бота (PUBLIC_BASE_URL из config.py), без слэша на конце.
-const API_BASE = "https://api.yarvpn.best";
+// Адрес API бота берётся из https://yarvpn.best/api.json (поле "api", HTTPS-адрес воркера) — тот же, что использует вход на сайте.
+// Запасной вариант — вписать HTTPS-адрес сюда (без слэша на конце).
+let API_BASE = "";
+const CFG_URL = "https://yarvpn.best/api.json";
+async function resolveApi() {
+  try {
+    const r = await fetch(CFG_URL, { cache: "no-store" });
+    const j = await r.json();
+    if (j && typeof j.api === "string" && j.api.trim()) API_BASE = j.api.trim().replace(/\/+$/, "");
+  } catch (_) { /* остаётся запасной адрес */ }
+}
 
 const ERR = {
   bad_init_data: "Не удалось подтвердить вас в Telegram. Закройте приложение и откройте его снова из бота.",
   not_registered: "Сначала запустите бота: отправьте ему /start и примите условия. Потом вернитесь за билетиком.",
   server_error: "На сервере что-то пошло не так, билетик не потрачен. Попробуйте ещё раз через минуту.",
   network: "Нет связи с сервером. Проверьте интернет и откройте приложение снова — если приз уже выпал, он на балансе.",
-  not_configured: "Приложение не настроено: в файле не указан адрес API бота."
+  not_configured: "Рулетка ещё не подключена к боту: не указан адрес API. Напишите в поддержку — @entoni."
 };
 
 /* ===== СОСТОЯНИЕ И УТИЛИТЫ ===== */
@@ -347,6 +358,7 @@ function applyStatus(d) {
   renderAll();
 }
 async function loadStatus() {
+  if (!API_BASE) await resolveApi();
   if (!API_BASE) return fail("not_configured", false);
   try {
     const d = await api("/api/roulette/status");
@@ -423,7 +435,7 @@ window.addEventListener("resize", () => { if (!S.busy && nodes.length) setPos(of
 
 if (tg) {
   tgTry(() => tg.ready()); tgTry(() => tg.expand());
-  tgTry(() => tg.setHeaderColor("#050506")); tgTry(() => tg.setBackgroundColor("#050506")); tgTry(() => tg.setBottomBarColor("#050506"));
+  tgTry(() => tg.setHeaderColor("#04050c")); tgTry(() => tg.setBackgroundColor("#04050c")); tgTry(() => tg.setBottomBarColor("#04050c"));
   tgTry(() => tg.disableVerticalSwipes());
 }
 

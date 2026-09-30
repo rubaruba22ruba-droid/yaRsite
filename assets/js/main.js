@@ -1,5 +1,5 @@
-/* YarVpn — интерфейс: навигация, появление блоков, 3D-наклон, демо подключения и диалога с ботом, FAQ.
-   Все тексты демо — из проекта (сайт и бот). Цифр, которых нет в проекте, здесь нет. */
+/* YarVpn — интерфейс: навигация, появление блоков, 3D-наклон, демо подключения (глобус «летит» к серверу) и диалога с ботом, FAQ.
+   Все тексты демо — из проекта (сайт и бот); серверы — из списка #srvList. Цифр, которых нет в проекте, здесь нет. */
 (function () {
   "use strict";
 
@@ -9,7 +9,7 @@
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasIO = "IntersectionObserver" in window;
   var fine = window.matchMedia && window.matchMedia("(hover:hover) and (pointer:fine)").matches;
-  var YV = window.YV = { px: 0, py: 0 };   // общее состояние: положение курсора (−0.5…0.5) для 3D-фона
+  var YV = window.YV = { px: 0, py: 0 };   // общее состояние: положение курсора (−0.5…0.5)
 
   /* ---------- общий загрузчик QR (нужен демо-чату и кабинету) ---------- */
   var qrWaiters = null;
@@ -17,7 +17,7 @@
     if (window.qrcode) { cb(); return; }
     if (qrWaiters) { qrWaiters.push(cb); return; }
     qrWaiters = [cb];
-    var s = doc.createElement("script"); s.src = "assets/js/qr.js?v=2";
+    var s = doc.createElement("script"); s.src = "assets/js/qr.js?v=3";
     s.onload = function () { var w = qrWaiters; qrWaiters = null; w.forEach(function (f) { f(); }); };
     doc.head.appendChild(s);
   };
@@ -26,11 +26,44 @@
   function ready() { root.className += " js-ready"; }
   if (doc.fonts && doc.fonts.ready) { doc.fonts.ready.then(function () { setTimeout(ready, 60); }); setTimeout(ready, 1200); } else { ready(); }
 
-  /* ---------- навигация ---------- */
-  var nav = $("#nav");
-  function onScroll() { if (nav) nav.classList.toggle("stuck", window.pageYOffset > 12); kick(); }
+  /* ---------- заголовки h2: разбиваем на слова для 3D-появления (текст в DOM остаётся тем же) ---------- */
+  $$(".h2").forEach(function (h) {
+    var w = 0;
+    (function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = doc.createDocumentFragment();
+          n.nodeValue.split(/(\s+)/).forEach(function (p) {
+            if (!p) return;
+            if (/^\s+$/.test(p)) { frag.appendChild(doc.createTextNode(p)); return; }
+            var a = doc.createElement("span"), b = doc.createElement("span"); a.className = "wd"; a.style.setProperty("--w", w++); b.textContent = p; a.appendChild(b); frag.appendChild(a);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1 && n.tagName !== "BR") walk(n);
+      });
+    })(h);
+  });
+
+  /* ---------- «печатная» подпись над заголовками (моноширинный шрифт — ширина не прыгает) ---------- */
+  function scramble(el) {
+    if (reduce) return;
+    var final = el.textContent, chars = "01<>/_*#+=:", n = final.length, t0 = performance.now(), dur = 700;
+    (function tick(ts) {
+      var p = Math.min(1, (ts - t0) / dur), k = Math.floor(p * n), out = "", i;
+      for (i = 0; i < n; i++) { var c = final.charAt(i); out += (i < k || c === " ") ? c : chars.charAt((Math.random() * chars.length) | 0); }
+      el.textContent = p < 1 ? out : final;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  /* ---------- навигация, полоса прокрутки ---------- */
+  var nav = $("#nav"), prog = $("#progress");
+  function onScroll() {
+    if (nav) nav.classList.toggle("stuck", window.pageYOffset > 12);
+    if (prog) { var max = Math.max(1, root.scrollHeight - window.innerHeight); prog.style.setProperty("--p", Math.min(1, window.pageYOffset / max).toFixed(4)); }
+    kick();
+  }
   window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
 
   var links = $$("#navLinks a"), ind = $("#navInd"), linkMap = {};
   links.forEach(function (a) { linkMap[a.getAttribute("href").slice(1)] = a; });
@@ -64,7 +97,11 @@
   var rvs = $$(".rv");
   if (hasIO) {
     var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in"); io.unobserve(e.target);
+        if (e.target.hasAttribute("data-scr")) scramble(e.target);
+      });
     }, { threshold: 0.1, rootMargin: "0px 0px -6% 0px" });
     rvs.forEach(function (el) { io.observe(el); });
   } else { root.className += " rv-all"; }
@@ -109,15 +146,16 @@
   var tilts = [], looping = false, sy = 0;
   function addTilt(el, host, max, opt) {
     if (!el || !host) return;
-    var t = { el: el, host: host, max: max, rx: 0, ry: 0, trx: 0, tr_y: 0, opt: opt || {} };
+    var t = { el: el, host: host, max: max, rx: 0, ry: 0, trx: 0, tyy: 0, hover: false, active: false, opt: opt || {} };
     tilts.push(t);
     if (fine) {
+      host.addEventListener("pointerenter", function (e) { if (e.pointerType !== "touch") { t.hover = true; t.active = true; kick(); } });
       host.addEventListener("pointermove", function (e) {
         if (e.pointerType === "touch") return;
         var r = host.getBoundingClientRect(), px = (e.clientX - r.left) / r.width - 0.5, py = (e.clientY - r.top) / r.height - 0.5;
-        t.tr_y = px * max * 2; t.trx = -py * max * 2; kick();
+        t.tyy = px * max * 2; t.trx = -py * max * 2; t.active = true; kick();
       });
-      host.addEventListener("pointerleave", function () { t.trx = 0; t.tr_y = 0; kick(); });
+      host.addEventListener("pointerleave", function () { t.hover = false; t.trx = 0; t.tyy = 0; kick(); });
     }
   }
   function kick() { if (!looping && !reduce) { looping = true; requestAnimationFrame(loop); } }
@@ -125,40 +163,63 @@
     var moving = false;
     sy = window.pageYOffset;
     for (var i = 0; i < tilts.length; i++) {
-      var t = tilts[i], k = 0.085;
-      t.rx += (t.trx - t.rx) * k; t.ry += (t.tr_y - t.ry) * k;
-      if (Math.abs(t.trx - t.rx) > 0.01 || Math.abs(t.tr_y - t.ry) > 0.01) moving = true;
-      var ty = t.opt.scroll ? (sy * t.opt.scroll) : 0;
-      t.el.style.transform = (ty ? "translate3d(0," + ty.toFixed(1) + "px,0) " : "") + "rotateX(" + t.rx.toFixed(2) + "deg) rotateY(" + t.ry.toFixed(2) + "deg)";
+      var t = tilts[i], o = t.opt;
+      if (!t.active && !o.scroll) continue;
+      t.rx += (t.trx - t.rx) * 0.09; t.ry += (t.tyy - t.ry) * 0.09;
+      var d = Math.abs(t.trx - t.rx) + Math.abs(t.tyy - t.ry);
+      if (d > 0.01) moving = true;
+      if (!o.scroll && !t.hover && d <= 0.01 && t.trx === 0 && t.tyy === 0) { t.active = false; t.el.style.transform = ""; continue; }
+      var ty = o.scroll ? sy * o.scroll : 0;
+      t.el.style.transform = (o.persp ? "perspective(" + o.persp + "px) " : "") + (ty ? "translate3d(0," + ty.toFixed(1) + "px,0) " : "") + "rotateX(" + t.rx.toFixed(2) + "deg) rotateY(" + t.ry.toFixed(2) + "deg)";
     }
     if (moving) requestAnimationFrame(loop); else looping = false;
   }
-  var hero = $(".hero"), stageIn = $("#stageIn"), netEl = $("#net"), mapEl = $("#map"), phoneWrap = $(".phone-wrap"), phoneEl = $("#phone");
-  addTilt(stageIn, hero, 7, { scroll: 0.05 });
-  addTilt(mapEl, netEl, 3.4);
-  addTilt(phoneEl, phoneWrap, 6);
-  $$(".plan").forEach(function (p) { addTilt(p, p, 4.5); });
-  // курсор для 3D-фона (решётка чуть «следит» за мышью)
-  if (fine) window.addEventListener("pointermove", function (e) { YV.px = e.clientX / window.innerWidth - 0.5; YV.py = e.clientY / window.innerHeight - 0.5; }, { passive: true });
+  addTilt($("#stageIn"), $(".hero"), 8, { scroll: 0.05 });
+  addTilt($("#phone"), $(".phone-wrap"), 6);
+  $$(".tilt").forEach(function (c) { addTilt(c, c, c.classList.contains("plan") ? 5 : 4.5, { persp: 1100 }); });
+  onScroll();
 
-  /* ================= демо подключения в hero ================= */
+  /* курсор: мягкое пятно света + магнитные кнопки */
+  if (fine) {
+    var spot = $("#spot"), spx = 0, spy = 0, pend = false;
+    window.addEventListener("pointermove", function (e) {
+      YV.px = e.clientX / window.innerWidth - 0.5; YV.py = e.clientY / window.innerHeight - 0.5;
+      if (!spot) return;
+      spx = e.clientX; spy = e.clientY;
+      if (!pend) { pend = true; requestAnimationFrame(function () { spot.style.transform = "translate3d(" + spx + "px," + spy + "px,0)"; spot.classList.add("on"); pend = false; }); }
+    }, { passive: true });
+    doc.documentElement.addEventListener("pointerleave", function () { if (spot) spot.classList.remove("on"); });
+    if (!reduce) $$(".btn-lg,.trial .btn,.plan .btn").forEach(function (b) {
+      b.addEventListener("pointermove", function (e) {
+        var r = b.getBoundingClientRect();
+        b.style.translate = ((e.clientX - r.left - r.width / 2) * 0.16).toFixed(1) + "px " + ((e.clientY - r.top - r.height / 2) * 0.26).toFixed(1) + "px";
+      });
+      b.addEventListener("pointerleave", function () { b.style.translate = ""; });
+    });
+  }
+
+  /* ================= демо подключения в hero: кольцо-статус + глобус летит к серверу ================= */
   (function connectDemo() {
-    var conn = $("#conn"), text = $("#connText"), dot = $("#srvDot"), kbBtn = $("#kbConnect");
+    var conn = $("#conn"), text = $("#connText"), dot = $("#srvDot"), kbBtn = $("#kbConnect"), nameEl = $("#srvName");
     if (!conn || !text) return;
+    var list = $$("#srvList .srv").map(function (li) { return { id: li.getAttribute("data-id"), name: li.getAttribute("data-country") }; });
     var seq = [
       { s: 0, t: "Нажми, чтобы подключиться", ms: 2200 },
       { s: 1, t: "Выбираем ближайший сервер…", ms: 1800 },
       { s: 2, t: "Переключаемся на быстрый канал…", ms: 1800 },
       { s: 3, t: "Подключено — можно пользоваться", ms: 5200 }
     ];
-    var i = 0, timer = 0, running = false;
+    var i = 0, si = 0, timer = 0, running = false;
+    function emit(name, detail) { try { window.dispatchEvent(new CustomEvent(name, { detail: detail })); } catch (e) { /* старые браузеры */ } }
+    function cur() { return list.length ? list[si % list.length] : null; }
     function set(st) {
       conn.setAttribute("data-s", st.s);
       text.classList.add("out");
       setTimeout(function () { text.textContent = st.t; text.classList.remove("out"); }, 300);
       if (dot) dot.style.opacity = st.s === 3 ? 1 : 0.35;
-      if (st.s === 1 && kbBtn) { kbBtn.classList.add("tap"); setTimeout(function () { kbBtn.classList.remove("tap"); }, 700); }
-      if (st.s === 3) window.dispatchEvent(new Event("yv:pulse"));
+      if (st.s === 0) { emit("yv:release"); var c0 = cur(); if (c0 && nameEl) nameEl.textContent = c0.name; }
+      if (st.s === 1) { if (kbBtn) { kbBtn.classList.add("tap"); setTimeout(function () { kbBtn.classList.remove("tap"); }, 700); } var c1 = cur(); if (c1) emit("yv:pick", { id: c1.id }); }
+      if (st.s === 3) { var c3 = cur(); emit("yv:pulse", { id: c3 ? c3.id : "*" }); si++; }
     }
     function next() { var st = seq[i % seq.length]; set(st); i++; timer = setTimeout(next, st.ms); }
     function start() { if (running || reduce) return; running = true; next(); }
@@ -172,19 +233,19 @@
   (function stepsDemo() {
     var box = $("#chat"), steps = $$("#steps .step");
     if (!box || !steps.length) return;
-    var timers = [], cur = 0, auto = true, resumeAt = 0, inView = false, cycle = 0;
+    var timers = [], cur = 0, auto = true, resumeAt = 0, inView = false;
     var BOT = "https://t.me/yarVpnRubot";
     function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
     function clearAll() { timers.forEach(clearTimeout); timers = []; }
     function reset() { box.innerHTML = ""; }
     function bot(html) { var m = doc.createElement("div"); m.className = "msg"; m.innerHTML = html; box.appendChild(m); trim(); return m; }
-    function me(text) { var m = doc.createElement("div"); m.className = "msg"; m.style.cssText = "align-self:flex-end;background:var(--accent);color:#1a0a00;font-weight:500;border-bottom-left-radius:18px;border-bottom-right-radius:6px"; m.textContent = text; box.appendChild(m); trim(); return m; }
+    function me(text) { var m = doc.createElement("div"); m.className = "msg me"; m.textContent = text; box.appendChild(m); trim(); return m; }
     function kb(rows) {
       var k = doc.createElement("div"); k.className = "kbd";
       rows.forEach(function (r) { var d = doc.createElement("div"); d.className = "kbd-r"; r.forEach(function (t) { var b = doc.createElement("div"); b.className = "kbd-b"; b.textContent = t; d.appendChild(b); }); k.appendChild(d); });
       box.appendChild(k); trim(); return k;
     }
-    function typing() { var t = doc.createElement("div"); t.className = "msg"; t.style.cssText = "display:flex;gap:4px;padding:14px 16px;width:60px"; t.innerHTML = "<i style='width:6px;height:6px;border-radius:50%;background:#71717a;animation:dots 1s infinite'></i><i style='width:6px;height:6px;border-radius:50%;background:#71717a;animation:dots 1s .15s infinite'></i><i style='width:6px;height:6px;border-radius:50%;background:#71717a;animation:dots 1s .3s infinite'></i>"; box.appendChild(t); trim(); return t; }
+    function typing() { var t = doc.createElement("div"); t.className = "msg"; t.style.cssText = "display:flex;gap:4px;padding:14px 16px;width:60px"; t.innerHTML = "<i style='width:6px;height:6px;border-radius:50%;background:#8a92bb;animation:dots 1s infinite'></i><i style='width:6px;height:6px;border-radius:50%;background:#8a92bb;animation:dots 1s .15s infinite'></i><i style='width:6px;height:6px;border-radius:50%;background:#8a92bb;animation:dots 1s .3s infinite'></i>"; box.appendChild(t); trim(); return t; }
     function trim() { while (box.scrollHeight > box.clientHeight + 4 && box.children.length > 1) box.removeChild(box.firstChild); }
     function tap(k, r, c) { var b = k.children[r] && k.children[r].children[c]; if (b) b.classList.add("tap"); }
     function say(html, then, delay) { var ty = typing(); later(function () { ty.remove(); var m = bot(html); if (then) then(m); }, delay || 900); }
@@ -210,7 +271,7 @@
         say("<b>Ссылка подписки:</b><span class='lnk'></span><span class='qr' id='chatQr'></span><span class='ln' style='margin-top:6px'><b>Как подключиться:</b><br>1. Установите приложение<br>2. Отсканируйте QR-код ИЛИ добавьте подписку по URL<br>3. Включите VPN</span>", function () {
           YV.loadQr(function () {
             var q = $("#chatQr"); if (!q) return;
-            try { var c = window.qrcode(0, "M"); c.addData(BOT); c.make(); q.innerHTML = c.createSvgTag({ scalable: true, margin: 0 }).replace(/fill="black"/g, 'fill="#0a0a0b"').replace(/fill="white"/g, 'fill="#f5f5f7"'); } catch (e) { /* ignore */ }
+            try { var c = window.qrcode(0, "M"); c.addData(BOT); c.make(); q.innerHTML = c.createSvgTag({ scalable: true, margin: 0 }).replace(/fill="black"/g, 'fill="#07091a"').replace(/fill="white"/g, 'fill="#f3f5ff"'); } catch (e) { /* ignore */ }
           });
         }, 500);
       }

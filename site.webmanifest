@@ -1,12 +1,12 @@
 {
   "name": "YarVpn — Яр ВПН",
   "short_name": "YarVpn",
-  "description": "VPN, который живёт в Telegram. Быстрые сервера, честная цена от 39 ₽.",
+  "description": "VPN, который живёт в Telegram. Серверы в Финляндии, США, Испании, Швеции, Турции и Албании. От 39 ₽, 3 дня бесплатно.",
   "lang": "ru",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050506",
-  "theme_color": "#050506",
+  "background_color": "#04050c",
+  "theme_color": "#04050c",
   "icons": [
     {
       "src": "assets/img/icon-192.png",

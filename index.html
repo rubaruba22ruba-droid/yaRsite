@@ -3,30 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>YarVpn (Яр ВПН) — VPN в Telegram от 39 ₽</title>
-<meta name="description" content="YarVpn (Яр ВПН) — VPN, который живёт в Telegram. Открой бота, выбери тариф и подключись за секунды. Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.">
-<meta name="keywords" content="впн, vpn, яр впн, ярвпн, yarvpn, yar vpn, vpn в телеграм, vpn telegram бот, купить vpn">
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<title>YarVpn (Яр ВПН) — VPN в Telegram от 39 ₽, 6 стран</title>
+<meta name="description" content="YarVpn (Яр ВПН) — VPN-сервис в Telegram: серверы в Финляндии, США, Испании, Швеции, Турции и Албании. Тарифы от 39 ₽, 3 дня бесплатно. Открой бота и подключи ВПН за секунды.">
+<meta name="keywords" content="впн, vpn, яр впн, ярвпн, yarvpn, yar vpn, vpn в телеграм, vpn telegram бот, купить vpn, впн финляндия, впн сша, впн испания, впн швеция, впн турция, впн албания">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="author" content="YarVpn">
-<meta name="theme-color" content="#050506">
+<meta name="theme-color" content="#04050c">
 <meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://yarvpn.best/">
-<!-- Адрес API бота для входа в кабинет (обязательно HTTPS, без слэша в конце). Пусто = кабинет отключён. -->
-<meta name="yarvpn-api" content="https://api.yarvpn.best/api/web">
+<link rel="alternate" hreflang="ru" href="https://yarvpn.best/">
+<link rel="alternate" hreflang="x-default" href="https://yarvpn.best/">
+<!-- Адрес API бота для входа в кабинет берётся из файла api.json (поле "api"). Здесь — запасной вариант (полный адрес до /api/web, HTTPS). Пусто = берём только api.json. -->
+<meta name="yarvpn-api" content="">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="YarVpn">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:url" content="https://yarvpn.best/">
 <meta property="og:title" content="YarVpn (Яр ВПН) — VPN, который живёт в Telegram">
-<meta property="og:description" content="Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.">
+<meta property="og:description" content="Серверы в Финляндии, США, Испании, Швеции, Турции и Албании. От 39 ₽, 3 дня бесплатно.">
 <meta property="og:image" content="https://yarvpn.best/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="YarVpn — скорость без ограничений">
+<meta property="og:image:alt" content="YarVpn — VPN в Telegram: 3D-глобус с серверами">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="YarVpn (Яр ВПН) — VPN, который живёт в Telegram">
-<meta name="twitter:description" content="Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.">
+<meta name="twitter:description" content="Серверы в Финляндии, США, Испании, Швеции, Турции и Албании. От 39 ₽, 3 дня бесплатно.">
 <meta name="twitter:image" content="https://yarvpn.best/assets/img/og.png">
 
 <!-- Подтверждение прав на сайт (добавьте свои коды из Яндекс.Вебмастера и Google Search Console):
@@ -38,11 +40,12 @@
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="site.webmanifest">
 
+<link rel="preconnect" href="https://assets.21st.dev">
 <link rel="preload" href="assets/fonts/onest-cyr.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/geologica-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/main.css?v=2">
-<noscript><style>.map-face,.pins,.map-ui{display:none}.map-plane{height:auto}.net-list{position:static;width:100%;margin-top:0}.nav{transform:translate(-50%,0)}</style></noscript>
+<link rel="stylesheet" href="assets/css/main.css?v=3">
+<noscript><style>.gl,.ring-half,.marquee,.ascii video{display:none}.nav{transform:translate(-50%,0)}.net{grid-template-columns:1fr}</style></noscript>
 <script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},5000)</script>
 
 <script type="application/ld+json">
@@ -56,7 +59,7 @@
       "alternateName": ["Яр ВПН", "ЯрВПН", "YarVPN", "Yar VPN"],
       "url": "https://yarvpn.best/",
       "logo": "https://yarvpn.best/assets/img/apple-touch-icon.png",
-      "sameAs": ["https://t.me/yarVpnRubot", "https://t.me/YarVpnews"],
+      "sameAs": ["https://t.me/yarVpnRubot", "https://t.me/yarvpnews"],
       "contactPoint": { "@type": "ContactPoint", "contactType": "customer support", "email": "yarsup@proton.me", "url": "https://t.me/entoni", "availableLanguage": ["ru"] }
     },
     {
@@ -74,7 +77,7 @@
       "name": "YarVpn — VPN в Telegram",
       "alternateName": "Яр ВПН",
       "serviceType": "VPN-сервис",
-      "description": "VPN, который живёт в Telegram. Быстрые сервера, честная цена от 39 ₽. 3 дня бесплатно.",
+      "description": "VPN, который живёт в Telegram. Серверы в Финляндии, США, Испании, Швеции, Турции и Албании. Тарифы от 39 ₽, 3 дня бесплатно.",
       "provider": { "@id": "https://yarvpn.best/#org" },
       "url": "https://yarvpn.best/",
       "hasOfferCatalog": {
@@ -91,6 +94,7 @@
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "Что такое YarVpn (Яр ВПН)?", "acceptedAnswer": { "@type": "Answer", "text": "VPN, который живёт в Telegram: открой бота, выбери тариф и подключись за секунды. Без нового аккаунта и отдельного приложения — подписка и поддержка в одном чате." } },
+        { "@type": "Question", "name": "В каких странах есть серверы YarVpn?", "acceptedAnswer": { "@type": "Answer", "text": "Финляндия (Хельсинки), США (Вашингтон), Испания (Мадрид), Швеция (Стокгольм), Турция (Анкара) и Албания (Тирана). Все серверы доступны по любому тарифу." } },
         { "@type": "Question", "name": "Сколько устройств можно подключить?", "acceptedAnswer": { "@type": "Answer", "text": "В тарифах — до 3 одновременно. Нужно больше? Докупи пакет прямо в боте: +1 устройство за 49 ₽, +3 за 99 ₽, +10 за 209 ₽." } },
         { "@type": "Question", "name": "Что даёт бесплатный пробный период?", "acceptedAnswer": { "@type": "Answer", "text": "3 дня, 10 ГБ трафика и 1 устройство — доступ ко всем серверам, как в платной подписке. Активируется один раз из главного меню бота." } },
         { "@type": "Question", "name": "Какие есть способы оплаты?", "acceptedAnswer": { "@type": "Answer", "text": "TON, Telegram Stars, криптовалюта, а ещё баланс — деньги, заработанные на рефералах, можно сразу потратить на подписку." } },
@@ -119,8 +123,21 @@
   </defs>
 </svg>
 
-<div class="page-bg" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
+<!-- ============ ФОН: ASCII-видео + свечение ============ -->
+<div class="bg" aria-hidden="true">
+  <!-- Видео — тот же ASCII-арт «sss», что и в компоненте components/ui/sss.tsx.
+       Если видео не загрузилось — включается запасная ASCII-анимация (assets/js/ascii-bg.js).
+       Светлое видео на тёмном: data-tone="dark" (по умолчанию). Тёмное на светлом: data-tone="light". -->
+  <div class="ascii" id="ascii" data-tone="dark">
+    <canvas id="asciiFallback"></canvas>
+    <video src="https://assets.21st.dev/ascii-recipes/videos/user_2xJxXqdwWohYrdd6fiMYrS9hbmO/2e358adb-cfc9-4ec4-a600-1abc8836f02b.mp4" poster="https://assets.21st.dev/ascii-recipes/thumbnails/user_2xJxXqdwWohYrdd6fiMYrS9hbmO/eae3b158-33e1-442d-8e17-3b4fb6656a7f.webp" autoplay loop muted playsinline preload="auto" disablepictureinpicture tabindex="-1" aria-hidden="true"></video>
+    <div class="ascii-tint"></div>
+  </div>
+  <div class="aurora"><i></i><i></i><i></i></div>
+  <div class="bg-scrim"></div>
+</div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+<div class="progress" id="progress" aria-hidden="true"><i></i></div>
 <a class="skip" href="#main">К содержимому</a>
 
 <!-- ============ НАВИГАЦИЯ ============ -->
@@ -161,7 +178,6 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="top" aria-labelledby="h1">
-  <canvas class="lattice" id="lattice" aria-hidden="true"></canvas>
   <div class="container hero-grid">
     <div class="hero-text">
       <p class="pill rv"><span class="dot"></span>Работает прямо в Telegram</p>
@@ -169,12 +185,12 @@
         <span class="wd" style="--w:0"><span>VPN,</span></span>
         <span class="wd" style="--w:1"><span>который</span></span><br>
         <span class="wd" style="--w:2"><span>живёт</span></span>
-        <span class="wd dim" style="--w:3"><span>в&nbsp;Telegram</span></span>
+        <span class="wd grad" style="--w:3"><span>в&nbsp;Telegram</span></span>
       </h1>
-      <p class="lede rv" style="--d:4">Открой бота, выбери тариф и подключись за секунды. Быстрые сервера в нескольких странах, честная цена от&nbsp;39&nbsp;₽.</p>
+      <p class="lede rv" style="--d:4">Открой бота, выбери тариф и подключись за секунды. Быстрые сервера в шести странах: Финляндия, США, Испания, Швеция, Турция и&nbsp;Албания. Честная цена от&nbsp;39&nbsp;₽.</p>
       <div class="hero-cta rv" style="--d:5">
-        <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
-        <a class="btn btn-ghost" href="#pricing">Тарифы</a>
+        <a class="btn btn-primary btn-lg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать в Telegram<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+        <a class="btn btn-ghost btn-lg" href="#servers">Смотреть серверы</a>
       </div>
       <ul class="hero-facts rv" style="--d:6">
         <li><svg aria-hidden="true"><use href="#i-check"/></svg>3 дня бесплатно</li>
@@ -183,69 +199,129 @@
       </ul>
     </div>
 
-    <!-- Интерфейс продукта: только существующие данные (пробный период: 3 дня, 10 ГБ, 1 устройство; сервер — Финляндия) -->
-    <div class="stage rv" style="--d:3" id="stage" aria-label="Пример интерфейса YarVpn" role="img">
+    <!-- 3D-сцена: глобус с серверами + интерфейс продукта (пробный период: 3 дня, 10 ГБ, 1 устройство) -->
+    <div class="stage rv" style="--d:3" id="stage" aria-label="3D-глобус с серверами YarVpn и пример интерфейса">
       <div class="stage-in" id="stageIn">
-        <div class="layer win float-y" data-z="0">
+        <div class="orb layer" data-z="0">
+          <div class="ring-half back" aria-hidden="true"><div class="ring r1"><div class="spin"><i></i></div></div><div class="ring r2"><div class="spin"><i></i></div></div></div>
+          <div class="gl" id="heroGlobe" data-globe="hero" role="img" aria-label="Глобус: серверы в Финляндии, США, Испании, Швеции, Турции и Албании"></div>
+          <div class="ring-half front" aria-hidden="true"><div class="ring r1"><div class="spin"><i></i></div></div><div class="ring r2"><div class="spin"><i></i></div></div></div>
+        </div>
+        <div class="layer win float-y" data-z="90">
           <div class="win-in">
             <div class="win-top"><span class="brand">YarVpn</span><span class="win-tag" id="winTag">Пробный период · 3 дня</span></div>
-            <div class="conn" id="conn" data-s="0">
-              <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="conn-ring" cx="50" cy="50" r="45"/><circle class="conn-arc" id="connArc" cx="50" cy="50" r="45"/></svg>
-              <div class="conn-btn"><svg aria-hidden="true"><use href="#i-power"/></svg></div>
-            </div>
-            <div class="conn-state"><b id="connText">Нажми, чтобы подключиться</b></div>
-            <div class="rows">
-              <div class="row"><span>Сервер</span><b><i class="dot" id="srvDot" style="opacity:.35"></i>Финляндия</b></div>
-              <div class="row"><span>Трафик</span><b class="tnum" id="winTraffic">10 ГБ</b></div>
-              <div class="row"><span>Устройства</span><b class="tnum" id="winDevices">1</b></div>
+            <div class="win-body">
+              <div class="conn" id="conn" data-s="0">
+                <svg viewBox="0 0 100 100" aria-hidden="true"><circle class="conn-ring" cx="50" cy="50" r="45"/><circle class="conn-arc" id="connArc" cx="50" cy="50" r="45"/></svg>
+                <div class="conn-btn"><svg aria-hidden="true"><use href="#i-power"/></svg></div>
+              </div>
+              <div class="conn-info">
+                <div class="conn-state"><b id="connText">Нажми, чтобы подключиться</b></div>
+                <div class="rows">
+                  <div class="row"><span>Сервер</span><b><i class="dot" id="srvDot"></i><span id="srvName">Финляндия</span></b></div>
+                  <div class="row"><span>Трафик</span><b class="tnum" id="winTraffic">10 ГБ</b></div>
+                  <div class="row"><span>Устройства</span><b class="tnum" id="winDevices">1</b></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="layer bubble float-y b" data-z="70" aria-hidden="true">
+        <div class="layer bubble float-y b" data-z="150" aria-hidden="true">
           <div class="bubble-h"><svg><use href="#i-tg"/></svg>@yarVpnRubot</div>
           <p><b>YarVpn</b><br>Быстрый и надёжный VPN. Выбирай, что нужно:</p>
           <div class="kb" id="kb"><span id="kbConnect">Подключиться</span><span>Профиль</span><span>Пробный период</span><span>Инструкция</span></div>
         </div>
-        <div class="layer chip-float float-y c" data-z="110" aria-hidden="true">
+        <div class="layer chip-float float-y c" data-z="200" aria-hidden="true">
           <small>Пробный период</small><b>3 дня бесплатно</b>
         </div>
       </div>
     </div>
   </div>
+  <a class="scroll-cue" href="#servers" aria-label="Прокрутить вниз"><i></i></a>
 </section>
 
-<!-- ============ СЕРВЕРЫ / КАРТА ============ -->
+<!-- ============ ЛЕНТА СТОЛИЦ ============ -->
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track">
+    <span>Хельсинки<em>HEL</em></span><span>Вашингтон<em>WAS</em></span><span>Мадрид<em>MAD</em></span><span>Стокгольм<em>STO</em></span><span>Анкара<em>ANK</em></span><span>Тирана<em>TIA</em></span>
+    <span>Хельсинки<em>HEL</em></span><span>Вашингтон<em>WAS</em></span><span>Мадрид<em>MAD</em></span><span>Стокгольм<em>STO</em></span><span>Анкара<em>ANK</em></span><span>Тирана<em>TIA</em></span>
+    <span>Хельсинки<em>HEL</em></span><span>Вашингтон<em>WAS</em></span><span>Мадрид<em>MAD</em></span><span>Стокгольм<em>STO</em></span><span>Анкара<em>ANK</em></span><span>Тирана<em>TIA</em></span>
+    <span>Хельсинки<em>HEL</em></span><span>Вашингтон<em>WAS</em></span><span>Мадрид<em>MAD</em></span><span>Стокгольм<em>STO</em></span><span>Анкара<em>ANK</em></span><span>Тирана<em>TIA</em></span>
+  </div>
+</div>
+
+<!-- ============ СЕРВЕРЫ / ГЛОБУС ============ -->
 <section class="sec" id="servers" aria-labelledby="servers-h">
   <div class="container">
     <header class="sec-head">
-      <p class="eyebrow rv">Серверы</p>
-      <h2 class="h2 rv" id="servers-h">Быстрые сервера&nbsp;<em>YarVpn</em></h2>
-      <p class="lede rv">Подписка сама подтягивает актуальный сервер — ничего добавлять вручную не нужно.</p>
+      <p class="eyebrow rv" data-scr>Серверы</p>
+      <h2 class="h2 rv" id="servers-h">Серверы в шести странах<br><em>по всему миру</em></h2>
+      <p class="lede rv">Финляндия, США, Испания, Швеция, Турция и Албания. Подписка сама подтягивает актуальный сервер — ничего добавлять вручную не нужно.</p>
     </header>
 
     <div class="net rv" id="net">
-      <div class="map-plane" id="map" role="group" aria-label="Карта серверов YarVpn">
-        <div class="map-face"><canvas id="mapCanvas" aria-hidden="true"></canvas></div>
-        <div class="pins" id="pins"></div>
-        <div class="map-ui" role="group" aria-label="Масштаб карты">
-          <button type="button" data-view="eu" aria-pressed="true">Европа</button>
-          <button type="button" data-view="world" aria-pressed="false">Весь мир</button>
+      <div class="net-globe">
+        <div class="gl" id="mainGlobe" data-globe="main" role="group" aria-label="Интерактивный 3D-глобус с серверами YarVpn. Потяни, чтобы повернуть."></div>
+        <div class="gl-tools">
+          <span class="gl-hint"><i aria-hidden="true"></i>Потяни глобус или выбери страну</span>
+          <button class="gl-reset dim" id="glReset" type="button">Все серверы</button>
         </div>
       </div>
       <div class="net-list">
-        <!-- Список серверов — единственный источник данных для карты. Добавить/убрать сервер = добавить/убрать <li>.
-             data-dir — куда ставить подпись у точки: r/l/t/b. data-main — основной узел. Сейчас в проекте один сервер — Финляндия. -->
-        <div class="srv-list">
-          <p class="srv-head">Сервер</p>
-          <ul id="srvList">
-            <li class="srv on" data-id="fi" data-code="HEL" data-city="Хельсинки" data-country="Финляндия" data-lat="60.1699" data-lon="24.9384" data-dir="r" data-main="1">
-              <button class="srv-btn" type="button" aria-pressed="true">
-                <span class="srv-name"><b>Финляндия</b><small>Хельсинки · столица</small></span>
-                <span class="srv-mark" aria-hidden="true"><i></i></span>
-              </button>
-            </li>
-          </ul>
-        </div>
+        <!-- Список серверов — единственный источник данных для глобуса. Добавить/убрать сервер = добавить/убрать <li>.
+             data-lat/data-lon — координаты столицы, data-dir — куда ставить подпись у точки: r/l/t/b, data-main — центр дуг на глобусе (только визуально). -->
+        <p class="srv-head">Серверы<span>6</span></p>
+        <ul id="srvList">
+          <li class="srv" data-id="fi" data-code="HEL" data-city="Хельсинки" data-country="Финляндия" data-lat="60.1699" data-lon="24.9384" data-dir="r" data-main="1">
+            <button class="srv-btn" type="button" aria-pressed="false">
+              <span class="srv-n">01</span>
+              <span class="srv-name"><b>Финляндия</b><small>Хельсинки · столица</small></span>
+              <span class="srv-code">HEL</span>
+              <span class="srv-mark" aria-hidden="true"><i></i></span>
+            </button>
+          </li>
+          <li class="srv" data-id="us" data-code="WAS" data-city="Вашингтон" data-country="США" data-lat="38.9072" data-lon="-77.0369" data-dir="r">
+            <button class="srv-btn" type="button" aria-pressed="false">
+              <span class="srv-n">02</span>
+              <span class="srv-name"><b>США</b><small>Вашингтон · столица</small></span>
+              <span class="srv-code">WAS</span>
+              <span class="srv-mark" aria-hidden="true"><i></i></span>
+            </button>
+          </li>
+          <li class="srv" data-id="es" data-code="MAD" data-city="Мадрид" data-country="Испания" data-lat="40.4168" data-lon="-3.7038" data-dir="l">
+            <button class="srv-btn" type="button" aria-pressed="false">
+              <span class="srv-n">03</span>
+              <span class="srv-name"><b>Испания</b><small>Мадрид · столица</small></span>
+              <span class="srv-code">MAD</span>
+              <span class="srv-mark" aria-hidden="true"><i></i></span>
+            </button>
+          </li>
+          <li class="srv" data-id="se" data-code="STO" data-city="Стокгольм" data-country="Швеция" data-lat="59.3293" data-lon="18.0686" data-dir="l">
+            <button class="srv-btn" type="button" aria-pressed="false">
+              <span class="srv-n">04</span>
+              <span class="srv-name"><b>Швеция</b><small>Стокгольм · столица</small></span>
+              <span class="srv-code">STO</span>
+              <span class="srv-mark" aria-hidden="true"><i></i></span>
+            </button>
+          </li>
+          <li class="srv" data-id="tr" data-code="ANK" data-city="Анкара" data-country="Турция" data-lat="39.9334" data-lon="32.8597" data-dir="r">
+            <button class="srv-btn" type="button" aria-pressed="false">
+              <span class="srv-n">05</span>
+              <span class="srv-name"><b>Турция</b><small>Анкара · столица</small></span>
+              <span class="srv-code">ANK</span>
+              <span class="srv-mark" aria-hidden="true"><i></i></span>
+            </button>
+          </li>
+          <li class="srv" data-id="al" data-code="TIA" data-city="Тирана" data-country="Албания" data-lat="41.3275" data-lon="19.8187" data-dir="b">
+            <button class="srv-btn" type="button" aria-pressed="false">
+              <span class="srv-n">06</span>
+              <span class="srv-name"><b>Албания</b><small>Тирана · столица</small></span>
+              <span class="srv-code">TIA</span>
+              <span class="srv-mark" aria-hidden="true"><i></i></span>
+            </button>
+          </li>
+        </ul>
+        <p class="srv-note">Все сервера доступны по любому тарифу и в пробном периоде.</p>
       </div>
     </div>
   </div>
@@ -255,31 +331,31 @@
 <section class="sec" id="features" aria-labelledby="features-h">
   <div class="container">
     <header class="sec-head">
-      <p class="eyebrow rv">Информация</p>
+      <p class="eyebrow rv" data-scr>Информация</p>
       <h2 class="h2 rv" id="features-h">Почему YarVpn</h2>
     </header>
     <div class="feats">
-      <article class="card feat rv" style="--d:0">
-        <div class="feat-art"><div class="art-speed" aria-hidden="true"><i></i><i></i><i></i></div></div>
+      <article class="card feat tilt rv" style="--d:0">
+        <div class="feat-art"><div class="art-speed" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
         <div class="feat-body"><h3>Высокая скорость</h3><p>Широкий канал на серверах — видео, звонки и игры без просадок и лишних задержек.</p></div>
       </article>
-      <article class="card feat rv" style="--d:1">
-        <div class="feat-art"><canvas class="art-map" id="miniMap" aria-hidden="true"></canvas></div>
-        <div class="feat-body"><h3>Несколько стран</h3><p>Выбирай сервер под задачу — локации на выбор, а не один-единственный узел.</p></div>
+      <article class="card feat tilt rv" style="--d:1">
+        <div class="feat-art"><div class="gl mini" data-globe="mini" aria-hidden="true"></div></div>
+        <div class="feat-body"><h3>Шесть стран</h3><p>Финляндия, США, Испания, Швеция, Турция и Албания — выбирай сервер под задачу, а не один-единственный узел.</p></div>
       </article>
-      <article class="card feat rv" style="--d:2">
+      <article class="card feat tilt rv" style="--d:2">
         <div class="feat-art"><div class="art-tg" aria-hidden="true"><div class="b"><svg><use href="#i-tg"/></svg>@yarVpnRubot</div><div class="b r">/start</div></div></div>
         <div class="feat-body"><h3>Всё в Telegram</h3><p>Без нового аккаунта и отдельного приложения — подписка и поддержка в одном чате.</p></div>
       </article>
-      <article class="card feat rv" style="--d:0">
-        <div class="feat-art"><div class="art-limits" aria-hidden="true"><div class="sl"><i></i></div><div class="sl"><i></i></div></div></div>
+      <article class="card feat tilt rv" style="--d:0">
+        <div class="feat-art"><div class="art-limits" aria-hidden="true"><div class="sl"><i></i></div><div class="sl"><i></i></div><div class="sl"><i></i></div></div></div>
         <div class="feat-body"><h3>Гибкие лимиты</h3><p>Начни с малого тарифа и докупай трафик или устройства отдельно, когда понадобится.</p></div>
       </article>
-      <article class="card feat rv" style="--d:1">
+      <article class="card feat tilt rv" style="--d:1">
         <div class="feat-art"><div class="art-price" aria-hidden="true"><small>От</small>39<sup>₽</sup></div></div>
         <div class="feat-body"><h3>Честная цена</h3><p>От 39&nbsp;₽ за неделю, без скрытых доплат. 3 дня — бесплатно, чтобы сначала попробовать.</p></div>
       </article>
-      <article class="card feat rv" style="--d:2">
+      <article class="card feat tilt rv" style="--d:2">
         <div class="feat-art"><div class="art-sup" aria-hidden="true"><span class="av">@</span><span>entoni<small>Поддержка</small></span></div></div>
         <div class="feat-body"><h3>Живая поддержка</h3><p>Пиши прямо в бота или напрямую в Telegram — отвечает человек, а не автоответчик.</p></div>
       </article>
@@ -291,7 +367,7 @@
 <section class="sec" id="how" aria-labelledby="how-h">
   <div class="container">
     <header class="sec-head">
-      <p class="eyebrow rv">Подключение</p>
+      <p class="eyebrow rv" data-scr>Подключение</p>
       <h2 class="h2 rv" id="how-h">Как это работает</h2>
     </header>
 
@@ -327,7 +403,7 @@
 <section class="sec" id="pricing" aria-labelledby="pricing-h">
   <div class="container">
     <header class="sec-head">
-      <p class="eyebrow rv">Тарифы</p>
+      <p class="eyebrow rv" data-scr>Тарифы</p>
       <h2 class="h2 rv" id="pricing-h">Тарифы</h2>
       <p class="lede rv">От 39&nbsp;₽ за неделю, без скрытых доплат.</p>
     </header>
@@ -338,21 +414,21 @@
     </div>
 
     <div class="plans" id="plans">
-      <article class="card plan rv" style="--d:0">
+      <article class="card plan tilt rv" style="--d:0">
         <div class="plan-top"><h3 class="plan-name">7 дней</h3></div>
         <div class="plan-price"><span class="js-price" data-n="39">39</span><sup>₽</sup></div>
         <p class="plan-per">разово</p>
         <ul class="plan-spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>120 ГБ трафика</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>До 3 устройств</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Все сервера</li></ul>
         <a class="btn btn-ghost" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Попробовать</a>
       </article>
-      <article class="card plan pop rv" style="--d:1">
+      <article class="card plan pop tilt rv" style="--d:1">
         <div class="plan-top"><h3 class="plan-name">1 месяц</h3><span class="badge">Популярный выбор</span></div>
         <div class="plan-price"><span class="js-price" data-n="79">79</span><sup>₽</sup></div>
         <p class="plan-per">разово</p>
         <ul class="plan-spec"><li><svg aria-hidden="true"><use href="#i-check"/></svg>500 ГБ трафика</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>До 3 устройств</li><li><svg aria-hidden="true"><use href="#i-check"/></svg>Все сервера</li></ul>
         <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Оформить<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
       </article>
-      <article class="card plan rv" style="--d:2">
+      <article class="card plan tilt rv" style="--d:2">
         <div class="plan-top"><h3 class="plan-name">3 месяца</h3></div>
         <div class="plan-price"><span class="js-price" data-n="199">199</span><sup>₽</sup></div>
         <p class="plan-per">разово</p>
@@ -361,7 +437,7 @@
       </article>
     </div>
 
-    <p class="lede rv" style="margin-top:44px;max-width:640px">Не хватает лимитов? Докупай отдельно: <b style="color:var(--text);font-weight:600">устройства — от&nbsp;49&nbsp;₽</b>, <b style="color:var(--text);font-weight:600">трафик — от&nbsp;49&nbsp;₽ за 50&nbsp;ГБ</b>.</p>
+    <p class="lede rv addons-lede">Не хватает лимитов? Докупай отдельно: <b>устройства — от&nbsp;49&nbsp;₽</b>, <b>трафик — от&nbsp;49&nbsp;₽ за 50&nbsp;ГБ</b>.</p>
     <div class="addons">
       <div class="card addon rv">
         <h3>Устройства</h3>
@@ -380,7 +456,7 @@
 <section class="sec" id="cabinet" aria-labelledby="cab-h">
   <div class="container">
     <header class="sec-head">
-      <p class="eyebrow rv">Личный кабинет</p>
+      <p class="eyebrow rv" data-scr>Личный кабинет</p>
       <h2 class="h2 rv" id="cab-h">Личный кабинет</h2>
     </header>
 
@@ -397,8 +473,8 @@
         <div class="gate-box">
           <div id="loginIdle">
             <h3>Войди через Telegram — увидишь баланс, подписку, устройства и статистику приглашений.</h3>
-            <div style="margin-top:28px"><button class="btn btn-primary" id="loginBtn" type="button"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</button></div>
-            <p class="cab-hint" style="margin-top:14px">Бот покажет, откуда идёт вход, и попросит подтвердить. Пароль не нужен.</p>
+            <div class="gate-cta"><button class="btn btn-primary btn-lg" id="loginBtn" type="button"><svg aria-hidden="true" style="width:18px;height:18px"><use href="#i-tg"/></svg>Войти через Telegram</button></div>
+            <p class="cab-hint">Бот покажет, откуда идёт вход, и попросит подтвердить. Пароль не нужен.</p>
           </div>
           <div class="wait" id="loginWait" hidden>
             <p>Открой бота, нажми Start и подтверди вход кнопкой «Да, это я». Кабинет откроется сам.</p>
@@ -426,7 +502,7 @@
           <div class="tile c8"><p class="lbl">Подписка</p><div class="val tnum" id="tSub">—</div><p class="sub" id="tSubS"></p><div class="act" id="tSubAct"></div></div>
           <div class="tile c4"><p class="lbl">Трафик</p><div class="val tnum" id="tTr">—</div><p class="sub" id="tTrS"></p><div class="meter" id="tMeter" hidden><i id="tMeterI"></i></div></div>
           <div class="tile c4"><p class="lbl">Устройства</p><div class="val tnum" id="tDev">—</div></div>
-          <div class="tile c4"><p class="lbl">Пробный период</p><div class="val" id="tTrial" style="font-size:clamp(24px,2.4vw,30px);margin-top:14px">—</div></div>
+          <div class="tile c4"><p class="lbl">Пробный период</p><div class="val val-s" id="tTrial">—</div></div>
           <div class="tile c12" id="tLinkBox"><p class="lbl">Ссылка подписки</p><p class="sub">Вставь в приложение через «Добавить подписку по URL». Никому не передавай — по ней работает твой VPN.</p>
             <div class="copy"><code id="tLink">—</code><button class="btn btn-primary btn-sm" id="copyLink" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>Копировать</span></button></div></div>
           <div class="tile c12"><p class="lbl">Друзья</p><div class="val tnum" id="tRef">0</div><p class="sub" id="tRefS"></p>
@@ -441,18 +517,18 @@
 <section class="sec" id="bonus" aria-labelledby="bonus-h">
   <div class="container">
     <header class="sec-head">
-      <p class="eyebrow rv">Реферальная программа</p>
+      <p class="eyebrow rv" data-scr>Реферальная программа</p>
       <h2 class="h2 rv" id="bonus-h">Зови друзей — <em>копи баланс</em></h2>
     </header>
     <div class="duo">
-      <article class="card rv">
+      <article class="card tilt rv">
         <p class="k">Реферальная программа</p>
         <h3>10&nbsp;₽ за каждого друга, который подключил VPN</h3>
         <p>Получай баланс за приглашение друзей и сразу трать его на подписку. Так — за первых 15 друзей, а с 16-го друга — 20% от каждой его покупки. Своя ссылка — в разделе «Реферальная программа» в боте.</p>
         <div class="big tnum"><span class="js-price" data-n="150">150</span><small>₽ за 15 друзей</small></div>
       </article>
-      <article class="card rv" style="--d:1">
-        <svg class="wheel" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><circle cx="100" cy="100" r="96" stroke-dasharray="2 6"/><circle cx="100" cy="100" r="70"/><circle cx="100" cy="100" r="14"/><path d="M100 30v56M100 114v56M30 100h56M114 100h56M50.5 50.5l39.6 39.6M109.9 109.9l39.6 39.6M149.5 50.5l-39.6 39.6M90.1 109.9l-39.6 39.6"/></svg>
+      <article class="card tilt rv" style="--d:1">
+        <div class="wheel3d" aria-hidden="true"><div class="wheel"><i></i></div><b class="pin"></b></div>
         <p class="k">Ежедневная рулетка</p>
         <h3>Бесплатный билетик каждый день</h3>
         <p>Новый билетик — каждый день в 14:00 по Москве. Кнопка «Ежедневная рулетка» — в главном меню бота.</p>
@@ -467,13 +543,14 @@
   <div class="container">
     <div class="faq">
       <div class="faq-side">
-        <p class="eyebrow rv">Поддержка</p>
+        <p class="eyebrow rv" data-scr>Поддержка</p>
         <h2 class="h2 rv" id="faq-h">Частые вопросы</h2>
         <p class="lede rv">Что-то не работает — пиши в бота, в Telegram или на почту.</p>
         <div class="rv"><a class="btn btn-ghost" href="https://t.me/entoni" target="_blank" rel="noopener">Поддержка @entoni<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a></div>
       </div>
       <div class="qas rv" id="qas">
         <div class="qa open"><h3><button class="qa-q" type="button" aria-expanded="true">Что такое YarVpn (Яр ВПН)?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>VPN, который живёт в Telegram: открой бота, выбери тариф и подключись за секунды. Без нового аккаунта и отдельного приложения — подписка и поддержка в одном чате.</p></div></div></div>
+        <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">В каких странах есть серверы YarVpn?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>Финляндия (Хельсинки), США (Вашингтон), Испания (Мадрид), Швеция (Стокгольм), Турция (Анкара) и Албания (Тирана). Все серверы доступны по любому тарифу.</p></div></div></div>
         <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Сколько устройств можно подключить?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>В тарифах — до 3 одновременно. Нужно больше? Докупи пакет прямо в боте: +1 устройство за 49&nbsp;₽, +3 за 99&nbsp;₽, +10 за 209&nbsp;₽.</p></div></div></div>
         <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Что даёт бесплатный пробный период?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>3 дня, 10&nbsp;ГБ трафика и 1 устройство — доступ ко всем серверам, как в платной подписке. Активируется один раз из главного меню бота.</p></div></div></div>
         <div class="qa"><h3><button class="qa-q" type="button" aria-expanded="false">Какие есть способы оплаты?<span class="qa-i"></span></button></h3><div class="qa-a"><div><p>TON, Telegram Stars, криптовалюта, а ещё баланс — деньги, заработанные на рефералах, можно сразу потратить на подписку.</p></div></div></div>
@@ -490,10 +567,12 @@
 <section class="cta" aria-labelledby="cta-h">
   <div class="container">
     <div class="cta-card rv">
-      <canvas class="lattice" id="lattice2" aria-hidden="true"></canvas>
-      <h2 id="cta-h">Попробуй бесплатно</h2>
-      <p>3 дня и 10&nbsp;ГБ трафика — без карты, без обязательств.</p>
-      <a class="btn btn-primary" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать бесплатно<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      <div class="gyro" aria-hidden="true"><div class="gy3d"><i></i><i></i><i></i></div><b>Y</b></div>
+      <div class="cta-text">
+        <h2 id="cta-h">Попробуй бесплатно</h2>
+        <p>3 дня и 10&nbsp;ГБ трафика — без карты, без обязательств.</p>
+        <a class="btn btn-primary btn-lg" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Начать бесплатно<svg class="go" aria-hidden="true"><use href="#i-go"/></svg></a>
+      </div>
     </div>
   </div>
 </section>
@@ -519,7 +598,7 @@
       <nav class="foot-col" aria-label="Связь">
         <h4>Связь</h4>
         <a href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Бот @yarVpnRubot</a>
-        <a href="https://t.me/YarVpnews" target="_blank" rel="noopener">Новости в Telegram</a>
+        <a href="https://t.me/yarvpnews" target="_blank" rel="noopener">Новости в Telegram</a>
         <a href="https://t.me/entoni" target="_blank" rel="noopener">Поддержка @entoni</a>
         <a href="mailto:yarsup@proton.me">yarsup@proton.me</a>
       </nav>
@@ -528,10 +607,10 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js?v=2" defer></script>
-<script src="assets/js/bg3d.js?v=2" defer></script>
-<script src="assets/js/mapdata.js?v=2" defer></script>
-<script src="assets/js/map.js?v=2" defer></script>
-<script src="assets/js/cabinet.js?v=2" defer></script>
+<script src="assets/js/main.js?v=3" defer></script>
+<script src="assets/js/ascii-bg.js?v=3" defer></script>
+<script src="assets/js/mapdata.js?v=3" defer></script>
+<script src="assets/js/globe.js?v=3" defer></script>
+<script src="assets/js/cabinet.js?v=3" defer></script>
 </body>
 </html>

@@ -4,7 +4,8 @@
      1) сайт просит у API бота одноразовый токен → бот отдаёт ссылку t.me/<бот>?start=web_<токен>
      2) человек открывает бота и нажимает «Да, это я» (бот при этом показывает устройство и IP запроса)
      3) сайт опрашивает статус; как только бот подтвердил — получает сессию (один раз) и грузит аккаунт
-   Адрес API задаётся в <meta name="yarvpn-api"> в index.html (HTTPS обязателен — сайт на HTTPS).
+   Адрес API берётся из файла api.json в корне сайта (поле "api" — HTTPS-адрес воркера/прокси, без слэша в конце);
+  запасной вариант — <meta name="yarvpn-api"> в index.html (полный адрес до /api/web). HTTPS обязателен — сайт на HTTPS.
    Показываются только данные, которые отдаёт бот; ничего не придумывается. */
 (function () {
   "use strict";
@@ -15,6 +16,10 @@
 
   var metaApi = doc.querySelector('meta[name="yarvpn-api"]');
   var API = ((metaApi && metaApi.getAttribute("content")) || "").replace(/\/+$/, "");
+  var apiReady = fetch("api.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+    var b = j && typeof j.api === "string" ? j.api.trim().replace(/\/+$/, "") : "";
+    if (b) API = b + "/api/web";
+  }).catch(function () { /* файла нет — остаётся адрес из meta */ });
   var BOT = "https://t.me/yarVpnRubot";
   var LS = "yarvpn_session";
   var memSession = null;
@@ -27,7 +32,7 @@
     o = o || {};
     var h = {};
     if (o.auth) h.Authorization = "Bearer " + o.auth;
-    return fetch(API + path, { method: o.method || "GET", headers: h, cache: "no-store" }).then(function (r) {
+    return apiReady.then(function () { if (!API) throw new Error("no api"); return fetch(API + path, { method: o.method || "GET", headers: h, cache: "no-store" }); }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, data: j || {} }; });
     });
   }
@@ -177,7 +182,7 @@
     function draw() {
       try {
         var q = window.qrcode(0, "M"); q.addData(link); q.make();
-        box.innerHTML = q.createSvgTag({ scalable: true, margin: 0 }).replace(/fill="black"/g, 'fill="#0a0a0b"').replace(/fill="white"/g, 'fill="#f5f5f7"');
+        box.innerHTML = q.createSvgTag({ scalable: true, margin: 0 }).replace(/fill="black"/g, 'fill="#07091a"').replace(/fill="white"/g, 'fill="#f3f5ff"');
         wrap.hidden = false;
       } catch (e) { wrap.hidden = true; }
     }
@@ -186,9 +191,12 @@
   }
   function startLogin() {
     note("");
-    if (!API) { note("Личный кабинет временно недоступен."); return; }
     loginBtn.disabled = true;
-    api("/login/start", { method: "POST" }).then(function (res) {
+    apiReady.then(function () {
+      if (!API) { loginBtn.disabled = false; note("Личный кабинет временно недоступен."); return null; }
+      return api("/login/start", { method: "POST" });
+    }).then(function (res) {
+      if (!res) return;
       if (res.status === 429) { loginBtn.disabled = false; note("Слишком много попыток входа. Подожди немного.", "info"); return; }
       if (res.status !== 200 || !res.data.token || !res.data.link) throw new Error("bad");
       st.token = res.data.token; st.total = res.data.expires_in || 300; st.until = Date.now() + st.total * 1000;
@@ -199,7 +207,7 @@
   }
   function logout() {
     var s = getSession(); clearSession(); showOut();
-    if (s && API) { try { api("/logout", { method: "POST", auth: s }); } catch (e) { /* ignore */ } }
+    if (s) { try { api("/logout", { method: "POST", auth: s }).catch(function () { /* ignore */ }); } catch (e) { /* ignore */ } }
   }
 
   function copy(text, btn) {
@@ -225,5 +233,5 @@
   });
 
   showOut();
-  if (getSession() && API) loadAccount();
+  if (getSession()) apiReady.then(function () { if (API) loadAccount(); });
 })();
