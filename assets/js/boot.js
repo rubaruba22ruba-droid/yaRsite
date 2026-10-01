@@ -1,18 +1,30 @@
 /* YarVpn — первый скрипт на каждой странице. Он внешний (не встроенный в HTML), чтобы страницы работали со строгой политикой CSP без 'unsafe-inline' для скриптов.
    Делает четыре вещи:
-   1) на боевом домене — только HTTPS;
+   1) на боевом домене открытая по http страница переходит на HTTPS, а если у сайта нет действующего сертификата — на запасной HTTPS-адрес бота
+      (тот же сайт, свой сертификат), чтобы человек не упёрся в ошибку сертификата;
    2) защита от встраивания сайта в чужую страницу (clickjacking): заголовок X-Frame-Options на GitHub Pages поставить нельзя;
    3) включает классы для анимаций появления блоков (с запасным таймером, чтобы контент не остался скрытым);
    4) если из кэша открылась устаревшая копия страницы — один раз перезагружает её (сверка с build.json). */
 (function () {
   "use strict";
-  var BUILD = 20, d = document, root = d.documentElement, loc = location;
+  var BUILD = 21, d = document, root = d.documentElement, loc = location;
   var me = d.currentScript;
 
-  if (loc.protocol === "http:" && /(^|\.)yarvpn\.best$/.test(loc.hostname)) {
-    loc.replace("https://" + loc.host + loc.pathname + loc.search + loc.hash);
-    return;
+  function goSecure() {
+    var tail = loc.pathname + loc.search + loc.hash;
+    function go(base) { loc.replace(base + tail); }
+    function mirror() {
+      fetch("/api.json?" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (j) {
+        var list = [].concat((j && j.api) || []).join(",").split(",").map(function (x) { return x.trim().replace(/\/+$/, ""); });
+        var origin = list.filter(function (x) { return /^https:\/\//.test(x); })[0];
+        if (!origin) return;
+        fetch(origin + "/api/web/ping", { mode: "no-cors", cache: "no-store" }).then(function () { go(origin); }, function () { /* запасной адрес тоже недоступен — остаёмся на странице */ });
+      }).catch(function () { /* нет связи */ });
+    }
+    try { fetch("https://" + loc.host + "/build.json?" + Date.now(), { mode: "no-cors", cache: "no-store" }).then(function () { go("https://" + loc.host); }, mirror); }
+    catch (e) { /* старый браузер */ }
   }
+  if (loc.protocol === "http:" && /(^|\.)yarvpn\.best$/.test(loc.hostname)) goSecure();
   if (window.top !== window.self) {                  // нас встроили в чужую страницу: прячем содержимое и пробуем выйти из рамки
     root.style.display = "none";
     try { window.top.location = loc.href; } catch (e) { /* браузер может запретить — тогда страница так и остаётся скрытой */ }
