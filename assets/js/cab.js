@@ -32,7 +32,7 @@
   }
 
   /* ---------- где живёт API ----------
-     Кабинет всегда открывается на сайте (yarvpn.best). Данные берутся у бота по HTTPS-адресу api.yarvpn.best (или из поля "api" в api.json).
+     Кабинет всегда открывается на сайте (yarvpn.best). Данные берутся у бота по HTTPS-адресу api.yarvpn.best:25273 (или из поля "api" в api.json); сертификат бот получает и продлевает сам.
      Если страницу отдал сам бот (тот же адрес) — работаем с ним напрямую. Переход на другой адрес — только если в api.json задано поле "cabinet". */
   function probeSameOrigin() {
     return fetch("/health", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { return t.trim() === "ok"; }).catch(function () { return false; });
@@ -58,7 +58,7 @@
     probeSameOrigin().then(function (same) {
       if (same) { API = ""; return start(); }
       return loadCfg().then(function (cfg) {
-        var base = cfg.api ? String(cfg.api).replace(/\/+$/, "") : "https://api.yarvpn.best";
+        var base = cfg.api ? String(cfg.api).replace(/\/+$/, "") : "https://api.yarvpn.best:25273";
         if (!/^https:\/\//.test(base) || location.protocol !== "https:") base = "";
         var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
         function fallback() {
