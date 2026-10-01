@@ -47,11 +47,15 @@
       .then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { clearTimeout(timer); return !!(j && j.ok); })
       .catch(function () { clearTimeout(timer); return false; });
   }
-  function showDown() {
+  function showDown(base) {
     note("Сервер кабинета сейчас не отвечает. Баланс и подписка в боте при этом не затронуты. Подождите минуту и нажмите «Повторить», либо откройте бота.", "info");
     var n = $("cNote"); if (!n) return;
     var b = doc.createElement("button"); b.type = "button"; b.className = "btn btn-glass btn-sm"; b.textContent = "Повторить"; b.style.marginLeft = "12px";
     b.addEventListener("click", function () { location.reload(); }); n.appendChild(b);
+    if (base) {
+      var a = doc.createElement("a"); a.className = "btn btn-glass btn-sm"; a.href = base + "/api/web/ping"; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Проверить связь"; a.style.marginLeft = "8px";
+      n.appendChild(a);
+    }
   }
   function boot() {
     note("Подключаемся к кабинету…", "info");
@@ -63,7 +67,7 @@
         var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
         function fallback() {
           if (cab && cab.replace(/^https?:\/\//, "") !== location.host) { note("Открываем кабинет на сервере бота…", "info"); location.replace(cab + "/cabinet/"); return; }
-          showDown();
+          showDown(base);
         }
         if (!base) return fallback();
         return pingApi(base).then(function (up) { if (up) { API = base; return start(); } fallback(); });
