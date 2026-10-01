@@ -118,7 +118,7 @@
   function fmtAt(ts) { try { return new Date(ts * 1000).toLocaleString("ru-RU", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
 
   /* ---------- вход ---------- */
-  function showLogin() { stopPolling(); show("cLogin", true); show("cDash", false); var b = $("loginBtn"); if (b) b.disabled = false; }
+  function showLogin() { stopPolling(); tgPanel(false); show("cLogin", true); show("cDash", false); var b = $("loginBtn"); if (b) b.disabled = false; }
   function showDash() { show("cLogin", false); show("cDash", true); }
 
   function login(e) {
@@ -151,6 +151,48 @@
       say(res.data.message || "Не удалось сохранить пароль. Попробуйте ещё раз.");
     }).catch(function () { btn.disabled = false; say("Нет связи с сервером."); });
   }
+  /* ---------- вход через Telegram (как на my.h1cloud.net): страница -> бот «Да, это я» -> страница ---------- */
+  var tgToken = "", tgInt = null, tgTick = null, tgEnd = 0, tgBusy = false;
+  function tgPanel(waiting) { show("tgBox", !waiting); show("tgWait", waiting); var d = $("pwBox"); if (d) d.hidden = waiting; }
+  function tgStop() {
+    if (tgInt) { clearInterval(tgInt); tgInt = null; }
+    if (tgTick) { clearInterval(tgTick); tgTick = null; }
+    tgToken = ""; tgPanel(false);
+  }
+  function tgTimerText() {
+    var left = Math.max(0, Math.round((tgEnd - Date.now()) / 1000)), t = $("tgTimer");
+    if (t) t.textContent = Math.floor(left / 60) + ":" + String(left % 60).padStart(2, "0");
+    return left;
+  }
+  function tgPoll() {
+    if (!tgToken || tgBusy) return;
+    tgBusy = true; var tok = tgToken;
+    api("/api/web/tg/status/" + encodeURIComponent(tok), { auth: false }).then(function (res) {
+      tgBusy = false; if (tok !== tgToken) return;
+      var d = res.data || {};
+      if (d.status === "confirmed" && d.session) { tgStop(); saveSession(d.session); note(""); loadAccount(); }
+      else if (d.status === "denied") { tgStop(); note("Вход отклонён в боте. Если это были вы — нажмите «Войти через Telegram» ещё раз.", "info"); }
+      else if (d.status === "expired" || res.status === 404) { tgStop(); note("Ссылка входа устарела. Нажмите «Войти через Telegram» ещё раз.", "info"); }
+      else if (res.status === 429) { /* слишком часто — следующий опрос позже */ }
+    }).catch(function () { tgBusy = false; });
+  }
+  function tgStart() {
+    note(""); var b = $("tgBtn"); if (b) b.disabled = true;
+    api("/api/web/tg/start", { method: "POST", auth: false, body: {} }).then(function (res) {
+      if (b) b.disabled = false;
+      var d = res.data || {};
+      if (res.status === 200 && d.token) {
+        tgToken = d.token; tgEnd = Date.now() + (d.expires_in || 300) * 1000;
+        $("tgOpen").href = d.link; $("tgOpenT").textContent = d.bot ? "Открыть @" + d.bot : "Открыть бота";
+        var q = $("tgQr"); if (d.qr) { q.src = d.qr; q.parentNode.parentNode.hidden = false; } else q.parentNode.parentNode.hidden = true;
+        tgPanel(true); tgTimerText();
+        tgInt = setInterval(function () { if (tgTimerText() <= 0) { tgStop(); note("Время на подтверждение вышло. Нажмите «Войти через Telegram» ещё раз.", "info"); return; } tgPoll(); }, 2000);
+        tgTick = setInterval(tgTimerText, 1000);
+      } else if (res.status === 429) note("Слишком много запросов. Подождите несколько минут.", "info");
+      else note("Не удалось начать вход. Попробуйте ещё раз или войдите по логину и паролю.", "info");
+    }).catch(function () { if (b) b.disabled = false; note("Нет связи с сервером. Попробуйте ещё раз.", "info"); });
+  }
+
   function logout() {
     var s = getSession(); clearSession(); showLogin();
     if (s) api("/api/web/logout", { method: "POST" }).catch(function () { /* ignore */ });
@@ -296,6 +338,8 @@
     var form = $("loginForm");
     on(form, "submit", login);
     on($("pwForm"), "submit", changePassword);
+    on($("tgBtn"), "click", tgStart); on($("tgCancel"), "click", tgStop);
+    doc.addEventListener("visibilitychange", function () { if (!doc.hidden) tgPoll(); });   /* вернулись из Telegram — сразу проверяем */
     on($("pwShow"), "click", function () { var i = $("fPass"), hid = i.type === "password"; i.type = hid ? "text" : "password"; this.textContent = hid ? "Скрыть" : "Показать"; });
     on($("cLogout"), "click", logout);
     on($("cRefresh"), "click", function () { loadAccount(true); });

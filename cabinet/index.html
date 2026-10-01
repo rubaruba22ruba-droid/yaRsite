@@ -23,10 +23,10 @@
 <link rel="preload" href="../assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css?v=18">
+<link rel="stylesheet" href="../assets/css/site.css?v=19">
 <script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},4000)</script>
 
-<script>window.YV_BUILD=18;(function(){try{var d=document,p=d.currentScript?d.currentScript.src:"";var base=location.pathname.indexOf("/cabinet/")>-1||location.pathname.indexOf("/privacy/")>-1||location.pathname.indexOf("/terms/")>-1?"../":"";fetch(base+"build.json?"+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j&&j.build&&j.build!==window.YV_BUILD){var k="yv_reloaded_"+j.build;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.reload()}}}).catch(function(){})}catch(e){}})()</script>
+<script>window.YV_BUILD=19;(function(){try{var d=document,p=d.currentScript?d.currentScript.src:"";var base=location.pathname.indexOf("/cabinet/")>-1||location.pathname.indexOf("/privacy/")>-1||location.pathname.indexOf("/terms/")>-1?"../":"";fetch(base+"build.json?"+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j&&j.build&&j.build!==window.YV_BUILD){var k="yv_reloaded_"+j.build;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.reload()}}}).catch(function(){})}catch(e){}})()</script>
 </head>
 <body>
 
@@ -92,14 +92,31 @@
 
     <!-- вход -->
     <div class="cab-login glass" id="cLogin" hidden>
-      <form id="loginForm" novalidate autocomplete="on">
+      <div id="tgBox">
         <h2>Войти</h2>
-        <p class="sub">Логин и пароль — в боте: <b>Профиль → «Вход на сайт»</b>. Логин — ваш Telegram ID, пароль — из того же места (можно поставить свой).</p>
-        <label class="field"><span>Логин (Telegram ID)</span><input id="fLogin" name="username" inputmode="numeric" autocomplete="username" maxlength="15" placeholder="например, 6258999209" required></label>
-        <label class="field"><span>Пароль</span><span class="pw"><input id="fPass" name="password" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="32" placeholder="Пароль из бота" required><button class="linkbtn" id="pwShow" type="button">Показать</button></span></label>
-        <div class="btn-line"><button class="btn btn-solid btn-lg" id="loginBtn" type="submit">Войти</button><a class="btn btn-glass btn-lg" id="openBot" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть бота</a></div>
-        <p class="cab-hint">Забыли пароль? В боте: Профиль → «Новый пароль» — придёт другой, а все старые входы закроются.</p>
-      </form>
+        <p class="sub">Откроется бот в Telegram — нажмите «Да, это я», и кабинет откроется сам. Пароль не нужен.</p>
+        <div class="btn-line"><button class="btn btn-solid btn-lg" id="tgBtn" type="button"><svg aria-hidden="true" class="tg-ico"><use href="#i-tg"/></svg>Войти через Telegram</button></div>
+      </div>
+
+      <div id="tgWait" hidden>
+        <h2>Вход через Telegram</h2>
+        <p class="sub">Откройте бота, нажмите <b>Start</b> и подтвердите вход кнопкой «Да, это я». Если аккаунта ещё нет, бот предложит пройти короткую проверку.</p>
+        <div class="btn-line"><a class="btn btn-solid btn-lg" id="tgOpen" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener"><svg aria-hidden="true" class="tg-ico"><use href="#i-tg"/></svg><span id="tgOpenT">Открыть бота</span></a></div>
+        <div class="qr-wrap"><div class="qr-box"><img id="tgQr" alt="QR-код для входа через Telegram" width="176" height="176"></div><p class="sub">или отсканируйте камерой телефона</p></div>
+        <p class="waiting" role="status"><i></i><span>Ждём подтверждение в Telegram…</span><b id="tgTimer"></b></p>
+        <button class="linkbtn" id="tgCancel" type="button">Отмена</button>
+      </div>
+
+      <details class="alt" id="pwBox">
+        <summary id="pwSummary">Войти по логину и паролю</summary>
+        <form id="loginForm" novalidate autocomplete="on">
+          <p class="sub">Логин и пароль — в боте: <b>Профиль → «Вход на сайт»</b>. Логин — ваш Telegram ID, пароль можно заменить на свой.</p>
+          <label class="field"><span>Логин (Telegram ID)</span><input id="fLogin" name="username" inputmode="numeric" autocomplete="username" maxlength="15" placeholder="например, 6258999209" required></label>
+          <label class="field"><span>Пароль</span><span class="pw"><input id="fPass" name="password" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="32" placeholder="Пароль из бота" required><button class="linkbtn" id="pwShow" type="button">Показать</button></span></label>
+          <div class="btn-line"><button class="btn btn-glass btn-lg" id="loginBtn" type="submit">Войти</button><a class="btn btn-glass btn-lg" id="openBot" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть бота</a></div>
+          <p class="cab-hint">Забыли пароль? В боте: Профиль → «Новый пароль» — придёт другой, а все старые входы закроются.</p>
+        </form>
+      </details>
     </div>
 
     <!-- кабинет -->
@@ -176,9 +193,9 @@
   </div>
 </footer>
 
-<script src="../assets/js/bg.js?v=18" defer></script>
-<script src="../assets/js/main.js?v=18" defer></script>
-<script src="../assets/js/cab.js?v=18" defer></script>
-<script src="../assets/js/consent.js?v=18" defer></script>
+<script src="../assets/js/bg.js?v=19" defer></script>
+<script src="../assets/js/main.js?v=19" defer></script>
+<script src="../assets/js/cab.js?v=19" defer></script>
+<script src="../assets/js/consent.js?v=19" defer></script>
 </body>
 </html>

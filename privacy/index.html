@@ -21,9 +21,9 @@
 <link rel="icon" href="../assets/img/favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
 <link rel="preload" href="../assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css?v=18">
+<link rel="stylesheet" href="../assets/css/site.css?v=19">
 <script>if(location.protocol==="http:"&&/(^|\.)yarvpn\.best$/.test(location.hostname))location.replace("https://"+location.host+location.pathname);document.documentElement.className+=" js"</script>
-<script>window.YV_BUILD=18;(function(){try{var d=document,p=d.currentScript?d.currentScript.src:"";var base=location.pathname.indexOf("/cabinet/")>-1||location.pathname.indexOf("/privacy/")>-1||location.pathname.indexOf("/terms/")>-1?"../":"";fetch(base+"build.json?"+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j&&j.build&&j.build!==window.YV_BUILD){var k="yv_reloaded_"+j.build;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.reload()}}}).catch(function(){})}catch(e){}})()</script>
+<script>window.YV_BUILD=19;(function(){try{var d=document,p=d.currentScript?d.currentScript.src:"";var base=location.pathname.indexOf("/cabinet/")>-1||location.pathname.indexOf("/privacy/")>-1||location.pathname.indexOf("/terms/")>-1?"../":"";fetch(base+"build.json?"+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j&&j.build&&j.build!==window.YV_BUILD){var k="yv_reloaded_"+j.build;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.reload()}}}).catch(function(){})}catch(e){}})()</script>
 </head>
 <body>
 <div class="bg" aria-hidden="true"><canvas id="bg"></canvas></div>
@@ -43,7 +43,8 @@
 <p>Сайт показывает информацию о сервисе и содержит личный кабинет: баланс, подписка, устройства, приглашённые друзья и пополнение баланса. Покупка тарифов и выдача подписки происходят в боте.</p>
 
 <h2>Вход в кабинет</h2>
-<p>Логин — ваш Telegram ID, пароль — случайный из 12 знаков (буквы, цифры, символы) либо тот, который вы придумали сами (любой, от 4 до 16 знаков). Данные для входа показывает бот <a href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">@yarVpnRubot</a> в разделе «Профиль → Вход на сайт»; свой пароль можно поставить там же («Свой пароль») или в кабинете на сайте, а кнопка «Новый пароль» в боте выдаёт другой и закрывает все прежние входы. Кабинет обслуживает сервер бота: при входе он получает введённые логин и пароль, ваш IP-адрес (для защиты от подбора пароля) и затем отдаёт данные вашего аккаунта — баланс, подписку, ссылку подписки, историю пополнений. Пароль хранится на стороне бота в виде хэша; если пароль выдал бот, его копию бот хранит, чтобы снова показать вам в «Профиле». Никому не сообщайте пароль и свою ссылку подписки.</p>
+<p><b>Через Telegram (основной способ).</b> Нажмите «Войти через Telegram» — сервер бота выдаёт странице одноразовую ссылку на <a href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">@yarVpnRubot</a> (действует 5 минут). В боте вы видите, с какого браузера и IP запрошен вход, и подтверждаете его кнопкой «Да, это я» (или отклоняете «Нет»). Мы сохраняем в базе бота только хэш этой ссылки, ваш IP-адрес и название браузера на время подтверждения. После подтверждения страница получает сессию (она хранится в вашем браузере до «Выйти»; команда /websessions в боте закрывает все входы).</p>
+<p><b>По логину и паролю.</b> Логин — ваш Telegram ID, пароль — случайный из 12 знаков (буквы, цифры, символы) либо тот, который вы придумали сами (любой, от 4 до 16 знаков). Данные для входа показывает бот <a href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">@yarVpnRubot</a> в разделе «Профиль → Вход на сайт»; свой пароль можно поставить там же («Свой пароль») или в кабинете на сайте, а кнопка «Новый пароль» в боте выдаёт другой и закрывает все прежние входы. Кабинет обслуживает сервер бота: при входе он получает введённые логин и пароль, ваш IP-адрес (для защиты от подбора пароля) и затем отдаёт данные вашего аккаунта — баланс, подписку, ссылку подписки, историю пополнений. Пароль хранится на стороне бота в виде хэша; если пароль выдал бот, его копию бот хранит, чтобы снова показать вам в «Профиле». Никому не сообщайте пароль и свою ссылку подписки.</p>
 <p>Если кабинет открыт по адресу, начинающемуся с <b>http://</b> (без шифрования), данные между браузером и сервером передаются открыто — на общедоступных сетях (кафе, вокзалы) лучше пользоваться ботом в Telegram.</p>
 
 <h2>Пополнение</h2>
@@ -69,7 +70,7 @@
     <div class="foot-end"><span>© 2026 YarVpn</span><span><a href="../privacy/">Политика конфиденциальности</a> · <a href="../terms/">Условия использования</a></span></div>
   </div>
 </footer>
-<script src="../assets/js/bg.js?v=18" defer></script>
-<script src="../assets/js/consent.js?v=18" defer></script>
+<script src="../assets/js/bg.js?v=19" defer></script>
+<script src="../assets/js/consent.js?v=19" defer></script>
 </body>
 </html>
