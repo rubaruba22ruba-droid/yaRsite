@@ -1,4 +1,4 @@
-/* YarVpn — личный кабинет: вход по логину (Telegram ID) и паролю (из «Профиля» бота или свой), данные аккаунта, пополнение баланса (Crypto Pay и TON).
+/* YarVpn — личный кабинет: вход по логину (Telegram ID) и паролю (из «Профиля» бота или свой — любой, 4–16 знаков), данные аккаунта, пополнение баланса (Crypto Pay и TON).
    Работает БЕЗ воркеров и прокси: страницу кабинета отдаёт сам бот, поэтому сайт и API — на одном адресе.
    Если страница лежит на обычном хостинге (GitHub Pages), она сама переходит в кабинет на сервере бота (адрес — в api.json, поле "cabinet"). */
 (function () {
@@ -31,21 +31,42 @@
       .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { return { status: r.status, data: j || {} }; }); });
   }
 
-  /* ---------- где живёт API ---------- */
+  /* ---------- где живёт API ----------
+     1) страницу отдал сам бот (тот же адрес) — работаем с ним;
+     2) страница на yarvpn.best (https) и у бота есть https-адрес api.yarvpn.best (или поле "api" в api.json) — входим прямо на сайте;
+     3) иначе https-страница не может обращаться к http-серверу бота (запрет браузера) — переходим в кабинет на сервере бота (поле "cabinet"). */
+  var NOAPI = "yv_cab_noapi";
   function probeSameOrigin() {
     return fetch("/health", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { return t.trim() === "ok"; }).catch(function () { return false; });
   }
   function loadCfg() {
     return fetch("../api.json", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; });
   }
+  function pingApi(base) {
+    var ctl = typeof AbortController === "function" ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 3000);
+    return fetch(base + "/api/web/ping", { cache: "no-store", signal: ctl ? ctl.signal : undefined })
+      .then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { clearTimeout(timer); return !!(j && j.ok); })
+      .catch(function () { clearTimeout(timer); return false; });
+  }
+  function recentlyDown() { try { return Date.now() - Number(localStorage.getItem(NOAPI) || 0) < 15 * 60 * 1000; } catch (e) { return false; } }
+  function markDown(yes) { try { if (yes) localStorage.setItem(NOAPI, String(Date.now())); else localStorage.removeItem(NOAPI); } catch (e) { /* ignore */ } }
+  function toBotCabinet(cfg) {
+    var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
+    if (cab && cab.replace(/^https?:\/\//, "") !== location.host) { note("Открываем кабинет на сервере бота…", "info"); location.replace(cab + "/cabinet/"); return; }
+    note("Кабинет временно недоступен. Попробуйте позже или откройте бота в Telegram.", "info");
+  }
   function boot() {
     probeSameOrigin().then(function (same) {
       if (same) { API = ""; return start(); }
       return loadCfg().then(function (cfg) {
-        if (cfg.api && /^https:\/\//.test(cfg.api) && location.protocol === "https:") { API = String(cfg.api).replace(/\/+$/, ""); return start(); }
-        var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
-        if (cab && cab.replace(/^https?:\/\//, "") !== location.host) { location.replace(cab + "/cabinet/"); return; }
-        note("Кабинет ещё не подключён к боту. Владельцу сайта: впишите адрес бота в файл api.json (поле «cabinet»).", "info");
+        var base = cfg.api ? String(cfg.api).replace(/\/+$/, "") : (location.protocol === "https:" ? "https://api.yarvpn.best" : "");
+        var usable = base && /^https:\/\//.test(base) && location.protocol === "https:";
+        if (!usable || recentlyDown()) return toBotCabinet(cfg);
+        return pingApi(base).then(function (up) {
+          if (up) { markDown(false); API = base; return start(); }
+          markDown(true); toBotCabinet(cfg);
+        });
       });
     });
   }
@@ -78,10 +99,10 @@
     var msg = $("pwMsg"), cur = $("pwCur").value, nw = $("pwNew").value, btn = $("pwSave");
     function say(t, ok) { msg.hidden = !t; msg.textContent = t || ""; msg.className = "sub" + (ok ? " ok" : ""); }
     say("");
+    nw = nw.replace(/^\s+|\s+$/g, "");
     if (!cur) { say("Введите текущий пароль."); return; }
-    if (nw.length < 8) { say("Новый пароль — минимум 8 знаков."); return; }
-    if (/\s/.test(nw)) { say("В пароле не должно быть пробелов."); return; }
-    if (/^\d+$/.test(nw)) { say("Пароль из одних цифр легко подобрать — добавьте буквы или символы."); return; }
+    if (nw.length < 4) { say("Новый пароль — минимум 4 знака."); return; }
+    if (nw.length > 16) { say("Новый пароль — максимум 16 знаков."); return; }
     btn.disabled = true;
     api("/api/web/password", { method: "POST", body: { current: cur, new: nw } }).then(function (res) {
       btn.disabled = false;
