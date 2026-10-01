@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /cabinet/
+Disallow: /build.json
+Disallow: /api.json
 
 Host: https://yarvpn.best
 Sitemap: https://yarvpn.best/sitemap.xml

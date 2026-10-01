@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cab.yarvpn.best:25273 https://api.yarvpn.best:25273 https://cloudflare-dns.com; manifest-src 'self'; base-uri 'none'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Личный кабинет — YarVpn</title>
 <meta name="description" content="Личный кабинет YarVpn: баланс, подписка, устройства и пополнение через Crypto Pay и TON. Вход по логину и паролю из бота.">
 <meta name="robots" content="noindex,nofollow">
@@ -23,10 +25,9 @@
 <link rel="preload" href="../assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css?v=19">
-<script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},4000)</script>
+<link rel="stylesheet" href="../assets/css/site.css?v=20">
+<script src="../assets/js/boot.js?v=20" data-reveal="4000"></script>
 
-<script>window.YV_BUILD=19;(function(){try{var d=document,p=d.currentScript?d.currentScript.src:"";var base=location.pathname.indexOf("/cabinet/")>-1||location.pathname.indexOf("/privacy/")>-1||location.pathname.indexOf("/terms/")>-1?"../":"";fetch(base+"build.json?"+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){if(j&&j.build&&j.build!==window.YV_BUILD){var k="yv_reloaded_"+j.build;if(!sessionStorage.getItem(k)){sessionStorage.setItem(k,"1");location.reload()}}}).catch(function(){})}catch(e){}})()</script>
 </head>
 <body>
 
@@ -193,9 +194,9 @@
   </div>
 </footer>
 
-<script src="../assets/js/bg.js?v=19" defer></script>
-<script src="../assets/js/main.js?v=19" defer></script>
-<script src="../assets/js/cab.js?v=19" defer></script>
-<script src="../assets/js/consent.js?v=19" defer></script>
+<script src="../assets/js/bg.js?v=20" defer></script>
+<script src="../assets/js/main.js?v=20" defer></script>
+<script src="../assets/js/cab.js?v=20" defer></script>
+<script src="../assets/js/consent.js?v=20" defer></script>
 </body>
 </html>

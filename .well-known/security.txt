@@ -1,0 +1,6 @@
+Contact: mailto:yarsup@proton.me
+Contact: https://t.me/entoni
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: ru, en
+Canonical: https://yarvpn.best/.well-known/security.txt
+Policy: https://yarvpn.best/privacy/
