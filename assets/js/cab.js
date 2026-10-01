@@ -32,10 +32,8 @@
   }
 
   /* ---------- где живёт API ----------
-     1) страницу отдал сам бот (тот же адрес) — работаем с ним;
-     2) страница на yarvpn.best (https) и у бота есть https-адрес api.yarvpn.best (или поле "api" в api.json) — входим прямо на сайте;
-     3) иначе https-страница не может обращаться к http-серверу бота (запрет браузера) — переходим в кабинет на сервере бота (поле "cabinet"). */
-  var NOAPI = "yv_cab_noapi";
+     Кабинет всегда открывается на сайте (yarvpn.best). Данные берутся у бота по HTTPS-адресу api.yarvpn.best (или из поля "api" в api.json).
+     Если страницу отдал сам бот (тот же адрес) — работаем с ним напрямую. Переход на другой адрес — только если в api.json задано поле "cabinet". */
   function probeSameOrigin() {
     return fetch("/health", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { return t.trim() === "ok"; }).catch(function () { return false; });
   }
@@ -44,29 +42,31 @@
   }
   function pingApi(base) {
     var ctl = typeof AbortController === "function" ? new AbortController() : null;
-    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 3000);
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 7000);
     return fetch(base + "/api/web/ping", { cache: "no-store", signal: ctl ? ctl.signal : undefined })
       .then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { clearTimeout(timer); return !!(j && j.ok); })
       .catch(function () { clearTimeout(timer); return false; });
   }
-  function recentlyDown() { try { return Date.now() - Number(localStorage.getItem(NOAPI) || 0) < 15 * 60 * 1000; } catch (e) { return false; } }
-  function markDown(yes) { try { if (yes) localStorage.setItem(NOAPI, String(Date.now())); else localStorage.removeItem(NOAPI); } catch (e) { /* ignore */ } }
-  function toBotCabinet(cfg) {
-    var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
-    if (cab && cab.replace(/^https?:\/\//, "") !== location.host) { note("Открываем кабинет на сервере бота…", "info"); location.replace(cab + "/cabinet/"); return; }
-    note("Кабинет временно недоступен. Попробуйте позже или откройте бота в Telegram.", "info");
+  function showDown() {
+    note("Сервер кабинета сейчас не отвечает. Баланс и подписка в боте при этом не затронуты. Подождите минуту и нажмите «Повторить», либо откройте бота.", "info");
+    var n = $("cNote"); if (!n) return;
+    var b = doc.createElement("button"); b.type = "button"; b.className = "btn btn-glass btn-sm"; b.textContent = "Повторить"; b.style.marginLeft = "12px";
+    b.addEventListener("click", function () { location.reload(); }); n.appendChild(b);
   }
   function boot() {
+    note("Подключаемся к кабинету…", "info");
     probeSameOrigin().then(function (same) {
       if (same) { API = ""; return start(); }
       return loadCfg().then(function (cfg) {
-        var base = cfg.api ? String(cfg.api).replace(/\/+$/, "") : (location.protocol === "https:" ? "https://api.yarvpn.best" : "");
-        var usable = base && /^https:\/\//.test(base) && location.protocol === "https:";
-        if (!usable || recentlyDown()) return toBotCabinet(cfg);
-        return pingApi(base).then(function (up) {
-          if (up) { markDown(false); API = base; return start(); }
-          markDown(true); toBotCabinet(cfg);
-        });
+        var base = cfg.api ? String(cfg.api).replace(/\/+$/, "") : "https://api.yarvpn.best";
+        if (!/^https:\/\//.test(base) || location.protocol !== "https:") base = "";
+        var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
+        function fallback() {
+          if (cab && cab.replace(/^https?:\/\//, "") !== location.host) { note("Открываем кабинет на сервере бота…", "info"); location.replace(cab + "/cabinet/"); return; }
+          showDown();
+        }
+        if (!base) return fallback();
+        return pingApi(base).then(function (up) { if (up) { API = base; return start(); } fallback(); });
       });
     });
   }
@@ -252,6 +252,7 @@
   }
 
   function start() {
+    note("");
     var form = $("loginForm");
     on(form, "submit", login);
     on($("pwForm"), "submit", changePassword);
