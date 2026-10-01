@@ -48,14 +48,35 @@
       .then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { clearTimeout(timer); return !!(j && j.ok); })
       .catch(function () { clearTimeout(timer); return false; });
   }
-  function showDown(base) {
-    note("Сервер кабинета сейчас не отвечает. Баланс и подписка в боте при этом не затронуты. Подождите минуту и нажмите «Повторить», либо откройте бота.", "info");
+  /* DNS-диагностика: спрашиваем публичный DNS-over-HTTPS, есть ли у имён сервера адрес. Если есть — сервер жив, а проблема в DNS именно этого устройства. */
+  function dohHasA(host) {
+    return fetch("https://cloudflare-dns.com/dns-query?name=" + encodeURIComponent(host) + "&type=A", { headers: { accept: "application/dns-json" }, cache: "no-store" })
+      .then(function (r) { return r.json(); }).then(function (j) { return !!(j && j.Answer && j.Answer.some(function (a) { return a.type === 1; })); })
+      .catch(function () { return null; });
+  }
+  function showDown(bases, fallbackUrl) {
+    bases = bases || [];
     var n = $("cNote"); if (!n) return;
+    n.className = "note info"; n.hidden = false; n.textContent = "";
+    var txt = doc.createElement("span");
+    txt.textContent = "Сервер кабинета сейчас не отвечает. Баланс и подписка в боте при этом не затронуты. Подождите минуту и нажмите «Повторить», либо откройте бота.";
+    n.appendChild(txt);
     var b = doc.createElement("button"); b.type = "button"; b.className = "btn btn-glass btn-sm"; b.textContent = "Повторить"; b.style.marginLeft = "12px";
     b.addEventListener("click", function () { location.reload(); }); n.appendChild(b);
-    if (base) {
-      var a = doc.createElement("a"); a.className = "btn btn-glass btn-sm"; a.href = base + "/api/web/ping"; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Проверить связь"; a.style.marginLeft = "8px";
+    var fb = String(fallbackUrl || "").replace(/\/+$/, "");
+    if (fb) {
+      var f = doc.createElement("a"); f.className = "btn btn-solid btn-sm"; f.href = fb + "/cabinet/"; f.rel = "noopener"; f.textContent = "Запасной вход"; f.style.marginLeft = "8px";
+      f.title = "Кабинет на адресе сервера бота (без шифрования)"; n.appendChild(f);
+    }
+    if (bases[0]) {
+      var a = doc.createElement("a"); a.className = "btn btn-glass btn-sm"; a.href = bases[0] + "/api/web/ping"; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Проверить связь"; a.style.marginLeft = "8px";
       n.appendChild(a);
+      Promise.all(bases.map(function (u) { return dohHasA(u.replace(/^https:\/\//, "").replace(/[:\/].*$/, "")); })).then(function (res) {
+        if (res.some(function (x) { return x === true; })) {
+          txt.textContent = "Сервер кабинета работает — его адрес есть в интернете, но ваше устройство (или оператор связи) пока его не находит: это кэш DNS, обычно проходит за 10–30 минут. " +
+            "Быстрый способ: включите VPN или Wi‑Fi и нажмите «Повторить» — или войдите через «Запасной вход» (адрес сервера бота, соединение без шифрования).";
+        }
+      });
     }
   }
   function pingAny(bases) {
@@ -81,7 +102,7 @@
         var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
         function fallback() {
           if (cab && cab.replace(/^https?:\/\//, "") !== location.host) { note("Открываем кабинет на сервере бота…", "info"); location.replace(cab + "/cabinet/"); return; }
-          showDown(bases[0]);
+          showDown(bases, cfg.fallback);
         }
         if (!bases.length) return fallback();
         return pingAny(bases).then(function (base) { if (base) { API = base; return start(); } fallback(); });
