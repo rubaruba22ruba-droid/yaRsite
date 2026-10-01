@@ -96,7 +96,8 @@
       if (same) { API = ""; return start(); }
       return loadCfg().then(function (cfg) {
         /* api в api.json — один адрес или список; страница проверяет все сразу и берёт тот, что ответил (у одного имени у конкретного телефона DNS может запаздывать) */
-        var list = cfg.api ? [].concat(cfg.api) : DEFAULT_API;
+        var list = cfg.api ? [].concat(cfg.api).join(",").split(",") : DEFAULT_API;
+        list = list.map(function (u) { return String(u).trim(); }).filter(Boolean);
         var bases = list.map(function (u) { return String(u).replace(/\/+$/, ""); }).filter(function (u) { return /^https:\/\//.test(u); });
         if (location.protocol !== "https:") bases = [];
         var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
