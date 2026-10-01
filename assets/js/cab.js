@@ -32,8 +32,9 @@
   }
 
   /* ---------- где живёт API ----------
-     Кабинет всегда открывается на сайте (yarvpn.best). Данные берутся у бота по HTTPS-адресу api.yarvpn.best:25273 (или из поля "api" в api.json); сертификат бот получает и продлевает сам.
+     Кабинет всегда открывается на сайте (yarvpn.best). Данные берутся у бота по HTTPS-адресу cab.yarvpn.best:25273 (запасной — api.yarvpn.best:25273; список в api.json, поле "api"); сертификат бот получает и продлевает сам.
      Если страницу отдал сам бот (тот же адрес) — работаем с ним напрямую. Переход на другой адрес — только если в api.json задано поле "cabinet". */
+  var DEFAULT_API = ["https://cab.yarvpn.best:25273", "https://api.yarvpn.best:25273"];
   function probeSameOrigin() {
     return fetch("/health", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { return t.trim() === "ok"; }).catch(function () { return false; });
   }
@@ -57,20 +58,33 @@
       n.appendChild(a);
     }
   }
+  function pingAny(bases) {
+    return new Promise(function (resolve) {
+      var left = bases.length, done = false;
+      bases.forEach(function (b) {
+        pingApi(b).then(function (up) {
+          if (done) return;
+          if (up) { done = true; resolve(b); } else if (--left === 0) resolve("");
+        });
+      });
+    });
+  }
   function boot() {
     note("Подключаемся к кабинету…", "info");
     probeSameOrigin().then(function (same) {
       if (same) { API = ""; return start(); }
       return loadCfg().then(function (cfg) {
-        var base = cfg.api ? String(cfg.api).replace(/\/+$/, "") : "https://api.yarvpn.best:25273";
-        if (!/^https:\/\//.test(base) || location.protocol !== "https:") base = "";
+        /* api в api.json — один адрес или список; страница проверяет все сразу и берёт тот, что ответил (у одного имени у конкретного телефона DNS может запаздывать) */
+        var list = cfg.api ? [].concat(cfg.api) : DEFAULT_API;
+        var bases = list.map(function (u) { return String(u).replace(/\/+$/, ""); }).filter(function (u) { return /^https:\/\//.test(u); });
+        if (location.protocol !== "https:") bases = [];
         var cab = String(cfg.cabinet || "").replace(/\/+$/, "");
         function fallback() {
           if (cab && cab.replace(/^https?:\/\//, "") !== location.host) { note("Открываем кабинет на сервере бота…", "info"); location.replace(cab + "/cabinet/"); return; }
-          showDown(base);
+          showDown(bases[0]);
         }
-        if (!base) return fallback();
-        return pingApi(base).then(function (up) { if (up) { API = base; return start(); } fallback(); });
+        if (!bases.length) return fallback();
+        return pingAny(bases).then(function (base) { if (base) { API = base; return start(); } fallback(); });
       });
     });
   }
