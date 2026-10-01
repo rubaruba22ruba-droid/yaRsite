@@ -7,7 +7,7 @@
    4) если из кэша открылась устаревшая копия страницы — один раз перезагружает её (сверка с build.json). */
 (function () {
   "use strict";
-  var BUILD = 21, d = document, root = d.documentElement, loc = location;
+  var BUILD = 22, d = document, root = d.documentElement, loc = location;
   var me = d.currentScript;
 
   function goSecure() {
@@ -16,9 +16,10 @@
     function mirror() {
       fetch("/api.json?" + Date.now(), { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (j) {
         var list = [].concat((j && j.api) || []).join(",").split(",").map(function (x) { return x.trim().replace(/\/+$/, ""); });
-        var origin = list.filter(function (x) { return /^https:\/\//.test(x); })[0];
-        if (!origin) return;
-        fetch(origin + "/api/web/ping", { mode: "no-cors", cache: "no-store" }).then(function () { go(origin); }, function () { /* запасной адрес тоже недоступен — остаёмся на странице */ });
+        var done = false;
+        list.filter(function (x) { return /^https:\/\//.test(x); }).forEach(function (origin) {          // пробуем все адреса бота сразу, берём первый ответивший
+          fetch(origin + "/api/web/ping", { mode: "no-cors", cache: "no-store" }).then(function () { if (!done) { done = true; go(origin); } }, function () { /* этот адрес недоступен */ });
+        });
       }).catch(function () { /* нет связи */ });
     }
     try { fetch("https://" + loc.host + "/build.json?" + Date.now(), { mode: "no-cors", cache: "no-store" }).then(function () { go("https://" + loc.host); }, mirror); }

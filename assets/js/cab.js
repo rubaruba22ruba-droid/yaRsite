@@ -34,7 +34,7 @@
   /* ---------- где живёт API ----------
      Кабинет всегда открывается на сайте (yarvpn.best). Данные берутся у бота по HTTPS-адресу cab.yarvpn.best:25273 (запасной — api.yarvpn.best:25273; список в api.json, поле "api"); сертификат бот получает и продлевает сам.
      Если страницу отдал сам бот (тот же адрес) — работаем с ним напрямую. Переход на другой адрес — только если в api.json задано поле "cabinet". */
-  var DEFAULT_API = ["https://cab.yarvpn.best:25273", "https://api.yarvpn.best:25273"];
+  var DEFAULT_API = ["https://yarvpn.duckdns.org:25273", "https://cab.yarvpn.best:25273", "https://api.yarvpn.best:25273"];
   function probeSameOrigin() {
     return fetch("/health", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (t) { return t.trim() === "ok"; }).catch(function () { return false; });
   }
