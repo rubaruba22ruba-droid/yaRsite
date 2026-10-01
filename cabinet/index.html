@@ -23,7 +23,7 @@
 <link rel="preload" href="../assets/fonts/unbounded-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/unbounded-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css?v=9">
+<link rel="stylesheet" href="../assets/css/site.css?v=10">
 <script>document.documentElement.className+=" js";setTimeout(function(){document.documentElement.className+=" rv-all"},4000)</script>
 
 </head>
@@ -93,11 +93,11 @@
     <div class="cab-login glass" id="cLogin" hidden>
       <form id="loginForm" novalidate autocomplete="on">
         <h2>Войти</h2>
-        <p class="sub">Логин и пароль — в боте: <b>Профиль → «Вход на сайт»</b>. Логин — ваш Telegram ID, пароль — 8 цифр.</p>
+        <p class="sub">Логин и пароль — в боте: <b>Профиль → «Вход на сайт»</b>. Логин — ваш Telegram ID, пароль — из того же места (можно поставить свой).</p>
         <label class="field"><span>Логин (Telegram ID)</span><input id="fLogin" name="username" inputmode="numeric" autocomplete="username" maxlength="15" placeholder="например, 6258999209" required></label>
-        <label class="field"><span>Пароль (8 цифр)</span><span class="pw"><input id="fPass" name="password" type="password" inputmode="numeric" autocomplete="current-password" maxlength="8" placeholder="••••••••" required><button class="linkbtn" id="pwShow" type="button">Показать</button></span></label>
+        <label class="field"><span>Пароль</span><span class="pw"><input id="fPass" name="password" type="password" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" maxlength="72" placeholder="Пароль из бота" required><button class="linkbtn" id="pwShow" type="button">Показать</button></span></label>
         <div class="btn-line"><button class="btn btn-solid btn-lg" id="loginBtn" type="submit">Войти</button><a class="btn btn-glass btn-lg" id="openBot" href="https://t.me/yarVpnRubot" target="_blank" rel="noopener">Открыть бота</a></div>
-        <p class="cab-hint">Пароль можно сменить в боте кнопкой «Новый пароль» — все старые входы закроются.</p>
+        <p class="cab-hint">Забыли пароль? В боте: Профиль → «Новый пароль» — придёт другой, а все старые входы закроются.</p>
       </form>
     </div>
 
@@ -135,6 +135,17 @@
         <div class="hist" id="payHist" hidden><p class="lbl">Последние пополнения</p><ul id="payHistList"></ul></div>
         <p class="cab-hint">Оплата картой/СБП и Telegram Stars — в боте: Профиль → «Пополнить баланс».</p>
       </div>
+
+      <!-- пароль -->
+      <form class="pay-card glass" id="pwForm" novalidate>
+        <h2>Свой пароль</h2>
+        <p class="sub">Поставьте пароль, который запомните. От 8 знаков, без пробелов, буквы + цифры или символы (из одних цифр нельзя). Остальные устройства выйдут из кабинета.</p>
+        <input id="pwUser" type="text" name="username" autocomplete="username" hidden>
+        <label class="field"><span>Текущий пароль</span><input id="pwCur" type="password" autocomplete="current-password" autocapitalize="off" spellcheck="false" maxlength="72"></label>
+        <label class="field"><span>Новый пароль</span><input id="pwNew" type="password" autocomplete="new-password" autocapitalize="off" spellcheck="false" maxlength="72"></label>
+        <div class="btn-line"><button class="btn btn-glass btn-lg" id="pwSave" type="submit">Сохранить пароль</button></div>
+        <p class="sub" id="pwMsg" role="status" hidden></p>
+      </form>
     </div>
   </div>
 </section>
@@ -164,9 +175,9 @@
   </div>
 </footer>
 
-<script src="../assets/js/bg.js?v=9" defer></script>
-<script src="../assets/js/main.js?v=9" defer></script>
-<script src="../assets/js/cab.js?v=9" defer></script>
-<script src="../assets/js/consent.js?v=9" defer></script>
+<script src="../assets/js/bg.js?v=10" defer></script>
+<script src="../assets/js/main.js?v=10" defer></script>
+<script src="../assets/js/cab.js?v=10" defer></script>
+<script src="../assets/js/consent.js?v=10" defer></script>
 </body>
 </html>

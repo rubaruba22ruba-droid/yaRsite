@@ -266,14 +266,14 @@ main{position:relative}
 .amounts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .chip-btn{min-height:44px;padding:0 18px;border-radius:99px;border:1px solid var(--line2);background:rgba(255,255,255,.04);color:var(--t1);font:700 14px var(--f-ui);transition:border-color .2s,background .2s}
 .chip-btn:hover{border-color:var(--or);background:rgba(255,90,0,.1)}
-.pay-card .field{max-width:260px}
+.pay-card .field{max-width:360px}
 .pay-card .btn-line{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 .pay-card .btn-line .btn{flex:1 1 200px}
 .pay-card .btn[disabled],.cab-login .btn[disabled]{opacity:.6;pointer-events:none}
 .pay-out{margin-top:22px;padding:18px;border:1px solid rgba(255,90,0,.5);border-radius:var(--r);background:rgba(255,90,0,.06)}
 .pay-out h3{font:800 15px/1.2 var(--f-d);text-transform:uppercase;margin-bottom:6px}
 .pay-out .btn{margin-top:14px;width:100%}
-.pay-out .sub.ok{color:var(--ok);font-weight:700}
+.sub.ok{color:var(--ok);font-weight:700}
 .kv{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;margin-top:10px}
 .kv>span{color:var(--t3);font:700 11px var(--f-d);text-transform:uppercase;letter-spacing:.08em}
 .kv code{min-width:0;overflow-wrap:anywhere;padding:9px 12px;background:rgba(0,0,0,.4);border:1px solid var(--line)}

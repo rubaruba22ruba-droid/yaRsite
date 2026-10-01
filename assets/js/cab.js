@@ -1,4 +1,4 @@
-/* YarVpn — личный кабинет: вход по логину (Telegram ID) и паролю (8 цифр из «Профиля» бота), данные аккаунта, пополнение баланса (Crypto Pay и TON).
+/* YarVpn — личный кабинет: вход по логину (Telegram ID) и паролю (из «Профиля» бота или свой), данные аккаунта, пополнение баланса (Crypto Pay и TON).
    Работает БЕЗ воркеров и прокси: страницу кабинета отдаёт сам бот, поэтому сайт и API — на одном адресе.
    Если страница лежит на обычном хостинге (GitHub Pages), она сама переходит в кабинет на сервере бота (адрес — в api.json, поле "cabinet"). */
 (function () {
@@ -62,16 +62,33 @@
 
   function login(e) {
     e.preventDefault(); note("");
-    var id = $("fLogin").value.replace(/\D/g, ""), pw = $("fPass").value.replace(/\D/g, "");
+    var id = $("fLogin").value.replace(/\D/g, ""), pw = $("fPass").value.replace(/^\s+|\s+$/g, "");
     if (id.length < 3) { note("Введите свой Telegram ID — он в боте: Профиль → «Вход на сайт».", "info"); return; }
-    if (pw.length !== 8) { note("Пароль — ровно 8 цифр (из Профиля в боте).", "info"); return; }
+    if (!pw) { note("Введите пароль — он в боте: Профиль → «Вход на сайт».", "info"); return; }
     var btn = $("loginBtn"); btn.disabled = true;
     api("/api/web/login", { method: "POST", auth: false, body: { login: id, password: pw } }).then(function (res) {
       btn.disabled = false;
-      if (res.status === 200 && res.data.session) { saveSession(res.data.session); $("fPass").value = ""; loadAccount(); return; }
-      if (res.status === 429) note(res.data.error === "locked" ? "Слишком много неверных попыток. Подождите 15 минут или смените пароль в боте." : "Слишком много попыток. Подождите несколько минут.", "info");
+      if (res.status === 200 && res.data.session) { saveSession(res.data.session); $("fPass").value = ""; $("pwUser").value = id; loadAccount(); return; }
+      if (res.status === 429) note(res.data.error === "locked" ? "Слишком много неверных попыток. Подождите 15 минут или возьмите новый пароль в боте." : "Слишком много попыток. Подождите несколько минут.", "info");
       else note("Неверный логин или пароль. Проверьте данные в боте: Профиль → «Вход на сайт».", "info");
     }).catch(function () { btn.disabled = false; note("Нет связи с сервером. Попробуйте ещё раз.", "info"); });
+  }
+  function changePassword(e) {
+    e.preventDefault();
+    var msg = $("pwMsg"), cur = $("pwCur").value, nw = $("pwNew").value, btn = $("pwSave");
+    function say(t, ok) { msg.hidden = !t; msg.textContent = t || ""; msg.className = "sub" + (ok ? " ok" : ""); }
+    say("");
+    if (!cur) { say("Введите текущий пароль."); return; }
+    if (nw.length < 8) { say("Новый пароль — минимум 8 знаков."); return; }
+    if (/\s/.test(nw)) { say("В пароле не должно быть пробелов."); return; }
+    if (/^\d+$/.test(nw)) { say("Пароль из одних цифр легко подобрать — добавьте буквы или символы."); return; }
+    btn.disabled = true;
+    api("/api/web/password", { method: "POST", body: { current: cur, new: nw } }).then(function (res) {
+      btn.disabled = false;
+      if (res.status === 401) { clearSession(); showLogin(); note("Сессия закончилась. Войдите снова.", "info"); return; }
+      if (res.status === 200 && res.data.session) { saveSession(res.data.session); $("pwCur").value = ""; $("pwNew").value = ""; say("✅ Пароль сохранён. Остальные устройства вышли из кабинета.", true); return; }
+      say(res.data.message || "Не удалось сохранить пароль. Попробуйте ещё раз.");
+    }).catch(function () { btn.disabled = false; say("Нет связи с сервером."); });
   }
   function logout() {
     var s = getSession(); clearSession(); showLogin();
@@ -81,7 +98,7 @@
   /* ---------- аккаунт ---------- */
   var refLink = "";
   function renderAccount(d) {
-    showDash(); note("");
+    showDash(); note(""); $("pwUser").value = d.id;
     var name = d.first_name || d.username || ("ID " + d.id);
     $("cAva").textContent = String(name).trim().charAt(0).toUpperCase() || "Y";
     $("cName").textContent = name;
@@ -216,6 +233,7 @@
   function start() {
     var form = $("loginForm");
     on(form, "submit", login);
+    on($("pwForm"), "submit", changePassword);
     on($("pwShow"), "click", function () { var i = $("fPass"), hid = i.type === "password"; i.type = hid ? "text" : "password"; this.textContent = hid ? "Скрыть" : "Показать"; });
     on($("cLogout"), "click", logout);
     on($("cRefresh"), "click", function () { loadAccount(true); });
