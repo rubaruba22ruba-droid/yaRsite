@@ -306,11 +306,16 @@
   }
   function renderPayOut(p) {
     var out = $("payOut"); out.innerHTML = ""; out.hidden = false;
-    var h = doc.createElement("h3"); h.textContent = p.method === "crypto" ? "Оплатите счёт в @CryptoBot" : "Переведите TON"; out.appendChild(h);
+    var h = doc.createElement("h3"); h.textContent = p.method === "crypto" ? "Оплатите счёт в @CryptoBot" : p.method === "ton" ? "Переведите TON" : "Оплатите по СБП"; out.appendChild(h);
     var st = doc.createElement("p"); st.className = "sub"; st.id = "payState"; st.textContent = "Ждём оплату… (страницу можно не закрывать — зачисление автоматическое)";
     if (p.method === "crypto") {
       var t = doc.createElement("p"); t.className = "sub"; t.textContent = "Сумма: " + fmtMoney(p.amount) + " ₽. Монету (USDT, TON, BTC и др.) выберете при оплате."; out.appendChild(t);
       var a = doc.createElement("a"); a.className = "btn btn-solid btn-lg"; a.href = p.pay_url; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Оплатить в Crypto Pay"; out.appendChild(a);
+    } else if (p.method !== "ton") {                     /* СБП и другие способы RollyPay: открывается страница оплаты */
+      var t3 = doc.createElement("p"); t3.className = "sub"; t3.textContent = "Сумма: " + fmtMoney(p.amount) + " ₽. Откроется страница оплаты СБП: выберите свой банк и подтвердите платёж. Деньги зачисляются сами."; out.appendChild(t3);
+      if (/^https:\/\//i.test(String(p.pay_url || ""))) {
+        var a3 = doc.createElement("a"); a3.className = "btn btn-solid btn-lg"; a3.href = p.pay_url; a3.target = "_blank"; a3.rel = "noopener"; a3.textContent = "Оплатить по СБП"; out.appendChild(a3);
+      }
     } else {
       out.appendChild(line("Сумма", p.amount_ton + " TON", true)); out.appendChild(line("Адрес", p.address, true)); out.appendChild(line("Комментарий", p.comment, true));
       var w = doc.createElement("p"); w.className = "sub"; w.textContent = "Комментарий обязателен — по нему мы находим платёж. Сумма ≈ " + fmtMoney(p.amount) + " ₽."; out.appendChild(w);
