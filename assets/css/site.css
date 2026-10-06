@@ -422,3 +422,9 @@ details.alt[open] summary::after{transform:rotate(-135deg)}
 details.alt[open] summary{color:var(--t1)}
 @media (prefers-reduced-motion:reduce){.waiting i{animation:none}}
 .dash-wrap .tile{background:var(--panel);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+
+/* покупка без входа (/buy/) и ссылка на неё в тарифах */
+.buy-link{margin-top:20px;display:flex;justify-content:center}
+.cab-page .lede{margin:0 0 20px;max-width:640px;color:var(--t2,inherit)}
+#bPlans{margin-bottom:18px}
+#bOrder .btn-line{margin-top:14px}

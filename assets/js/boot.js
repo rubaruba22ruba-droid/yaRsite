@@ -7,7 +7,7 @@
    4) если из кэша открылась устаревшая копия страницы — один раз перезагружает её (сверка с build.json). */
 (function () {
   "use strict";
-  var BUILD = 23, d = document, root = d.documentElement, loc = location;
+  var BUILD = 24, d = document, root = d.documentElement, loc = location;
   var me = d.currentScript;
 
   function goSecure() {
